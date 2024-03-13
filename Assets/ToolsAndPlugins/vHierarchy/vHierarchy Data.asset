@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9752b0c8e144801967e6897679604b, type: 3}
+  m_Name: vHierarchy Data
+  m_EditorClassIdentifier: 
+  sceneDatas_byGuid:
+    keys:
+    - b75d50201929be3469c5e0039b4ccf06
+    - 1dc30e3a22f86214aa44910fff834e50
+    - 15511480715a7474c87c37cbe03f8955
+    - f5e09fc835aeebd469a4c159813f05eb
+    values:
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-b75d50201929be3469c5e0039b4ccf06-422959965-0
+        - globalObjectIdString: GlobalObjectId_V1-2-b75d50201929be3469c5e0039b4ccf06-7443408887813606051-1332684822
+        - globalObjectIdString: GlobalObjectId_V1-2-b75d50201929be3469c5e0039b4ccf06-1458401603-0
+        - globalObjectIdString: GlobalObjectId_V1-2-b75d50201929be3469c5e0039b4ccf06-252963805-0
+        - globalObjectIdString: GlobalObjectId_V1-2-b75d50201929be3469c5e0039b4ccf06-290669670-0
+        - globalObjectIdString: GlobalObjectId_V1-2-b75d50201929be3469c5e0039b4ccf06-5970018895971726697-776042728
+        - globalObjectIdString: GlobalObjectId_V1-2-b75d50201929be3469c5e0039b4ccf06-581238501-0
+        - globalObjectIdString: GlobalObjectId_V1-2-b75d50201929be3469c5e0039b4ccf06-980924791-0
+        values:
+        - colorIndex: 0
+          iconNameOrGuid: Camera Icon
+        - colorIndex: 7
+          iconNameOrGuid: Settings Icon
+        - colorIndex: 4
+          iconNameOrGuid: Settings Icon
+        - colorIndex: 3
+          iconNameOrGuid: Canvas Icon
+        - colorIndex: 1
+          iconNameOrGuid: 
+        - colorIndex: 0
+          iconNameOrGuid: 353941869ce39ba499351b2f33a98bbb
+        - colorIndex: 0
+          iconNameOrGuid: 3d2b5fd5e9768c8428b9282e509c981d
+        - colorIndex: 0
+          iconNameOrGuid: 4c200b2d6eb0d674c9a08ca8e31def5b
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-1-1dc30e3a22f86214aa44910fff834e50-46071899428106205-0
+        values:
+        - colorIndex: 0
+          iconNameOrGuid: 547f757d95fbc024bb3d4fe317afa1e3
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-15511480715a7474c87c37cbe03f8955-1458401603-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15511480715a7474c87c37cbe03f8955-7443408887813606051-1332684822
+        - globalObjectIdString: GlobalObjectId_V1-2-15511480715a7474c87c37cbe03f8955-252963805-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15511480715a7474c87c37cbe03f8955-581238501-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15511480715a7474c87c37cbe03f8955-980924791-0
+        values:
+        - colorIndex: 5
+          iconNameOrGuid: 
+        - colorIndex: 6
+          iconNameOrGuid: 
+        - colorIndex: 3
+          iconNameOrGuid: 
+        - colorIndex: 0
+          iconNameOrGuid: 3d2b5fd5e9768c8428b9282e509c981d
+        - colorIndex: 0
+          iconNameOrGuid: 4c200b2d6eb0d674c9a08ca8e31def5b
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-1-f5e09fc835aeebd469a4c159813f05eb-8427099846615412568-0
+        - globalObjectIdString: GlobalObjectId_V1-1-f5e09fc835aeebd469a4c159813f05eb-6231498545829964491-0
+        values:
+        - colorIndex: 0
+          iconNameOrGuid: Settings Icon
+        - colorIndex: 0
+          iconNameOrGuid: Favorite
