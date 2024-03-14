@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Source.Scripts.EventSystem
 {
-    [CreateAssetMenu(fileName = "New IntEventChannel", menuName = "Events/Int Event Channel")]
+    [CreateAssetMenu(fileName = "New HeroChannel", menuName = "Events/Hero Channel")]
     public class HeroChannel : ScriptableObject
     {
         public UnityAction<Hero> OnEventRaised;

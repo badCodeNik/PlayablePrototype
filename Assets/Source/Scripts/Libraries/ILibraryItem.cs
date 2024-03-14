@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Source.Scripts.Libraries
+namespace Source.Scripts.LibrariesSystem
 {
     public interface ILibraryItem<out TE> where TE : Enum
     {

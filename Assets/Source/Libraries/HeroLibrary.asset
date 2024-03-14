@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc21e4cd263cfe542a7da1c81ca0022b, type: 3}
   m_Name: HeroLibrary
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - heroID: 1
+    heroInfo: {fileID: 11400000, guid: 0d8bbb6cccfe99c469e72a2c2100a119, type: 2}
+    prefab: {fileID: 3974154192787621255, guid: debfbc358f831144dbbf1a6988449d4c, type: 3}
+    icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}

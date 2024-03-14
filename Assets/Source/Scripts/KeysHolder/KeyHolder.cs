@@ -13,7 +13,7 @@ namespace Source.Scripts.KeysHolder
         public HeroKeys GetHeroKeyByID(string id) => GetItemByString(_heroKeys, id);
         public EnemyKeys GetEnemyKeyByID(string id) => GetItemByString(_enemyKeys, id);
         
-        public T GetItemByString<T>(Dictionary<string, T> collection, string id)
+        private T GetItemByString<T>(Dictionary<string, T> collection, string id)
         {
             return collection[id];
         }
@@ -36,12 +36,32 @@ namespace Source.Scripts.KeysHolder
     public enum HeroKeys
     {
         [Description("hero_some_hero")]
-        SomeHero
+        SomeHero,
+        [Description("hero_vasya")]
+        Vasya
     }
     
     public enum EnemyKeys
     {
         [Description("enemy_default_enemy")]
         DefaultEnemy
+    }
+
+    public enum LanguageKeys
+    {
+        [Description("ru")]
+        Ru,
+        [Description("en")]
+        En
+    }
+
+    public enum WordKeys
+    {
+        [Description("MainMenu_Play_Btn")]
+        MainMenuPlayBtn,
+        [Description("MainMenu_Raider_Btn")]
+        MainMenuRaiderBtn,
+        [Description("MainMenu_Shop_Btn")]
+        MainMenuShopBtn
     }
 }

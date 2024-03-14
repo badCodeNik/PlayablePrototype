@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Source.Scripts.Libraries
+namespace Source.Scripts.LibrariesSystem
 {
     public class Library<T, TE> : ScriptableObject, ILibrary 
         where TE : Enum
@@ -36,9 +36,12 @@ namespace Source.Scripts.Libraries
         public void Initialize()
         {
             _itemByID = new Dictionary<TE, T>();
-            foreach (var item in items)
+            if (items != null && items.Length > 0)
             {
-                _itemByID[item.ID] = item;
+                foreach (var item in items)
+                {
+                    _itemByID[item.ID] = item;
+                }
             }
         }
     }

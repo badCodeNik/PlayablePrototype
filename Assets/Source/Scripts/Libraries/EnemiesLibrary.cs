@@ -3,7 +3,7 @@ using Source.Scripts.Data;
 using Source.Scripts.KeysHolder;
 using UnityEngine;
 
-namespace Source.Scripts.Libraries
+namespace Source.Scripts.LibrariesSystem
 {
     [CreateAssetMenu(menuName = "Library/EnemiesLibrary", fileName = "EnemiesLibrary")]
     public class EnemiesLibrary : Library<EnemyPack, EnemyKeys>
@@ -17,9 +17,11 @@ namespace Source.Scripts.Libraries
         [SerializeField] private EnemyKeys heroID;
         [SerializeField] private EnemyInfo enemyInfo;
         [SerializeField] private GameObject prefab;
+        [SerializeField] private Sprite icon;
 
         public EnemyInfo EnemyInfo => enemyInfo;
         public GameObject Prefab => prefab;
+        public Sprite Icon => icon;
         public EnemyKeys ID => heroID;
     }
 }

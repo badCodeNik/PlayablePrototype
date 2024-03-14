@@ -1,8 +1,11 @@
 ﻿
+using System;
+using Sirenix.OdinInspector;
 using Source.EasyECS;
 using Source.Scripts.Data;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.EventSystem;
+using UnityEditor;
 using UnityEngine;
 
 namespace Source.Scripts.Characters
@@ -11,7 +14,7 @@ namespace Source.Scripts.Characters
     {
         [SerializeField] private HeroInfo heroInfo;
         [SerializeField] private HeroChannel heroChannel;
-        [SerializeField] private int entity;
+        [SerializeField, ReadOnly] private int entity;
 
         public HeroInfo HeroInfo => heroInfo;
         public int Entity => entity;
@@ -46,6 +49,7 @@ namespace Source.Scripts.Characters
             {
                 
             }
+
         }
     }
 }
