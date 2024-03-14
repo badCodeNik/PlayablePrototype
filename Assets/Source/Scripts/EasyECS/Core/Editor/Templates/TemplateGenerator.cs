@@ -19,7 +19,7 @@ namespace Source.EasyECS.UnityEditor.Templates {
         const string RunSystemTemplate = "RunSystem.cs.txt";
         const string ComponentTemplate = "Component.cs.txt";
 
-        [MenuItem ("Assets/Create/LeoECS Lite/Create Startup from template", false, -200)]
+        //[MenuItem ("Assets/Create/LeoECS Lite/Create Startup from template", false, -200)]
         static void CreateStartupTpl () {
             var assetPath = GetAssetPath ();
             CreateAndRenameAsset ($"{assetPath}/EcsStartup.cs", GetIcon (), (name) => {
@@ -46,19 +46,19 @@ namespace Source.EasyECS.UnityEditor.Templates {
             }
         }
 
-        [MenuItem ("Assets/Create/LeoECS Lite/Systems/Create InitSystem from template", false, -199)]
+        //[MenuItem ("Assets/Create/LeoECS Lite/Systems/Create InitSystem from template", false, -199)]
         static void CreateInitSystemTpl () {
             CreateAndRenameAsset ($"{GetAssetPath ()}/EcsInitSystem.cs", GetIcon (),
                 (name) => CreateTemplateInternal (GetTemplateContent (InitSystemTemplate), name));
         }
 
-        [MenuItem ("Assets/Create/LeoECS Lite/Systems/Create RunSystem from template", false, -198)]
+        //[MenuItem ("Assets/Create/LeoECS Lite/Systems/Create RunSystem from template", false, -198)]
         static void CreateRunSystemTpl () {
             CreateAndRenameAsset ($"{GetAssetPath ()}/EcsRunSystem.cs", GetIcon (),
                 (name) => CreateTemplateInternal (GetTemplateContent (RunSystemTemplate), name));
         }
 
-        [MenuItem ("Assets/Create/LeoECS Lite/Components/Create Component from template", false, -197)]
+        //[MenuItem ("Assets/Create/LeoECS Lite/Components/Create Component from template", false, -197)]
         static void CreateComponentTpl () {
             CreateAndRenameAsset ($"{GetAssetPath ()}/EcsComponent.cs", GetIcon (),
                 (name) => CreateTemplateInternal (GetTemplateContent (ComponentTemplate), name));
