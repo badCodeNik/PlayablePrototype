@@ -7,6 +7,7 @@ namespace Source.Scripts.Data
     [CreateAssetMenu(menuName = "Data/HeroInfo")]
     public class HeroInfo : SerializedScriptableObject
     {
+        
         [SerializeField] private Movable movable;
         [SerializeField] private Interactable interactable;
         [SerializeField] private Destructable destructable;

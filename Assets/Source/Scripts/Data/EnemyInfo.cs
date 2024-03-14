@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Source.Scripts.Data
 {
     [CreateAssetMenu(menuName = "Data/NpcInfo")]
-    public class NpcInfo : SerializedScriptableObject
+    public class EnemyInfo : SerializedScriptableObject
     {
         [SerializeField] private Movable movable;
         [SerializeField] private Interactable interactable;
