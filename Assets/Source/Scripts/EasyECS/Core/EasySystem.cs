@@ -15,7 +15,7 @@ namespace Source.EasyECS
         protected EcsWorld World;
         protected EcsWorld WorldUI;
         protected Componenter Componenter;
-        protected Signal Signal;
+        private Signal _signal;
         
         public void PreInit(GameShare gameShare)
         {
@@ -23,24 +23,24 @@ namespace Source.EasyECS
             _gameShare = gameShare;
             _eventSystem = _gameShare.GetSharedEcsSystem<EventSystem>();
             Componenter = GetSharedEcsSystem<Componenter>();
-            Signal = gameShare.Signal;
+            _signal = gameShare.Signal;
             InjectFields();
             _isInitialized = true;
         }
 
         public void RegistrySignal<T>(T data)
         {
-            Signal.RegistryRaise(data);
+            _signal.RegistryRaise(data);
         }
 
         public void SubscribeSignal<T>(Action<T> action)
         {
-            Signal.Subscribe(action);
+            _signal.Subscribe(action);
         }
 
         public void UnsubscribeSignal<T>(Action<T> action)
         {
-            Signal.Unsubscribe(action);
+            _signal.Unsubscribe(action);
         }
 
         public void RegistryEvent<T>(T data) where T: struct, IEcsEvent<T>
