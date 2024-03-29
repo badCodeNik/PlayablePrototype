@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Source.SignalSystem;
 using UnityEngine;
 
 
@@ -8,11 +9,12 @@ namespace Source.EasyECS
     [Serializable]
     public class GameShare
     {        
-        public GameShare(Dictionary<Type, DataPack> monoBehShared)
+        public GameShare(Dictionary<Type, DataPack> monoBehShared, Signal signal)
         {
             _monoBehShared = monoBehShared;
             _ecsShared = new Dictionary<Type, IEcsSharingSystem>();
             sharedEcsSystems = new List<string>();
+            Signal = signal;
         }
         
         [SerializeField] private List<string> sharedEcsSystems;
@@ -21,6 +23,7 @@ namespace Source.EasyECS
 
         public Dictionary<Type, DataPack> MonoBehShared => _monoBehShared;
         public Dictionary<Type, IEcsSharingSystem> EcsShared => _ecsShared;
+        public Signal Signal { get; }
         
         public T GetSharedMonoBehaviour<T>() where T : EasyMonoBehaviour
         {

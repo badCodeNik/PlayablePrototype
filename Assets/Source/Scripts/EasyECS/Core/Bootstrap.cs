@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using Source.EasyECS.Interfaces;
+using Source.SignalSystem;
+using UnityEditor;
 using UnityEngine;
 
 namespace Source.EasyECS
@@ -17,6 +19,8 @@ namespace Source.EasyECS
         private Dictionary<Type, DataPack> _sharedData;
         [SerializeField] private GameShare gameShare;
         [SerializeField, HideInInspector] private bool _isInitialized = false;
+
+        [SerializeField, HideInInspector] public Signal signal;
         
         private Action _onUpdate;
         private Action _onFixedUpdate;
@@ -51,7 +55,7 @@ namespace Source.EasyECS
         {
             _sharedData = new Dictionary<Type, DataPack>();
             bootQueue = new List<DataPack>();
-            gameShare = new GameShare(_sharedData);
+            gameShare = new GameShare(_sharedData, signal);
                         
             foreach (var monoBeh in _share)
             {
@@ -180,6 +184,21 @@ namespace Source.EasyECS
             for (int i = _share.Count - 1; i >= 0; i--) if (_share[i] == null) _share.RemoveAt(i);
             for (int i = _awake.Count - 1; i >= 0; i--) if (_awake[i] == null) _awake.RemoveAt(i);
             for (int i = _start.Count - 1; i >= 0; i--) if (_start[i] == null) _start.RemoveAt(i);
+            LoadSignal();
+            SignalValidator.InjectSignal(signal);
+        }
+        
+        private void LoadSignal()
+        {
+            if (signal != null) return;
+
+            // Ищем первый ассет типа Signal
+            string[] guids = AssetDatabase.FindAssets("t:Signal");
+            if (guids.Length > 0)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+                signal = AssetDatabase.LoadAssetAtPath<Signal>(path);
+            }
         }
 
 #endif
