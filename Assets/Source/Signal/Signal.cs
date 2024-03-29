@@ -8,7 +8,7 @@ namespace Source.SignalSystem
     [CreateAssetMenu(menuName = "SignalSystem")]
     public class Signal : ScriptableObject
     {
-        private Dictionary<Type, List<object>> _actions = new Dictionary<Type, List<object>>();
+        private Dictionary<Type, List<object>> _actions = new ();
 
         public void RegistryRaise<T>(T data)
         {

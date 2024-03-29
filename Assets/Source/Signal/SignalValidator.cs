@@ -1,7 +1,7 @@
-﻿
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 namespace Source.SignalSystem
 {
@@ -12,23 +12,30 @@ namespace Source.SignalSystem
         public static void InjectSignal(Signal signalInstance)
         {
             _signalInstance = signalInstance;
-            ValidateAndInjectSignalsInScene();
+            ValidateAndInjectSignalsInScenes();
             ValidateAndInjectSignalsInAssets();
         }
 
-        private static void ValidateAndInjectSignalsInScene()
+        private static void ValidateAndInjectSignalsInScenes()
         {
-            var allGameObjects = GameObject.FindObjectsOfType<GameObject>();
-            foreach (var gameObject in allGameObjects)
+            for (int i = 0; i < EditorSceneManager.sceneCount; i++)
             {
-                if (gameObject != null && gameObject.activeInHierarchy)
+                var scene = EditorSceneManager.GetSceneAt(i);
+                if (scene.isLoaded)
                 {
-                    var components = gameObject.GetComponents<Component>();
-                    foreach (var component in components)
+                    var rootGameObjects = scene.GetRootGameObjects();
+                    foreach (var rootGameObject in rootGameObjects)
                     {
-                        if (component != null)
+                        if (rootGameObject != null && rootGameObject.activeInHierarchy)
                         {
-                            InjectSignalIntoFields(component);
+                            var components = rootGameObject.GetComponents<Component>();
+                            foreach (var component in components)
+                            {
+                                if (component != null)
+                                {
+                                    InjectSignalIntoFields(component);
+                                }
+                            }
                         }
                     }
                 }

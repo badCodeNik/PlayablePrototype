@@ -1,7 +1,9 @@
 ﻿
+using System;
 using System.Linq;
 using System.Reflection;
 using Source.Scripts.EasyECS.Core;
+using Source.SignalSystem;
 
 namespace Source.EasyECS
 {
@@ -13,6 +15,7 @@ namespace Source.EasyECS
         protected EcsWorld World;
         protected EcsWorld WorldUI;
         protected Componenter Componenter;
+        protected Signal Signal;
         
         public void PreInit(GameShare gameShare)
         {
@@ -20,8 +23,24 @@ namespace Source.EasyECS
             _gameShare = gameShare;
             _eventSystem = _gameShare.GetSharedEcsSystem<EventSystem>();
             Componenter = GetSharedEcsSystem<Componenter>();
+            Signal = gameShare.Signal;
             InjectFields();
             _isInitialized = true;
+        }
+
+        public void RegistrySignal<T>(T data)
+        {
+            Signal.RegistryRaise(data);
+        }
+
+        public void SubscribeSignal<T>(Action<T> action)
+        {
+            Signal.Subscribe(action);
+        }
+
+        public void UnsubscribeSignal<T>(Action<T> action)
+        {
+            Signal.Unsubscribe(action);
         }
 
         public void RegistryEvent<T>(T data) where T: struct, IEcsEvent<T>
