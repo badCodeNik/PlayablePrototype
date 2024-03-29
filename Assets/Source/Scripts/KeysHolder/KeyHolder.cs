@@ -43,8 +43,19 @@ namespace Source.Scripts.KeysHolder
     
     public enum EnemyKeys
     {
-        [Description("enemy_default_enemy")]
-        DefaultEnemy
+        [Description("enemy_range_enemy")]
+        RangeEnemy,
+        [Description("enemy_melee_enemy")]
+        MeleeEnemy
+    }
+    
+    public enum ProjectileKeys
+    {
+        [Description("projectile_player_default")]
+        PlayerDefault,
+        [Description("projectile_enemy_default")]
+        EnemyDefault,
+        
     }
 
     public enum LanguageKeys
@@ -64,4 +75,6 @@ namespace Source.Scripts.KeysHolder
         [Description("MainMenu_Shop_Btn")]
         MainMenuShopBtn
     }
+    
+    
 }

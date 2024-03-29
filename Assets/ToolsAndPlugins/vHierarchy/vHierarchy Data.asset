@@ -18,6 +18,7 @@ MonoBehaviour:
     - 1dc30e3a22f86214aa44910fff834e50
     - 15511480715a7474c87c37cbe03f8955
     - f5e09fc835aeebd469a4c159813f05eb
+    - 46243510ade632848a7a543e18f51dc2
     values:
     - goDatas_byGlobalId:
         keys:
@@ -79,3 +80,6 @@ MonoBehaviour:
           iconNameOrGuid: Settings Icon
         - colorIndex: 0
           iconNameOrGuid: Favorite
+    - goDatas_byGlobalId:
+        keys: []
+        values: []

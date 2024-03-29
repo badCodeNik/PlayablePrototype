@@ -133,7 +133,7 @@ namespace VHierarchy
                 "AvatarMask On Icon",
                 "cs Script Icon",
                 "StandaloneInputModule Icon",
-                "EventSystem Icon",
+                "ChannelEventSystem Icon",
                 "Terrain Icon",
                 "ScriptableObject Icon",
 

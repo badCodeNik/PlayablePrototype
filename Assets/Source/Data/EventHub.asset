@@ -22,3 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   playerHealthChannel: {fileID: 11400000, guid: d576720c5130be946956130581329c28, type: 2}
+  heroChannel: {fileID: 11400000, guid: 22cc357950fc8af45b9d33bf7374e0e2, type: 2}
+  enemyChannel: {fileID: 11400000, guid: 3bece7fa7e021bd418309cdcad2313e9, type: 2}
+  colliderChannel: {fileID: 11400000, guid: e80d43bcc7a59a9409dbd887abb436ca, type: 2}
+  directionSpeedChannel: {fileID: 11400000, guid: 7cb580d004fb3114890ba120077f2130, type: 2}

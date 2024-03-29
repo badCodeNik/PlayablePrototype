@@ -22,3 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   languageID: 0
+  EventHub: {fileID: 11400000, guid: e7543d0218f5ba84880e9ee4498a62df, type: 2}

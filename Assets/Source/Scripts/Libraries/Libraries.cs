@@ -9,32 +9,34 @@ namespace Source.Scripts.LibrariesSystem
         [SerializeField] private HeroLibrary heroLibrary;
         [SerializeField] private EnemiesLibrary enemiesLibrary;
         [SerializeField] private LanguageLibrary languageLibrary;
+        [SerializeField] private ProjectileLibrary projectileLibrary;
         private KeyHolder _keysHolder = new();
         private ILibrary[] AllLibraries => new ILibrary[] 
             { 
                 heroLibrary, 
                 enemiesLibrary,
-                languageLibrary
+                languageLibrary,
+                projectileLibrary
             };
 
         public static KeyHolder KeysHolder => Instance._keysHolder;
         public static HeroLibrary HeroPrefabLibrary => Instance.heroLibrary;
         public static LanguageLibrary LanguageLibrary => Instance.languageLibrary;
         public static EnemiesLibrary EnemiesLibrary => Instance.enemiesLibrary;
+        public static ProjectileLibrary ProjectileLibrary => Instance.projectileLibrary;
 
         public static Libraries Instance { get; private set; }
 
         public Action OnConfigurationsUpdate;
         
-        public void Awake()
+        public void Initialize()
         {
             if (Instance == null)
             {
                 Instance = this;
                 DontDestroyOnLoad(this);
                 UpdateConfigurations();
-                _keysHolder.Initialize();
-                foreach (var library in AllLibraries)
+                _keysHolder.Initialize(); foreach (var library in AllLibraries)
                 {
                     library.Initialize();
                 }

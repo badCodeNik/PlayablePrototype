@@ -22,12 +22,17 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   movable:
-    enabled: 0
-    moveSpeed: 0
+    enabled: 1
+    moveSpeed: 20
     rotationSpeed: 0
-  interactable:
-    enabled: 0
-    interactableSpeed: 0
+    navMeshAgent: {fileID: 0}
   destructable:
-    enabled: 0
-    health: 0
+    enabled: 1
+    maxHealth: 100
+    health: 100
+  attacking:
+    enabled: 1
+    damage: 1
+    attackDistance: 0
+    attackSpeed: 1
+    projectileID: 0
