@@ -6,7 +6,6 @@ namespace Source.Scripts.Ecs.Systems
     public class ProjectileSystem : EasySystem
     {
         
-
         protected override void Initialize()
         {
             

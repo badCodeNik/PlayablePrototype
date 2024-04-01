@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameConfiguration: {fileID: 11400000, guid: 054f334666ea4fa4fa1845c00b90ecd9, type: 2}
-  languageKeyEventChannel: {fileID: 11400000, guid: 2e2b1a7a5a42873478e2b73a1f89cc88, type: 2}
+  signal: {fileID: 0}
 --- !u!114 &11405871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,9 +1223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd644bb6c9de40b78f7ad9889d8a8285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 611a7ca498befef4a96c2ffd3868bbb8, type: 2}
   wordID: 0
   tmpText: {fileID: 1841290211}
-  languageKeyEventChannel: {fileID: 11400000, guid: 2e2b1a7a5a42873478e2b73a1f89cc88, type: 2}
   gameConfiguration: {fileID: 11400000, guid: 054f334666ea4fa4fa1845c00b90ecd9, type: 2}
   languageLibrary: {fileID: 11400000, guid: 63f16f8a1cb03934487c9abb90c79f93, type: 2}
 --- !u!114 &1841290211

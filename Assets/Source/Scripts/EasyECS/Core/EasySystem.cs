@@ -1,33 +1,59 @@
 ﻿
 using System;
-using System.Linq;
-using System.Reflection;
 using Source.Scripts.EasyECS.Core;
 using Source.SignalSystem;
+using UnityEngine;
 
 namespace Source.EasyECS
 {
     public abstract class EasySystem : IEcsInitSystem, IEcsRunSystem
     {
+        protected EasySystem()
+        {
+        }
+
         private bool _isInitialized = false;
         private GameShare _gameShare;
         private EventSystem _eventSystem;
         protected EcsWorld World;
-        protected EcsWorld WorldUI;
         protected Componenter Componenter;
         private Signal _signal;
+        private float _deltaTime;
+        protected float DeltaTime => _deltaTime;
+        protected float TickTime { get; private set; }
+        private InitializeType _initializeType;
         
-        public void PreInit(GameShare gameShare)
+        public void PreInit(GameShare gameShare, float tickTime, InitializeType initializeType = InitializeType.None)
         {
             if (_isInitialized) return;
             _gameShare = gameShare;
-            _eventSystem = _gameShare.GetSharedEcsSystem<EventSystem>();
-            Componenter = GetSharedEcsSystem<Componenter>();
-            _signal = gameShare.Signal;
-            InjectFields();
+            _eventSystem = _gameShare.GetSharedObject<EventSystem>();
+            Componenter = _gameShare.GetSharedObject<Componenter>();
+            _signal = _gameShare.GetSharedObject<Signal>();
+            TickTime = tickTime;
+            _initializeType = initializeType;
+            _deltaTime = GetCurrentTime();
             _isInitialized = true;
         }
 
+        private float GetCurrentTime()
+        {
+            switch (_initializeType)
+            {
+                case InitializeType.None:
+                    return 0;
+                
+                case InitializeType.FixedUpdate:
+                    return Time.fixedDeltaTime;
+                
+                case InitializeType.Tick:
+                    return TickTime;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        
         public void RegistrySignal<T>(T data)
         {
             _signal.RegistryRaise(data);
@@ -47,60 +73,10 @@ namespace Source.EasyECS
         {
             _eventSystem.RegistryEvent(data);
         }
-        
-        public T GetSharedMonoBehaviour<T>() where T : EasyMonoBehaviour
-        {
-            return _gameShare.GetSharedMonoBehaviour<T>();
-        }
-        
-        public T GetSharedEcsSystem<T>() where T : IEcsSharingSystem
-        {
-            return _gameShare.GetSharedEcsSystem<T>();
-        }
-
-        public void InjectFields()
-        {
-            var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            
-            foreach (var field in fields)
-            {
-                var injectAttribute = (EasyInjectAttribute)field.GetCustomAttributes(typeof(EasyInjectAttribute), true).FirstOrDefault();
-
-                if (injectAttribute != null)
-                {
-                    var fieldType = field.FieldType;
-
-                    if (typeof(EasySystem).IsAssignableFrom(fieldType) && typeof(IEcsSharingSystem).IsAssignableFrom(fieldType))
-                    {
-                        var sharedEasySystemMethod = typeof(EasySystem).GetMethod("GetSharedEcsSystem").MakeGenericMethod(fieldType);
-                        var sharedSystem = sharedEasySystemMethod.Invoke(this, null);
-
-                        field.SetValue(this, sharedSystem);
-                    }
-                    else if (typeof(EasyMonoBehaviour).IsAssignableFrom(fieldType))
-                    {
-                        var sharedMonoBehaviourMethod = typeof(EasySystem).GetMethod("GetSharedMonoBehaviour").MakeGenericMethod(fieldType);
-                        var sharedMonoBehaviour = sharedMonoBehaviourMethod.Invoke(this, null);
-
-                        field.SetValue(this, sharedMonoBehaviour);
-                    }
-                    else if (typeof(Configuration).IsAssignableFrom(fieldType))
-                    {
-                        var configurationHub = GetSharedMonoBehaviour<ConfigurationHub>();
-
-                        var getConfigMethod = typeof(ConfigurationHub).GetMethod("GetConfigByType").MakeGenericMethod(fieldType);
-                        var sharedObject = getConfigMethod.Invoke(configurationHub, null);
-
-                        field.SetValue(this, sharedObject);
-                    }
-                }
-            }
-        }
 
         public void Init(IEcsSystems systems)
         {
             World = systems.GetWorld();
-            WorldUI = systems.GetWorld("UI");
             Initialize();
         }
 
@@ -113,5 +89,23 @@ namespace Source.EasyECS
         
         protected virtual void Initialize(){}
         protected virtual void Update(){}
+
+        public virtual InitializeType DefaultInitializeType()
+        {
+            return InitializeType.None;
+        }
+
+        public virtual string Description()
+        {
+            return "";
+        }
+    }
+    
+    public enum InitializeType
+    {
+        None,
+        Start,
+        FixedUpdate,
+        Tick
     }
 }

@@ -1,11 +1,12 @@
-﻿using Source.EasyECS;
+﻿using Sirenix.OdinInspector;
+using Source.EasyECS;
 using Source.Scripts.KeysHolder;
 using UnityEngine;
 
 namespace Source.Scripts.Data
 {
-    [CreateAssetMenu(menuName = "Data/GameConfiguration", fileName = "GameConfiguration")]
-    public class GameConfiguration : Configuration
+    [CreateAssetMenu(fileName = "GameConfiguration", menuName = "Data/GameConfiguration")]
+    public class GameConfiguration : SerializedScriptableObject, IGameShareItem
     {
         public LanguageKeys languageID;
     }

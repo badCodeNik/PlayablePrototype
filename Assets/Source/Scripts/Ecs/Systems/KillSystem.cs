@@ -1,7 +1,6 @@
 using Source.EasyECS;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
-using UnityEngine;
 
 namespace Source.Scripts.Ecs.Systems
 {
@@ -19,7 +18,7 @@ namespace Source.Scripts.Ecs.Systems
             {
                 ref var enemy = ref Componenter.Get<DestructableData>(enemyEntity).Prefab;
                 ref var destroyingData = ref Componenter.Get<DestroyingData>(enemyEntity);
-                destroyingData.TimeRemaining -= Time.fixedDeltaTime;
+                destroyingData.TimeRemaining -= DeltaTime;
                 enemy.SetActive(false);
                 if (destroyingData.TimeRemaining <= 0)
                 {

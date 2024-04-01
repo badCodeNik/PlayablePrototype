@@ -6,7 +6,7 @@ using Source.Scripts.Extensions;
 
 namespace Source.Scripts.EasyECS.Core
 {
-    public class EventSystem : IEcsInitSystem, IEcsRunSystem, IEcsSharingSystem
+    public class EventSystem : IEcsRunSystem, IGameShareItem
     {
         private List<EcsFilter> _filterList = new();
         private List<Action> _jobQuery = new();
@@ -15,23 +15,7 @@ namespace Source.Scripts.EasyECS.Core
         private Dictionary<Type, List<EcsEventListener>> _listenersByType = new();
         private EcsWorld World { get; set; }
         private Componenter Componenter { get; set; }
-
-        public void PreInit(GameShare gameShare)
-        {
-            Componenter = gameShare.GetSharedEcsSystem<Componenter>();
-        }
         
-        public void Init(IEcsSystems systems)
-        {
-            World = systems.GetWorld();
-        }
-        
-        public void Run(IEcsSystems systems)
-        {
-            TryDelEvents();
-            AddActionQuery();
-        }
-
         public void AddListener(EcsEventListener eventListener)
         {
             var types = eventListener.GetListenTypes();
@@ -88,6 +72,18 @@ namespace Source.Scripts.EasyECS.Core
                 InvokeEvent(data);
             });
         }
+
+        public void PreInit(EcsWorld world, GameShare gameShare)
+        {
+            Componenter = gameShare.GetSharedObject<Componenter>();
+            World = world;
+        }
+
+        public void Run(IEcsSystems systems)
+        {
+            TryDelEvents();
+            AddActionQuery();
+        }
     }
     
     public interface IEcsEvent<in T> : IEcsComponent where T : struct, IEcsComponent
@@ -98,6 +94,10 @@ namespace Source.Scripts.EasyECS.Core
         
     public abstract class EcsEventListener : EasySystem
     {
+        protected EcsEventListener()
+        {
+        }
+
         public abstract void InvokeEvent<T>(T data) where T : struct, IEcsEvent<T>;
         public abstract Type[] GetListenTypes();
     }

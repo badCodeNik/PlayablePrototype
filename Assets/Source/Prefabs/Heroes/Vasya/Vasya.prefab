@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroInfo: {fileID: 11400000, guid: 0d8bbb6cccfe99c469e72a2c2100a119, type: 2}
-  heroChannel: {fileID: 11400000, guid: 22cc357950fc8af45b9d33bf7374e0e2, type: 2}
   animator: {fileID: -4590052344189408706}
   entity: 0
+  signal: {fileID: 11400000, guid: 611a7ca498befef4a96c2ffd3868bbb8, type: 2}
 --- !u!70 &-4918974254415718790
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a6eea3dc3293fb49b56e22cc5723f52, type: 3}
+  m_Script: {fileID: 11500000, guid: 618325efe9f2452791d03c6104f2dced, type: 3}
   m_Name: GameConfiguration
   m_EditorClassIdentifier: 
   serializationData:
@@ -22,4 +22,3 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   languageID: 0
-  EventHub: {fileID: 11400000, guid: e7543d0218f5ba84880e9ee4498a62df, type: 2}

@@ -97,7 +97,7 @@ namespace Source.Scripts.Ecs.Systems
             foreach (var entity in _reloadRemainingFilter)
             {
                 ref var reloadData = ref Componenter.Get<AttackReloadData>(entity);
-                reloadData.RemainingTime -= Time.fixedDeltaTime;
+                reloadData.RemainingTime -= DeltaTime;
                 if (reloadData.RemainingTime <= 0) Componenter.Del<AttackReloadData>(entity);
                     
             }

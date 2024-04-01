@@ -1,52 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using Source.EasyECS.Interfaces;
+using Source.Scripts.Data;
+using Source.Scripts.EasyECS.Core;
 using Source.SignalSystem;
-using UnityEditor;
 using UnityEngine;
 
 namespace Source.EasyECS
 {
     public class Bootstrap : MonoBehaviour
     {
-        [SerializeField] private List<EasyMonoBehaviour> _awake = new List<EasyMonoBehaviour>();
-        [SerializeField] private List<EasyMonoBehaviour> _start = new List<EasyMonoBehaviour>();
-        [SerializeField] private List<EasyMonoBehaviour> _share = new List<EasyMonoBehaviour>();
-
+        [SerializeField] private List<BootstrapComponent> _awake = new List<BootstrapComponent>();
+        [SerializeField] private List<BootstrapComponent> _start = new List<BootstrapComponent>();
+        [ReadOnly]
         [SerializeField] private List<DataPack> bootQueue;
         private Dictionary<Type, DataPack> _sharedData;
+        [ReadOnly]
         [SerializeField] private GameShare gameShare;
         [SerializeField, HideInInspector] private bool _isInitialized = false;
 
-        [SerializeField, HideInInspector] public Signal signal;
+        [SerializeField] public Signal signal;
+        [SerializeField] private GameConfiguration gameConfiguration;
+        private Componenter _componenter = new Componenter();
+
+        public IGameShareItem[] GameShareItems => new IGameShareItem[] 
+            { signal, _componenter, gameConfiguration };
         
         private Action _onUpdate;
         private Action _onFixedUpdate;
         private Action _onLateUpdate;
         
-        private void PreInit(EasyMonoBehaviour easyMonoBeh)
+        private void PreInit(BootstrapComponent component)
         {
-            if (!_sharedData.ContainsKey(easyMonoBeh.GetType()))
+            if (!_sharedData.ContainsKey(component.GetType()))
             {
-                var newPack = new DataPack(easyMonoBeh.GetType(), easyMonoBeh);
-                easyMonoBeh.PreInit(gameShare, newPack);
-                _sharedData[easyMonoBeh.GetType()] = newPack;
-                
-                if (easyMonoBeh is Starter ecsStarter)
-                {
-                    ecsStarter.SetSharedData(gameShare);
-                    ecsStarter.PreInit();
-                }
-                if (easyMonoBeh is ConfigurationHub configurationHub)
-                {
-                    configurationHub.PreInitialize();
-                }
+                var newPack = new DataPack(component.GetType(), component);
+                component.PreInit(gameShare, newPack);
+                _sharedData[component.GetType()] = newPack;
 
-                if (easyMonoBeh is IEasyUpdate easyUpdate) _onUpdate += easyUpdate.EasyUpdate;
-                if (easyMonoBeh is IEasyFixedUpdate easyFixedUpdate) _onFixedUpdate += easyFixedUpdate.EasyFixedUpdate;
-                if (easyMonoBeh is IEasyLateUpdate easyLateUpdate) _onLateUpdate += easyLateUpdate.EasyLateUpdate;
+                if (component is IEasyUpdate easyUpdate) _onUpdate += easyUpdate.EasyUpdate;
+                if (component is IEasyFixedUpdate easyFixedUpdate) _onFixedUpdate += easyFixedUpdate.EasyFixedUpdate;
+                if (component is IEasyLateUpdate easyLateUpdate) _onLateUpdate += easyLateUpdate.EasyLateUpdate;
             }
             
         }
@@ -55,11 +50,11 @@ namespace Source.EasyECS
         {
             _sharedData = new Dictionary<Type, DataPack>();
             bootQueue = new List<DataPack>();
-            gameShare = new GameShare(_sharedData, signal);
-                        
-            foreach (var monoBeh in _share)
+            gameShare = new GameShare(_sharedData);
+            
+            foreach (var gameShareItem in GameShareItems)
             {
-                PreInit(monoBeh);
+                gameShare.AddSharedObject(gameShareItem.GetType(), gameShareItem);
             }
             
             foreach (var monoBeh in _awake)
@@ -71,16 +66,6 @@ namespace Source.EasyECS
             {
                 PreInit(monoBeh);
             }
-
-            foreach (var easyMonoBehaviour in _share) InjectDependencies(easyMonoBehaviour);
-            foreach (var easyMonoBehaviour in _awake) InjectDependencies(easyMonoBehaviour);
-            foreach (var easyMonoBehaviour in _start) InjectDependencies(easyMonoBehaviour);
-            
-        }
-        
-        private void InjectDependencies(EasyMonoBehaviour easyMonoBehaviour)
-        {
-            easyMonoBehaviour.Inject();
         }
         
         private void Awake()
@@ -127,82 +112,6 @@ namespace Source.EasyECS
             if (_isInitialized) return;
             _isInitialized = true;
             gameObject.name = "Bootstrapper";
-            TryCreateElement<ConfigurationHub>(_share);
-            TryCreateElement<EasyNode>(_awake);
-            TryCreateElement<EcsStarter>(_start);
         }
-
-        private void TryCreateElement<T>(List<EasyMonoBehaviour> elementList) where T : EasyMonoBehaviour
-        {
-            
-            if (GetIsAnyOfType<T>()) return;
-            
-            var elementObject = new GameObject
-            {
-                transform =
-                {
-                    parent = transform
-                }
-            };
-
-            var element = elementObject.AddComponent<T>();
-            elementObject.name = element.GetType().Name;
-            elementList.Add(element);
-        }
-
-        private bool GetIsAnyOfType<T>()
-        {
-            var inAwake = _awake != null && _awake.OfType<T>().Any();
-            var inStart = _start != null && _start.OfType<T>().Any();
-            var inShare = _share != null && _share.OfType<T>().Any();
-            return inAwake || inStart || inShare;
-        }
-        
-        private T GetCurrentEasyObject<T>() where T : EasyMonoBehaviour
-        {
-            foreach (var easyMonoBehaviour in _share)
-            {
-                if (easyMonoBehaviour is T typeEasyMonoBeh) return typeEasyMonoBeh;
-            }
-            foreach (var easyMonoBehaviour in _awake)
-            {
-                if (easyMonoBehaviour is T typeEasyMonoBeh) return typeEasyMonoBeh;
-            }
-            foreach (var easyMonoBehaviour in _start)
-            {
-                if (easyMonoBehaviour is T typeEasyMonoBeh) return typeEasyMonoBeh;
-            }
-
-            throw new Exception($"Can't find {typeof(T)}");
-        }
-        
-#if UNITY_EDITOR
-        [Button(ButtonSizes.Medium)]
-        public void UpdateAllSettings()
-        {
-            GetCurrentEasyObject<ConfigurationHub>().GetAllData();
-            for (int i = _share.Count - 1; i >= 0; i--) if (_share[i] == null) _share.RemoveAt(i);
-            for (int i = _awake.Count - 1; i >= 0; i--) if (_awake[i] == null) _awake.RemoveAt(i);
-            for (int i = _start.Count - 1; i >= 0; i--) if (_start[i] == null) _start.RemoveAt(i);
-            LoadSignal();
-            SignalValidator.InjectSignal(signal);
-        }
-        
-        private void LoadSignal()
-        {
-            if (signal != null) return;
-
-            // Ищем первый ассет типа Signal
-            string[] guids = AssetDatabase.FindAssets("t:Signal");
-            if (guids.Length > 0)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(guids[0]);
-                signal = AssetDatabase.LoadAssetAtPath<Signal>(path);
-            }
-        }
-
-#endif
     }
-    
-    public class EasyInjectAttribute : PropertyAttribute { }
 }

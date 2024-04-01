@@ -1,24 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Source.EasyECS.Interfaces;
+using UnityEngine;
 
 namespace Source.EasyECS
 {
-    public class Componenter : IEcsInitSystem, IEcsSharingSystem
+    public class Componenter : IGameShareItem
     {
         private EcsWorld _world;
         private Dictionary<Type, IEcsPool> _pools;
-        private readonly bool _isUI;
 
-        public Componenter(bool isUI = false)
+        public void PreInit(EcsWorld world)
         {
-            _isUI = isUI;
-        }
-        
-        public void Init(IEcsSystems systems)
-        {
+            _world = world;
             _pools = new Dictionary<Type, IEcsPool>();
-            _world = _isUI ? systems.GetWorld("UI") : systems.GetWorld();
         }
 
         public int GetNewEntity()

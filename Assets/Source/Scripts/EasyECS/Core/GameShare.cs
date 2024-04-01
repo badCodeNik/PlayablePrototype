@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Source.SignalSystem;
 using UnityEngine;
 
 
@@ -8,39 +7,49 @@ namespace Source.EasyECS
 {
     [Serializable]
     public class GameShare
-    {        
-        public GameShare(Dictionary<Type, DataPack> monoBehShared, Signal signal)
+    {
+        public GameShare(Dictionary<Type, DataPack> sharedObjects)
         {
-            _monoBehShared = monoBehShared;
-            _ecsShared = new Dictionary<Type, IEcsSharingSystem>();
-            sharedEcsSystems = new List<string>();
-            Signal = signal;
-        }
-        
-        [SerializeField] private List<string> sharedEcsSystems;
-        private Dictionary<Type, DataPack> _monoBehShared;
-        private Dictionary<Type, IEcsSharingSystem> _ecsShared;
-
-        public Dictionary<Type, DataPack> MonoBehShared => _monoBehShared;
-        public Dictionary<Type, IEcsSharingSystem> EcsShared => _ecsShared;
-        public Signal Signal { get; }
-        
-        public T GetSharedMonoBehaviour<T>() where T : EasyMonoBehaviour
-        {
-            var classPack = _monoBehShared[typeof(T)];
-            var monoBeh = classPack.MonoBehaviour;
-            return (T)monoBeh;
+            _sharedObjects = sharedObjects;
         }
 
-        public void AddSharedEcsSystem<T>(Type type, T ecsSystem) where T : IEcsSharingSystem
+        [SerializeField] private List<string> sharedEcsSystems = new ();
+        private Dictionary<Type, DataPack> _sharedObjects;
+        
+        public T GetSharedObject<T>() where T : IGameShareItem
+        {
+            var classPack = _sharedObjects[typeof(T)];
+            var sharedObject = classPack.Object;
+            return (T)sharedObject;
+        }
+
+        public void AddSharedObject<T>(Type type, T sharedObject) where T : IGameShareItem
         {
             sharedEcsSystems.Add(type.Name);
-            _ecsShared[type] = ecsSystem;
+            _sharedObjects[type] = new DataPack(type, sharedObject);
         }
+    }
+
+    public interface IGameShareItem
+    {
         
-        public T GetSharedEcsSystem<T>() where T : IEcsSharingSystem
+    }
+    
+    [Serializable]
+    public class DataPack
+    {
+        public DataPack(Type type, IGameShareItem sharedObject)
         {
-            return (T)_ecsShared[typeof(T)];
+            _object = sharedObject;
+            _type = type;
+            name = _type.Name;
         }
+
+        [SerializeField] private string name;
+        private Type _type;
+        private IGameShareItem _object;
+        
+        public string Name => name; 
+        public IGameShareItem Object => _object;
     }
 }

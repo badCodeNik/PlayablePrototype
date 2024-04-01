@@ -1,13 +1,11 @@
-using System;
+
 using Sirenix.OdinInspector;
 using Source.EasyECS;
 using Source.Scripts.Data;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
-using Source.Scripts.Enums;
-using Source.Scripts.EventSystem;
-using Source.Scripts.KeysHolder;
 using Source.Scripts.LibrariesSystem;
+using Source.SignalSystem;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,10 +14,10 @@ namespace Source.Scripts.Characters
     public class Npc : MonoBehaviour
     {
         [SerializeField] private EnemyInfo enemyInfo;
-        [SerializeField] private EnemyChannel enemyChannel;
         [SerializeField] private Animator animator;
         [SerializeField] private NavMeshAgent agent;
         [SerializeField, ReadOnly] private int entity;
+        [SerializeField] private Signal signal;
 
         public EnemyInfo EnemyInfo => enemyInfo;
         public int Entity => entity;
@@ -27,7 +25,11 @@ namespace Source.Scripts.Characters
         public void Start()
         {
             EcsInitialize();
-            enemyChannel.RaiseEvent(this);
+            signal.RegistryRaise(new OnEnemyInitializedSignal
+            {
+                Npc = this,
+                EnemyInfo = EnemyInfo
+            });
             agent.updateRotation = false;
             agent.updateUpAxis = false;
         }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Source.EasyECS;
 using UnityEngine;
 
 namespace Source.SignalSystem
 {
     [CreateAssetMenu(menuName = "SignalSystem")]
-    public class Signal : ScriptableObject
+    public class Signal : ScriptableObject, IGameShareItem
     {
         private Dictionary<Type, List<object>> _actions = new ();
 

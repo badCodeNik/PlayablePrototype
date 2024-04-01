@@ -2,7 +2,6 @@ using Source.EasyECS;
 using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
-using UnityEngine;
 
 namespace Source.Scripts.Ecs.Systems
 {
@@ -20,9 +19,9 @@ namespace Source.Scripts.Ecs.Systems
             {
                 ref var movableData = ref Componenter.Get<MovableData>(playerEntity);
                 ref var inputData = ref Componenter.Get<InputData>(playerEntity);
-                var speed = movableData.MoveSpeed * Time.fixedDeltaTime;
+                var speed = movableData.MoveSpeed * DeltaTime;
                 movableData.CharacterTransform.Translate(inputData.Direction.normalized * speed);
-                RegistryEvent(new OnMoveEvent(){Direction = inputData.Direction,Entity = playerEntity});
+                RegistryEvent(new OnMoveEvent {Direction = inputData.Direction,Entity = playerEntity});
             }
         }
     }

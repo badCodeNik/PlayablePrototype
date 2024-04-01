@@ -1,46 +1,37 @@
 
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Source.EasyECS.Interfaces;
 using Source.Scripts.EasyECS.Core;
 using UnityEngine;
 
 namespace Source.EasyECS
 {
-    public abstract class Starter : EasyMonoBehaviour, IEasyUpdate, IEasyFixedUpdate, IEasyLateUpdate
+    public abstract class Starter : BootstrapComponent, IEasyFixedUpdate
     {
         [SerializeField] private float tickTime = 1f;
+        [ReadOnly]
         [SerializeField] private List<string> _bootQueue;
         
-        private GameShare _gameSharing;
         private EcsWorld _world;
         private EventSystem _eventSystem;
+        private Componenter _componenter;
         private IEcsSystems _stepByStepSystems;
         private IEcsSystems _cardViewRefreshSystems;
         private IEcsSystems _coreSystems;
         private IEcsSystems _initSystems;
-        private IEcsSystems _updateSystems;
         private IEcsSystems _fixedUpdateSystems;
-        private IEcsSystems _lateUpdateSystems;
         private IEcsSystems _tickUpdateSystems;
         private float _tickTimer;
         
-        public void SetSharedData(GameShare gameShare)
-        {
-            _gameSharing = gameShare;
-        }
-
-        public void PreInit()
+        protected override void OnPreInit()
         {
             _world = new EcsWorld();
-            _eventSystem = new EventSystem();
             PrepareCoreSystems();
             PrepareInitSystems();
-            PrepareUpdateSystems();
             PrepareFixedUpdateSystems();
-            PrepareLateUpdateSystems();
             PrepareTickUpdateSystems();
             DependencyInject();
-            _eventSystem.PreInit(_gameSharing);
             InitEvents();
         }
 
@@ -48,19 +39,15 @@ namespace Source.EasyECS
         {
             InjectSystems(_coreSystems);
             InjectSystems(_initSystems);
-            InjectSystems(_updateSystems);
-            InjectSystems(_fixedUpdateSystems);
-            InjectSystems(_lateUpdateSystems);
-            InjectSystems(_tickUpdateSystems);
+            InjectSystems(_fixedUpdateSystems, InitializeType.FixedUpdate);
+            InjectSystems(_tickUpdateSystems, InitializeType.Tick);
         }
 
         private void InitEvents()
         {
             InitEventSubscribes(_coreSystems);
             InitEventSubscribes(_initSystems);
-            InitEventSubscribes(_updateSystems);
             InitEventSubscribes(_fixedUpdateSystems);
-            InitEventSubscribes(_lateUpdateSystems);
             InitEventSubscribes(_tickUpdateSystems);
         }
 
@@ -75,13 +62,13 @@ namespace Source.EasyECS
             }
         }
         
-        private void InjectSystems(IEcsSystems systems)
+        private void InjectSystems(IEcsSystems systems, InitializeType initializeType = InitializeType.None)
         {
             foreach (var system in systems.GetAllSystems())
             {
                 if (system is EasySystem easySystem)
                 {
-                    easySystem.PreInit(_gameSharing);
+                    easySystem.PreInit(GameShare, tickTime, initializeType);
                 }
             }
         }
@@ -92,17 +79,13 @@ namespace Source.EasyECS
             
             _coreSystems.Init();
             _initSystems.Init();
-            _updateSystems.Init();
             _fixedUpdateSystems.Init();
-            _lateUpdateSystems.Init();
             _tickUpdateSystems.Init();
  
         }
         
         protected abstract void SetInitSystems(IEcsSystems initSystems);
-        protected abstract void SetUpdateSystems(IEcsSystems updateSystems);
         protected abstract void SetFixedUpdateSystems(IEcsSystems fixedUpdateSystems);
-        protected abstract void SetLateUpdateSystems(IEcsSystems lateUpdateSystems);
         protected abstract void SetTickUpdateSystems(IEcsSystems tickUpdateSystems);
 
         private void InitBootInfo()
@@ -110,9 +93,7 @@ namespace Source.EasyECS
             _bootQueue = new List<string>();
             AddToBoot(_coreSystems);
             AddToBoot(_initSystems);
-            AddToBoot(_updateSystems);
             AddToBoot(_fixedUpdateSystems);
-            AddToBoot(_lateUpdateSystems);
             AddToBoot(_tickUpdateSystems);
         }
 
@@ -123,18 +104,6 @@ namespace Source.EasyECS
                 _bootQueue.Add(system.GetType().Name);
             }
         }
-        
-        private void AddToShare(IEcsSystems systems)
-        {
-            var sharingSystems = systems.GetAllSharingSystems();
-            if (sharingSystems.Count < 1) return;
-            foreach (var sharingSystem in sharingSystems)
-            {
-                var type = sharingSystem.GetType();
-                _gameSharing.AddSharedEcsSystem(type, sharingSystem);
-            }
-        }
- 
 
         private void TryInvokeTick()
         {
@@ -146,31 +115,25 @@ namespace Source.EasyECS
         
         private void PrepareCoreSystems()
         {
-            _coreSystems = new EcsSystems(_world, _gameSharing);
-            _coreSystems.Add(new Componenter());
+            _eventSystem = new EventSystem();
+            _componenter = GameShare.GetSharedObject<Componenter>();
+            _eventSystem.PreInit(_world, GameShare);
+            _componenter.PreInit(_world);
+            GameShare.AddSharedObject(_eventSystem.GetType(), _eventSystem);
+            _coreSystems = new EcsSystems(_world, GameShare);
             _coreSystems.Inject();
-            AddToShare(_coreSystems);
         }
         
         private void PrepareInitSystems()
         {
-            _initSystems = new EcsSystems(_world, _gameSharing);
+            _initSystems = new EcsSystems(_world, GameShare);
             SetInitSystems(_initSystems);
             _initSystems.Inject();
-            AddToShare(_initSystems);
-        }
-        
-        private void PrepareUpdateSystems()
-        {
-            _updateSystems = new EcsSystems(_world, _gameSharing);
-            SetUpdateSystems(_updateSystems);
-            _updateSystems.Inject();
-            AddToShare(_updateSystems);
         }
         
         private void PrepareFixedUpdateSystems()
         {
-            _fixedUpdateSystems = new EcsSystems(_world, _gameSharing);
+            _fixedUpdateSystems = new EcsSystems(_world, GameShare);
             _fixedUpdateSystems.Add(_eventSystem);
             SetFixedUpdateSystems(_fixedUpdateSystems);
 #if UNITY_EDITOR
@@ -180,23 +143,13 @@ namespace Source.EasyECS
 #endif
             
             _fixedUpdateSystems.Inject();
-            AddToShare(_fixedUpdateSystems);
-        }
-        
-        private void PrepareLateUpdateSystems()
-        {
-            _lateUpdateSystems = new EcsSystems(_world, _gameSharing);
-            SetLateUpdateSystems(_lateUpdateSystems);
-            _lateUpdateSystems.Inject();
-            AddToShare(_lateUpdateSystems);
         }
         
         private void PrepareTickUpdateSystems()
         {
-            _tickUpdateSystems = new EcsSystems(_world, _gameSharing);
+            _tickUpdateSystems = new EcsSystems(_world, GameShare);
             SetTickUpdateSystems(_tickUpdateSystems);
             _tickUpdateSystems.Inject();
-            AddToShare(_tickUpdateSystems);
         }
         
         private void OnDestroy() 
@@ -204,24 +157,13 @@ namespace Source.EasyECS
             _coreSystems?.Destroy();
             _initSystems?.Destroy();
             _fixedUpdateSystems?.Destroy();
-            _lateUpdateSystems?.Destroy();
             _tickUpdateSystems?.Destroy();
-        }
-
-        public void EasyUpdate()
-        {
-            _updateSystems?.Run();
         }
 
         public void EasyFixedUpdate()
         {
             _fixedUpdateSystems?.Run();
             TryInvokeTick();
-        }
-
-        public void EasyLateUpdate()
-        {
-            _lateUpdateSystems?.Run();
         }
     }
 }

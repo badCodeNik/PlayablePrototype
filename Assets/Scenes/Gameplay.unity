@@ -198,17 +198,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e450692e8f14c76a24e500350a0deea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
   tickTime: 1
   _bootQueue: []
+  updateSystemsOnValidate: 1
+  autoTransition: 0
+  none: []
+  start: []
+  fixedUpdate:
+  - name: AnimatorListener
+    fullName: Source.Scripts.Ecs.Systems.AnimatorListener
+    initializeType: 2
+    description: '
+
+
+      Default: None'
+  - name: InputSystem
+    fullName: Source.Scripts.Ecs.Systems.InputSystem
+    initializeType: 2
+    description: '
+
+
+      Default: None'
+  - name: PlayerMovementSystem
+    fullName: Source.Scripts.Ecs.Systems.PlayerMovementSystem
+    initializeType: 2
+    description: '
+
+
+      Default: None'
+  - name: KillSystem
+    fullName: Source.Scripts.Ecs.Systems.KillSystem
+    initializeType: 2
+    description: '
+
+
+      Default: None'
+  - name: EnemyAttackSystem
+    fullName: Source.Scripts.Ecs.Systems.EnemyAttackSystem
+    initializeType: 2
+    description: '
+
+
+      Default: None'
+  - name: PlayerAttackSystem
+    fullName: Source.Scripts.Ecs.Systems.PlayerAttackSystem
+    initializeType: 2
+    description: '
+
+
+      Default: None'
+  - name: ProjectileSystem
+    fullName: Source.Scripts.Ecs.Systems.ProjectileSystem
+    initializeType: 2
+    description: '
+
+
+      Default: None'
+  - name: EnemyMovementSystem
+    fullName: Source.Scripts.Ecs.Systems.EnemyMovementSystem
+    initializeType: 2
+    description: '
+
+
+      Default: None'
+  - name: HealthChanger
+    fullName: Source.Scripts.Ecs.Systems.HealthChanger
+    initializeType: 2
+    description: '
+
+
+      Default: None'
+  tick: []
+  setDefault: []
 --- !u!4 &354023504
 Transform:
   m_ObjectHideFlags: 0
@@ -223,62 +284,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2083625703}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &573822971
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 573822973}
-  - component: {fileID: 573822972}
-  m_Layer: 0
-  m_Name: GameConfiguration
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &573822972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573822971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fbcbb896daa40a7a30716c70751e487, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  configurations:
-  - {fileID: 11400000, guid: 054f334666ea4fa4fa1845c00b90ecd9, type: 2}
-  - {fileID: 11400000, guid: e7543d0218f5ba84880e9ee4498a62df, type: 2}
---- !u!4 &573822973
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573822971}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.35571, y: 1.7626513, z: -2.4586504}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &690579737
 GameObject:
@@ -309,15 +314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38728e9b46d4cfe9b531c77d64d2984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
 --- !u!4 &690579739
 Transform:
   m_ObjectHideFlags: 0
@@ -494,6 +490,10 @@ PrefabInstance:
       value: Vasya
       objectReference: {fileID: 0}
     - target: {fileID: 8650087069736066970, guid: debfbc358f831144dbbf1a6988449d4c, type: 3}
+      propertyPath: signal
+      value: 
+      objectReference: {fileID: 11400000, guid: 611a7ca498befef4a96c2ffd3868bbb8, type: 2}
+    - target: {fileID: 8650087069736066970, guid: debfbc358f831144dbbf1a6988449d4c, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1460437931}
@@ -507,62 +507,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: -4590052344189408706, guid: debfbc358f831144dbbf1a6988449d4c, type: 3}
   m_PrefabInstance: {fileID: 1257407725}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1646537397
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1646537399}
-  - component: {fileID: 1646537398}
-  m_Layer: 0
-  m_Name: ConfigurationHub
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1646537398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646537397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fbcbb896daa40a7a30716c70751e487, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  configurations:
-  - {fileID: 11400000, guid: 054f334666ea4fa4fa1845c00b90ecd9, type: 2}
-  - {fileID: 11400000, guid: e7543d0218f5ba84880e9ee4498a62df, type: 2}
---- !u!4 &1646537399
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646537397}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.35571, y: -1.7626513, z: 2.4586504}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2083625703}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1732981181
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,16 +942,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _awake:
-  - {fileID: 354023503}
   - {fileID: 690579738}
+  - {fileID: 354023503}
   _start: []
-  _share:
-  - {fileID: 1646537398}
   bootQueue: []
   gameShare:
     sharedEcsSystems: []
   _isInitialized: 1
   signal: {fileID: 11400000, guid: 611a7ca498befef4a96c2ffd3868bbb8, type: 2}
+  gameConfiguration: {fileID: 11400000, guid: 054f334666ea4fa4fa1845c00b90ecd9, type: 2}
 --- !u!4 &2083625703
 Transform:
   m_ObjectHideFlags: 0
@@ -1017,11 +960,10 @@ Transform:
   m_GameObject: {fileID: 2083625701}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.35571, y: 1.7626513, z: -2.4586504}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1646537399}
   - {fileID: 690579739}
   - {fileID: 354023504}
   m_Father: {fileID: 0}
@@ -1151,7 +1093,6 @@ SceneRoots:
   - {fileID: 1732981184}
   - {fileID: 2248019893781500787}
   - {fileID: 2083625703}
-  - {fileID: 573822973}
   - {fileID: 43518063}
   - {fileID: 705929546}
   - {fileID: 1257407725}

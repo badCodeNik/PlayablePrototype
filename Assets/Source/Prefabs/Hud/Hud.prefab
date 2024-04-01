@@ -301,7 +301,6 @@ GameObject:
   - component: {fileID: 7664744090551153748}
   - component: {fileID: 5794699134863479449}
   - component: {fileID: 5953211685478957345}
-  - component: {fileID: 586985899313024877}
   m_Layer: 0
   m_Name: Joystick
   m_TagString: Untagged
@@ -397,19 +396,6 @@ MonoBehaviour:
   isDynamicJoystick: 1
   dynamicJoystickMovementArea: {fileID: 297663734842199003}
   canFollowPointer: 0
---- !u!114 &586985899313024877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6183323679915909450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 539cf1e620ae49109d6d934a35d515cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputEventChannel: {fileID: 11400000, guid: 45ace0b8b8eaf5e439710b993793208d, type: 2}
 --- !u!1 &7288960868536671407
 GameObject:
   m_ObjectHideFlags: 0

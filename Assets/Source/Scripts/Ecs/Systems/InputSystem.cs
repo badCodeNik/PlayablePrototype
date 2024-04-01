@@ -1,5 +1,4 @@
 using Source.EasyECS;
-using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
 using UnityEngine;
@@ -26,16 +25,8 @@ namespace Source.Scripts.Ecs.Systems
                 {
                     ref var inputData = ref Componenter.AddOrGet<InputData>(playerEntity);
                     inputData.InitializeValues(direction);
-                    
                 }
-
             }
-            
         }
-        
-       
     }
-    
-    
-    
 }

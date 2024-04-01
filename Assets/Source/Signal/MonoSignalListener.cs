@@ -4,10 +4,11 @@ namespace Source.SignalSystem
 {
     public abstract class MonoSignalListener<T> : MonoBehaviour
     {
-        [HideInInspector] public Signal signal;
+        public Signal signal;
         
         protected virtual void OnEnable()
         {
+            if (signal == null) Debug.Log(GetType().Name);
             signal.Subscribe<T>(OnSignal);
         }
 

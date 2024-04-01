@@ -35,10 +35,12 @@ namespace Source.Scripts.Ecs.Systems
                     ref var attackingData = ref Componenter.Get<AttackingData>(enemyEntity);
                     var playerTransform = Componenter.Get<TransformData>(playerEntity).Value;
                     var enemyTransform = Componenter.Get<TransformData>(enemyEntity).Value;
+                    var enemyPosition = enemyTransform.position;
+                    var playerPosition = playerTransform.position;
                     var canAttack = attackingData.AttackDistance >
-                                    Vector2.Distance(playerTransform.position, enemyTransform.position);
-                    var targetDirection = ((Vector2)playerTransform.position - (Vector2)enemyTransform.position).normalized;
-                    var targetPoint = (Vector2)playerTransform.position - targetDirection * attackingData.AttackDistance;
+                                    Vector2.Distance(playerPosition, enemyPosition);
+                    var targetDirection = ((Vector2)playerPosition - (Vector2)enemyPosition).normalized;
+                    var targetPoint = (Vector2)playerPosition - targetDirection * attackingData.AttackDistance;
                     if (!canAttack)
                     {
                         Componenter.Add<InputData>(enemyEntity).InitializeValues(targetPoint);

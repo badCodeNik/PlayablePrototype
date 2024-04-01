@@ -38,10 +38,6 @@ namespace Source.EasyECS {
         void PostDestroy (IEcsSystems systems);
     }
     
-    public interface IEcsSharingSystem : IEcsSystem {
-        string GetName() => GetType().Name;
-    }
-    
     [Serializable]
     public class SystemState
     {
@@ -63,10 +59,7 @@ namespace Source.EasyECS {
         Dictionary<string, EcsWorld> GetAllNamedWorlds ();
         IEcsSystems Add (IEcsSystem system);
         List<IEcsSystem> GetAllSystems ();
-        List<IEcsSharingSystem> GetAllSharingSystems ();
         List<SystemState> SystemsState  { get; }
-        public T GetSharedMonoBehaviour<T>() where T : EasyMonoBehaviour;
-        public T GetSharedEcsSystem<T>() where T : IEcsSharingSystem;
         
         void Init ();
         void Run ();
@@ -83,7 +76,6 @@ namespace Source.EasyECS {
         readonly List<IEcsSystem> _allSystems;
         readonly List<IEcsRunSystem> _runSystems;
         readonly List<IEcsPostRunSystem> _postRunSystems;
-        readonly List<IEcsSharingSystem> _sharingSystems;
         private Dictionary<string, SystemState> _systemsSwitcher;
         private GameShare _gameShare;
 
@@ -100,23 +92,10 @@ namespace Source.EasyECS {
             _allSystems = new List<IEcsSystem> (128);
             _runSystems = new List<IEcsRunSystem> (128);
             _postRunSystems = new List<IEcsPostRunSystem> (128);
-            _sharingSystems = new List<IEcsSharingSystem>(128);
             _systemsSwitcher = new Dictionary<string, SystemState>();
             SystemsState = new List<SystemState>();
             _gameShare = gameShare;
             
-        }
-        
-        public T GetSharedMonoBehaviour<T>() where T : EasyMonoBehaviour
-        {
-            var classPack = _gameShare.MonoBehShared[typeof(T)];
-            var monoBeh = classPack.MonoBehaviour;
-            return (T)monoBeh;
-        }
-                
-        public T GetSharedEcsSystem<T>() where T : IEcsSharingSystem
-        {
-            return (T)_gameShare.EcsShared[typeof(T)];
         }
         
         public virtual T GetObsoleteShare<T> () where T : class {
@@ -161,21 +140,11 @@ namespace Source.EasyECS {
             if (system is IEcsPostRunSystem postRunSystem) {
                 _postRunSystems.Add (postRunSystem);
             }
-
-            if (system is IEcsSharingSystem sharingSystem)
-            {
-                _sharingSystems.Add(sharingSystem);
-            }
             return this;
         }
 
         public virtual List<IEcsSystem> GetAllSystems () {
             return _allSystems;
-        }
-
-        public virtual List<IEcsSharingSystem> GetAllSharingSystems()
-        {
-            return _sharingSystems;
         }
 
         public virtual void Init () {

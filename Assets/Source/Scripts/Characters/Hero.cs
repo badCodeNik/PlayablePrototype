@@ -3,30 +3,32 @@ using Source.EasyECS;
 using Source.Scripts.Data;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
-using Source.Scripts.EventSystem;
 using Source.Scripts.LibrariesSystem;
+using Source.SignalSystem;
 using UnityEngine;
 namespace Source.Scripts.Characters
 {
     public class Hero : MonoBehaviour
     {
         [SerializeField] private HeroInfo heroInfo;
-        [SerializeField] private HeroChannel heroChannel;
         [SerializeField] private Animator animator;
         [SerializeField, ReadOnly] private int entity;
-
+        [SerializeField] private Signal signal;
         public HeroInfo HeroInfo => heroInfo;
         public int Entity => entity;
 
         public void Start()
         {
             EcsInitialize();
-            heroChannel.RaiseEvent(this);
+            signal.RegistryRaise(new OnPlayerInitializedSignal
+            {
+                Hero = this,
+                HeroInfo = heroInfo
+            });
         }
 
         private void EcsInitialize()
         {
-            
             var componenter = EasyNode.EcsComponenter;
             entity = componenter.GetNewEntity();
             componenter.Add<PlayerMark>(entity);
@@ -47,9 +49,7 @@ namespace Source.Scripts.Characters
             }
             
             // И все остальные параметры...
-
-
-
+            
             if (heroInfo.Destructable.Enabled)
             {
                 ref var destructableData = ref componenter.Add<DestructableData>(entity);
@@ -60,8 +60,8 @@ namespace Source.Scripts.Characters
 
             if (heroInfo.Attacking.Enabled)
             {
-                ref var attackingData = ref componenter.Add<AttackingData>(entity);
                 var projectileInfo = Libraries.ProjectileLibrary.GetByID(heroInfo.Attacking.ProjectileID);
+                ref var attackingData = ref EasyNode.EcsComponenter.Add<AttackingData>(entity);
                 attackingData.AttackSpeed = heroInfo.Attacking.AttackSpeed;//Not reading the value from the inspector
                 attackingData.InitializeValues(
                     heroInfo.Attacking.Damage,

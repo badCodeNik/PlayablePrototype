@@ -7,16 +7,13 @@ namespace Source.SignalSystem
 {
     public static class SignalValidator
     {
-        private static Signal _signalInstance;
-
         public static void InjectSignal(Signal signalInstance)
         {
-            _signalInstance = signalInstance;
-            ValidateAndInjectSignalsInScenes();
-            ValidateAndInjectSignalsInAssets();
+            ValidateAndInjectSignalsInScenes(signalInstance);
+            ValidateAndInjectSignalsInAssets(signalInstance);
         }
 
-        private static void ValidateAndInjectSignalsInScenes()
+        private static void ValidateAndInjectSignalsInScenes(Signal signalInstance)
         {
             for (int i = 0; i < EditorSceneManager.sceneCount; i++)
             {
@@ -33,7 +30,7 @@ namespace Source.SignalSystem
                             {
                                 if (component != null)
                                 {
-                                    InjectSignalIntoFields(component);
+                                    InjectSignalIntoFields(component, signalInstance);
                                 }
                             }
                         }
@@ -42,7 +39,7 @@ namespace Source.SignalSystem
             }
         }
 
-        private static void ValidateAndInjectSignalsInAssets()
+        private static void ValidateAndInjectSignalsInAssets(Signal signalInstance)
         {
             string[] guids = AssetDatabase.FindAssets("t:GameObject");
             foreach (string guid in guids)
@@ -56,21 +53,21 @@ namespace Source.SignalSystem
                     {
                         if (component != null)
                         {
-                            InjectSignalIntoFields(component);
+                            InjectSignalIntoFields(component, signalInstance);
                         }
                     }
                 }
             }
         }
 
-        private static void InjectSignalIntoFields(Component component)
+        private static void InjectSignalIntoFields(Component component, Signal signalInstance)
         {
             var fields = component.GetType().GetFields();
             foreach (var field in fields)
             {
                 if (field.FieldType == typeof(Signal))
                 {
-                    field.SetValue(component, _signalInstance);
+                    field.SetValue(component, signalInstance);
                     Debug.Log($"Injected Signal into field {field.Name} of {component.gameObject.name}");
                 }
             }
