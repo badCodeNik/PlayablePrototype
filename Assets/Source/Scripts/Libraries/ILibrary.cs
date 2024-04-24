@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using Source.Scripts.KeysHolder;
+using UnityEngine; 
 
 namespace Source.Scripts.LibrariesSystem
 {
@@ -18,6 +20,14 @@ namespace Source.Scripts.LibrariesSystem
         {
             return _itemByID[id];
         }
+
+        public List<T> GetAllPacks()
+        {
+            List<T> packs = new List<T>();
+            packs = items.ToList();
+            return packs;
+        }
+
         
         /// <summary>
         /// Use it on validation only.

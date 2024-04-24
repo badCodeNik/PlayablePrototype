@@ -1,4 +1,5 @@
 
+using System;
 using Sirenix.OdinInspector;
 using Source.EasyECS;
 using Source.Scripts.Data;
@@ -25,13 +26,7 @@ namespace Source.Scripts.Characters
         public void Start()
         {
             EcsInitialize();
-            signal.RegistryRaise(new OnEnemyInitializedSignal
-            {
-                Npc = this,
-                EnemyInfo = EnemyInfo
-            });
-            agent.updateRotation = false;
-            agent.updateUpAxis = false;
+            
         }
 
         private void EcsInitialize()
@@ -43,6 +38,13 @@ namespace Source.Scripts.Characters
             transformData.InitializeValues(transform);
             ref var animatorData = ref componenter.Add<AnimatorData>(entity);
             animatorData.InitializeValues(animator);
+            signal.RegistryRaise(new OnEnemyInitializedSignal
+            {
+                Npc = this,
+                EnemyInfo = EnemyInfo
+            });
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
             
             // Создаем и прокидываем соотвествующую дату в ECS!
             if (EnemyInfo.Movable.Enabled)
@@ -76,8 +78,20 @@ namespace Source.Scripts.Characters
             }
             
         }
-        
-        
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out Hero hero))
+            {
+                Debug.Log("Kek");
+                signal.RegistryRaise(new OnEnemyColliderTouchSignal()
+                {
+                    EnemyEntity = entity,
+                    PlayerEntity = hero.Entity
+                });
+            }
+            
+        }
     }
 
     

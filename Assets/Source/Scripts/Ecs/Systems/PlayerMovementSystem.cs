@@ -8,9 +8,10 @@ namespace Source.Scripts.Ecs.Systems
     public class PlayerMovementSystem : EasySystem
     {
         private EcsFilter _inputFilter;
+
         protected override void Initialize()
         {
-            _inputFilter = World.Filter<InputData>().Inc<PlayerMark>().Inc<MovableData>().End();
+            _inputFilter = World.Filter<InputData>().Inc<PlayerMark>().Inc<MovableData>().Exc<PerkChoosingMark>().End();
         }
 
         protected override void Update()
@@ -21,7 +22,7 @@ namespace Source.Scripts.Ecs.Systems
                 ref var inputData = ref Componenter.Get<InputData>(playerEntity);
                 var speed = movableData.MoveSpeed * DeltaTime;
                 movableData.CharacterTransform.Translate(inputData.Direction.normalized * speed);
-                RegistryEvent(new OnMoveEvent {Direction = inputData.Direction,Entity = playerEntity});
+                RegistryEvent(new OnMoveEvent { Direction = inputData.Direction, Entity = playerEntity });
             }
         }
     }

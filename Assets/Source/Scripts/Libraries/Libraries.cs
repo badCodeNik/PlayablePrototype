@@ -10,20 +10,29 @@ namespace Source.Scripts.LibrariesSystem
         [SerializeField] private EnemiesLibrary enemiesLibrary;
         [SerializeField] private LanguageLibrary languageLibrary;
         [SerializeField] private ProjectileLibrary projectileLibrary;
+        [SerializeField] private LocationsLibrary locationsLibrary;
+        [SerializeField] private PerksLibrary perksLibrary;
+
+
         private KeyHolder _keysHolder = new();
+
         private ILibrary[] AllLibraries => new ILibrary[] 
             { 
                 heroLibrary, 
                 enemiesLibrary,
                 languageLibrary,
-                projectileLibrary
+                projectileLibrary,
+                locationsLibrary,
+                perksLibrary
             };
-
+        
+        public PerksLibrary PerksLibrary => perksLibrary;
         public static KeyHolder KeysHolder => Instance._keysHolder;
         public static HeroLibrary HeroPrefabLibrary => Instance.heroLibrary;
         public static LanguageLibrary LanguageLibrary => Instance.languageLibrary;
         public static EnemiesLibrary EnemiesLibrary => Instance.enemiesLibrary;
         public static ProjectileLibrary ProjectileLibrary => Instance.projectileLibrary;
+        public LocationsLibrary LocationsLibrary => Instance.locationsLibrary;
 
         public static Libraries Instance { get; private set; }
 

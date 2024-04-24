@@ -4,6 +4,8 @@ using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
 using Source.Scripts.Enums;
+using Source.Scripts.KeysHolder;
+using Source.Scripts.LibrariesSystem;
 using UnityEngine;
 
 namespace Source.Scripts.Ecs.Systems
@@ -52,6 +54,8 @@ namespace Source.Scripts.Ecs.Systems
                         var newObject = Object.Instantiate(attackingData.ProjectilePrefab,enemyTransform.position,Quaternion.Euler(0f, 0f, angle));
                         var projectile = newObject.GetComponent<Projectile>();
                         var velocity = targetDirection * attackingData.ProjectileSpeed ;
+                        var projectileSprite =
+                            Libraries.ProjectileLibrary.GetByID(ProjectileKeys.EnemyDefault).PreviewSprite;
                         projectile.Initialize((targetEntity =>
                         {
                             RegistryEvent(new OnProjectileTouch
@@ -59,7 +63,7 @@ namespace Source.Scripts.Ecs.Systems
                                 CharacterEntity = enemyEntity,
                                 TargetEntity = targetEntity
                             });
-                        } ),velocity,CharacterFaction.Enemy);
+                        } ),velocity,CharacterFaction.Enemy, projectileSprite);
                     }
                 }
                     

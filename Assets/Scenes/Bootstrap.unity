@@ -450,6 +450,8 @@ MonoBehaviour:
   enemiesLibrary: {fileID: 11400000, guid: 5a78b793e8535e2418c8d953420f0add, type: 2}
   languageLibrary: {fileID: 11400000, guid: 63f16f8a1cb03934487c9abb90c79f93, type: 2}
   projectileLibrary: {fileID: 11400000, guid: e9cfb164faa57d44ca02bb37d32aaf59, type: 2}
+  locationsLibrary: {fileID: 11400000, guid: c1b082d454dfa3247a2f9cca7c26738e, type: 2}
+  perksLibrary: {fileID: 11400000, guid: b0eec8c803316694fbd91129a6fde32e, type: 2}
 --- !u!4 &504555582
 Transform:
   m_ObjectHideFlags: 0

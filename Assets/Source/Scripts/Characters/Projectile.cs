@@ -13,7 +13,8 @@ namespace Source.Scripts.Characters
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Collider2D _collider;
         [SerializeField] private bool isInitialized;
-        [SerializeField] private CharacterFaction faction;   
+        [SerializeField] private CharacterFaction faction;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         private Action<int> _onTouch;
         private int _touchCount;
         private int _destroyTouchAmount = 3;
@@ -25,11 +26,12 @@ namespace Source.Scripts.Characters
             if (_collider == null) _collider.GetComponent<Collider2D>();
         }
 
-        public void Initialize(Action<int> onTouch, Vector2 velocity, CharacterFaction faction)
+        public void Initialize(Action<int> onTouch, Vector2 velocity, CharacterFaction faction, Sprite projectileSprite)
         {
             _onTouch = onTouch;
             _rb.velocity = velocity;
             this.faction = faction;
+            spriteRenderer.sprite = projectileSprite;
             switch (this.faction)
             {
                 case CharacterFaction.Player:

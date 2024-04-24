@@ -16,11 +16,11 @@ namespace Source.Scripts.LibrariesSystem
     {
         [SerializeField] private HeroKeys heroID;
         [SerializeField] private HeroInfo heroInfo;
-        [SerializeField] private GameObject prefab;
+        [SerializeField] private string prefab;
         [SerializeField] private Sprite icon;
 
         public HeroInfo HeroInfo => heroInfo;
-        public GameObject Prefab => prefab;
+        public string Prefab => prefab;
         public Sprite Icon => icon;
         public HeroKeys ID => heroID;
     }

@@ -16,8 +16,8 @@ MonoBehaviour:
   - projectileID: 0
     speed: 100
     prefab: {fileID: 203466082654516957, guid: d6981f8a4e2c30d44854b4640aeb47aa, type: 3}
-    previewSprite: {fileID: 21300000, guid: 24431c3919705ef4c817a22910c443a4, type: 3}
+    previewSprite: {fileID: 1219309625, guid: e3eff5578220bb64584ff7e41bb35d34, type: 3}
   - projectileID: 1
     speed: 100
     prefab: {fileID: 203466082654516957, guid: d6981f8a4e2c30d44854b4640aeb47aa, type: 3}
-    previewSprite: {fileID: 21300000, guid: 35cd8f9c237025141a4d556f32aab4bc, type: 3}
+    previewSprite: {fileID: 1380529022, guid: fe3fb5e82bac478448fa2166c6687706, type: 3}

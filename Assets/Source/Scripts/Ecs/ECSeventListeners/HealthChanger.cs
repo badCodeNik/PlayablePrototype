@@ -1,9 +1,6 @@
 using Source.Scripts.EasyECS.Core;
 using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Components;
-using Source.Scripts.MonoBehaviours;
-using Source.SignalSystem;
-using UnityEngine;
 
 namespace Source.Scripts.Ecs.Systems
 {
@@ -16,7 +13,7 @@ namespace Source.Scripts.Ecs.Systems
             targetHealth -= playerAttackingData.Damage;
             if (targetHealth <= 0)
             {
-                Componenter.Add<DestroyingData>(data.TargetEntity).InitializeValues(6);
+                Componenter.Add<DestroyingData>(data.TargetEntity).InitializeValues(3);
                 
             }
         }

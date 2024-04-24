@@ -8,12 +8,11 @@ using Source.SignalSystem;
 using UnityEngine;
 namespace Source.Scripts.Characters
 {
-    public class Hero : MonoBehaviour
+    public class Hero : MonoSignalListener<OnLocationCreatedSignal>
     {
         [SerializeField] private HeroInfo heroInfo;
         [SerializeField] private Animator animator;
         [SerializeField, ReadOnly] private int entity;
-        [SerializeField] private Signal signal;
         public HeroInfo HeroInfo => heroInfo;
         public int Entity => entity;
 
@@ -73,6 +72,11 @@ namespace Source.Scripts.Characters
             }
             
 
+        }
+
+        protected override void OnSignal(OnLocationCreatedSignal data)
+        {
+            transform.position = data.PlayerSpawnPosition.position;
         }
     }
 }

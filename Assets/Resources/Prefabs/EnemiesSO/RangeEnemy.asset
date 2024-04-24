@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ecf527d3d54751b6cc35348d3436c0, type: 3}
+  m_Name: RangeEnemy
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  movable:
+    enabled: 1
+    moveSpeed: 0
+    rotationSpeed: 0
+    navMeshAgent: {fileID: -1074186850333074833, guid: 79b9428276af5114195e171dcad24839, type: 3}
+  destructable:
+    enabled: 1
+    maxHealth: 1
+    health: 1
+  attacking:
+    enabled: 1
+    damage: 1
+    attackDistance: 200
+    attackSpeed: 3
+    projectileID: 1

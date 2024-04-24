@@ -15,5 +15,5 @@ MonoBehaviour:
   items:
   - heroID: 1
     heroInfo: {fileID: 11400000, guid: 0d8bbb6cccfe99c469e72a2c2100a119, type: 2}
-    prefab: {fileID: 3974154192787621255, guid: debfbc358f831144dbbf1a6988449d4c, type: 3}
+    prefab: Vasya/Vasya
     icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}

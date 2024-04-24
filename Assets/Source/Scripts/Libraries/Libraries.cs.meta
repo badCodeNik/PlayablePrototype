@@ -3,7 +3,11 @@ guid: 4df6067102ca1d943b53aeb747845f49
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - heroLibrary: {fileID: 11400000, guid: 141189b3b503ab34ca34d84954724f58, type: 2}
+  - enemiesLibrary: {fileID: 11400000, guid: 5a78b793e8535e2418c8d953420f0add, type: 2}
+  - languageLibrary: {fileID: 11400000, guid: 63f16f8a1cb03934487c9abb90c79f93, type: 2}
+  - projectileLibrary: {fileID: 11400000, guid: e9cfb164faa57d44ca02bb37d32aaf59, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
