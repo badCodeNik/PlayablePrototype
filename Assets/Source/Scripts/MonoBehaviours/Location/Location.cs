@@ -20,20 +20,15 @@ namespace Source.Scripts.MonoBehaviours.Location
 
         private void Start()
         {
-            signal.RegistryRaise(new OnLocationCreatedSignal()
-            {
-                PlayerSpawnPosition = playerSpawnPosition
-            });
-
             var componenter = EasyNode.EcsComponenter;
             entity = componenter.GetNewEntity();
             ref var locationData = ref componenter.AddOrGet<LocationData>(entity);
             locationData.InitializeValues(finishingPoint);
-            
-            
 
+            signal.RegistryRaise(new OnLocationCreatedSignal()
+            {
+                PlayerSpawnPosition = playerSpawnPosition
+            });
         }
-        
     }
-    
 }

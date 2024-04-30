@@ -36,3 +36,4 @@ MonoBehaviour:
     attackDistance: 0
     attackSpeed: 1
     projectileID: 0
+    baseAttackSpeed: 1

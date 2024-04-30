@@ -2,6 +2,7 @@ using Source.EasyECS;
 using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
+using Source.SignalSystem;
 
 namespace Source.Scripts.Ecs.Systems
 {
@@ -10,6 +11,7 @@ namespace Source.Scripts.Ecs.Systems
         private EcsFilter _enemyFilter;
         private EcsFilter _playerFilter;
         private bool _isRoomCleaned;
+
         protected override void Initialize()
         {
             _enemyFilter = World.Filter<EnemyMark>().End();
@@ -23,16 +25,14 @@ namespace Source.Scripts.Ecs.Systems
                 if (!_enemyFilter.HasAny())
                 {
                     ref var playerTransformData = ref Componenter.Get<TransformData>(playerEntity);
-                    
-                        RegistryEvent(new OnRoomCleaned()
-                        {
-                            Transform = playerTransformData.Value
-                        });
-                        
+
+                    RegistryEvent(new OnRoomCleaned()
+                    {
+                        Transform = playerTransformData.Value
+                    });
+                   
                 }
             }
-            
-                
         }
     }
 }

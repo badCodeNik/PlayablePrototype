@@ -16,12 +16,12 @@ namespace Source.Scripts.EasyECS.Custom
         }
     }
 
-    public struct OnProjectileTouch : IEcsEvent<OnProjectileTouch>
+    public struct OnHitEvent : IEcsEvent<OnHitEvent>
     {
         public int CharacterEntity;
         public int TargetEntity;
 
-        public void InitializeValues(OnProjectileTouch eventData)
+        public void InitializeValues(OnHitEvent eventData)
         {
             CharacterEntity = eventData.CharacterEntity;
             TargetEntity = eventData.TargetEntity;
@@ -97,12 +97,12 @@ namespace Source.Scripts.EasyECS.Custom
 
     public struct OnPerkChosen : IEcsEvent<OnPerkChosen>
     {
-        public int PlayerEntity;
+        public object Data;
         public PerkKeys ChosenPerkID;
 
         public void InitializeValues(OnPerkChosen eventData)
         {
-            PlayerEntity = eventData.PlayerEntity;
+            Data = eventData.Data;
             ChosenPerkID = eventData.ChosenPerkID;
         }
     }
@@ -118,4 +118,16 @@ namespace Source.Scripts.EasyECS.Custom
             PlayerEntity = eventData.PlayerEntity;
         }
     }
+    
+    public struct OnHeroInitialized : IEcsEvent<OnHeroInitialized>
+    {
+        public Hero Hero;
+        public HeroInfo HeroInfo;
+        public void InitializeValues(OnHeroInitialized eventData)
+        {
+            Hero = eventData.Hero;
+            HeroInfo = eventData.HeroInfo;
+        }
+    }
 }
+

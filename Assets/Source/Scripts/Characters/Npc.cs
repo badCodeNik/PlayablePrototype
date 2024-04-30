@@ -1,5 +1,3 @@
-
-using System;
 using Sirenix.OdinInspector;
 using Source.EasyECS;
 using Source.Scripts.Data;
@@ -9,6 +7,7 @@ using Source.Scripts.LibrariesSystem;
 using Source.SignalSystem;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 namespace Source.Scripts.Characters
 {
@@ -19,15 +18,18 @@ namespace Source.Scripts.Characters
         [SerializeField] private NavMeshAgent agent;
         [SerializeField, ReadOnly] private int entity;
         [SerializeField] private Signal signal;
+        private Tween _tween;
 
         public EnemyInfo EnemyInfo => enemyInfo;
         public int Entity => entity;
-        
+
         public void Start()
         {
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+            _tween = spriteRenderer.DOFade(1, 1);
             EcsInitialize();
-            
         }
+
 
         private void EcsInitialize()
         {
@@ -45,17 +47,17 @@ namespace Source.Scripts.Characters
             });
             agent.updateRotation = false;
             agent.updateUpAxis = false;
-            
+
             // Создаем и прокидываем соотвествующую дату в ECS!
             if (EnemyInfo.Movable.Enabled)
             {
                 ref var movableData = ref componenter.Add<MovableData>(entity);
-                movableData.InitializeValue( EnemyInfo.Movable.MoveSpeed, EnemyInfo.Movable.RotationSpeed, transform, agent);
-                
+                movableData.InitializeValue(EnemyInfo.Movable.MoveSpeed, EnemyInfo.Movable.RotationSpeed, transform,
+                    agent);
             }
-            
+
             // И все остальные параметры...
-            
+
 
             if (EnemyInfo.Destructable.Enabled)
             {
@@ -74,9 +76,9 @@ namespace Source.Scripts.Characters
                     EnemyInfo.Attacking.AttackDistance,
                     EnemyInfo.Attacking.AttackSpeed,
                     projectileInfo.Prefab,
-                    projectileInfo.Speed);
+                    projectileInfo.Speed,
+                    EnemyInfo.Attacking.BaseAttackSpeed);
             }
-            
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -84,15 +86,12 @@ namespace Source.Scripts.Characters
             if (other.TryGetComponent(out Hero hero))
             {
                 Debug.Log("Kek");
-                signal.RegistryRaise(new OnEnemyColliderTouchSignal()
+                signal.RegistryRaise(new OnHitSignal()
                 {
                     EnemyEntity = entity,
                     PlayerEntity = hero.Entity
                 });
             }
-            
         }
     }
-
-    
 }

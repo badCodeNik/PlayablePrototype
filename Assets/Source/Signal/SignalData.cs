@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using Source.Scripts.Characters;
+﻿using Source.Scripts.Characters;
 using Source.Scripts.Data;
 using Source.Scripts.KeysHolder;
-using Source.Scripts.LibrariesSystem;
 using UnityEngine;
 
 namespace Source.SignalSystem
@@ -35,7 +33,7 @@ namespace Source.SignalSystem
         public Transform PlayerSpawnPosition;
     }
 
-    public struct OnEnemyColliderTouchSignal
+    public struct OnHitSignal
     {
         public int EnemyEntity;
         public int PlayerEntity;
@@ -43,7 +41,7 @@ namespace Source.SignalSystem
 
     public struct OnPerkChosenSignal
     {
-        public int PlayerEntity;
+        public object Data;
         public PerkKeys ChosenPerkID;
     }
 
@@ -55,20 +53,13 @@ namespace Source.SignalSystem
     {
     }
 
-    public struct OnPerksGenerated
-    {
-        public List<PerksPack> PerksPacks;
-    }
-
 
     public struct OnFreezingAuraChosen
     {
-        
     }
 
 
     public struct OnBurningAuraChosen
     {
-        
     }
 }

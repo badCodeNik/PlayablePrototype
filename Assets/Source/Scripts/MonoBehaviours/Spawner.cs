@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
-using Source.Scripts.Characters;
 using Source.Scripts.KeysHolder;
 using Source.Scripts.LibrariesSystem;
-using Source.SignalSystem;
-using UnityEditor;
 using UnityEngine;
 
 namespace Source.Scripts.MonoBehaviours
@@ -30,7 +26,7 @@ namespace Source.Scripts.MonoBehaviours
         private void SpawnEnemies()
         {
             var enemyLibrary = Libraries.EnemiesLibrary.GetByID(enemyId);
-            var enemy = Resources.Load(enemyLibrary.Prefab); 
+            var enemy = Resources.Load(enemyLibrary.Prefab);
             Instantiate(enemy, transform.position, Quaternion.identity);
         }
     }

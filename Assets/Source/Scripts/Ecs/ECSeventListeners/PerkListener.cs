@@ -26,40 +26,52 @@ namespace Source.Scripts.Ecs.ECSeventListeners
             _playerFilter.TryGetFirstEntity(out int playerEntity);
             switch (data.ChosenPerkID)
             {
-                case PerkKeys.BonusHP:
-                    Componenter.Add<BonusHPPerkData>(playerEntity);
+                case PerkKeys.BonusHealth:
+                    //Componenter.Add<BonusHPPerkData>(playerEntity);
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     break;
-                case PerkKeys.HPRestoration:
-                    Componenter.Add<HPRestorationPerkData>(playerEntity);
+                case PerkKeys.HealthRestoration:
+                    //Componenter.Add<HPRestorationPerkData>(playerEntity);
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     break;
                 case PerkKeys.LifeSteal:
                     Componenter.Add<LifestealPerkData>(playerEntity);
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     break;
                 case PerkKeys.BonusDamage:
-                    Componenter.Add<BonusDamagePerkData>(playerEntity);
+                    //Componenter.Add<BonusDamagePerkData>(playerEntity);
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     break;
                 case PerkKeys.BonusAttackSpeed:
-                    Componenter.Add<BonusAttackSpeedPerkData>(playerEntity);
+                   // Componenter.Add<BonusAttackSpeedPerkData>(playerEntity);
+                    
                     break;
                 case PerkKeys.Bleeding:
-                    Componenter.Add<BleedingPerkData>(playerEntity);
+                    //Componenter.Add<BleedingPerkData>(playerEntity);
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     break;
                 case PerkKeys.CriticalDamage:
                     Componenter.Add<CriticalDamagePerkData>(playerEntity);
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     break;
                 case PerkKeys.BonusProjectileParallel:
                     Componenter.Add<BonusProjectileParallelPerkData>(playerEntity);
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     break;
                 case PerkKeys.BonusProjectileBackwards:
                     Componenter.Add<BonusProjectileBackwardsPerkData>(playerEntity);
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     break;
                 case PerkKeys.BonusProjectilesSides:
                     Componenter.Add<BonusProjectilesSidesPerkData>(playerEntity);
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     break;
                 case PerkKeys.FreezingAura:
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     RegistrySignal(new OnFreezingAuraChosen());
                     break;
                 case PerkKeys.BurningAura:
+                    Componenter.Del<PerkChoosingMark>(playerEntity);
                     RegistrySignal(new OnBurningAuraChosen());
                     break;
             }

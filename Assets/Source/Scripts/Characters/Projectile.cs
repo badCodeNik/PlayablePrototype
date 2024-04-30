@@ -1,9 +1,6 @@
 using System;
-using Source.EasyECS;
 using Source.Scripts.Enums;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Source.Scripts.Characters
 {

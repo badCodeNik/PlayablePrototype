@@ -58,7 +58,7 @@ namespace Source.Scripts.Ecs.Systems
                             Libraries.ProjectileLibrary.GetByID(ProjectileKeys.EnemyDefault).PreviewSprite;
                         projectile.Initialize((targetEntity =>
                         {
-                            RegistryEvent(new OnProjectileTouch
+                            RegistryEvent(new OnHitEvent
                             {
                                 CharacterEntity = enemyEntity,
                                 TargetEntity = targetEntity

@@ -6,6 +6,7 @@ using Source.Scripts.Ecs.Marks;
 using Source.Scripts.LibrariesSystem;
 using Source.SignalSystem;
 using UnityEngine;
+
 namespace Source.Scripts.Characters
 {
     public class Hero : MonoSignalListener<OnLocationCreatedSignal>
@@ -37,7 +38,7 @@ namespace Source.Scripts.Characters
             lookRotationData.InitializeValues(Vector2.zero);
             ref var animatorData = ref componenter.Add<AnimatorData>(entity);
             animatorData.InitializeValues(animator);
-            
+
             // Создаем и прокидываем соотвествующую дату в ECS!
             if (heroInfo.Movable.Enabled)
             {
@@ -46,32 +47,30 @@ namespace Source.Scripts.Characters
                 movableData.MoveSpeed = heroInfo.Movable.MoveSpeed;
                 movableData.CharacterTransform = transform;
             }
-            
+
             // И все остальные параметры...
-            
+
             if (heroInfo.Destructable.Enabled)
             {
                 ref var destructableData = ref componenter.Add<DestructableData>(entity);
                 destructableData.CurrentHealth = heroInfo.Destructable.Health;
                 destructableData.Maxhealth = heroInfo.Destructable.MaxHealth;
             }
-            
+
 
             if (heroInfo.Attacking.Enabled)
             {
                 var projectileInfo = Libraries.ProjectileLibrary.GetByID(heroInfo.Attacking.ProjectileID);
                 ref var attackingData = ref EasyNode.EcsComponenter.Add<AttackingData>(entity);
-                attackingData.AttackSpeed = heroInfo.Attacking.AttackSpeed;//Not reading the value from the inspector
                 attackingData.InitializeValues(
                     heroInfo.Attacking.Damage,
                     heroInfo.Attacking.AttackDistance,
                     heroInfo.Attacking.AttackSpeed,
                     projectileInfo.Prefab,
-                    projectileInfo.Speed
-                    );
+                    projectileInfo.Speed,
+                    heroInfo.Attacking.BaseAttackSpeed
+                );
             }
-            
-
         }
 
         protected override void OnSignal(OnLocationCreatedSignal data)

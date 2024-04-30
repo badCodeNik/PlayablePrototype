@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8650087069736066970}
   - component: {fileID: -4918974254415718790}
   - component: {fileID: -4590052344189408706}
-  - component: {fileID: 403495974608292358}
+  - component: {fileID: -6306853969316616420}
   m_Layer: 3
   m_Name: Vasya
   m_TagString: Untagged
@@ -33,7 +33,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 8437504078963508917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6404001325524345767
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 39a6cb80dfb11d341bc9194db7e29892, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -133,7 +134,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -160,7 +161,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &403495974608292358
+--- !u!114 &-6306853969316616420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,8 +173,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed349a705b50df44bc3b9f54449249f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  auraPrefab: {fileID: 324089919723640893, guid: e51a2303c615d9e44bdf73f6b975773c, type: 3}
-  playerTransform: {fileID: 1012303890251940342}
-  rotationSpeed: 50
+  signal: {fileID: 11400000, guid: 611a7ca498befef4a96c2ffd3868bbb8, type: 2}
+  fireAuraPrefab: {fileID: 324089919723640893, guid: e51a2303c615d9e44bdf73f6b975773c, type: 3}
+  freezingAuraPrefab: {fileID: 324089919723640893, guid: b0a23cab0ba7bd84f906f31ffff67555, type: 3}
+  playerTransform: {fileID: 8437504078963508917}
+  rotationSpeed: 300
   auraCount: 3
-  auraRadius: 2
+  auraRadius: 10
+  maxDistance: 1
+--- !u!1 &5477513936851260483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8437504078963508917}
+  m_Layer: 3
+  m_Name: auraHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8437504078963508917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5477513936851260483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1012303890251940342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

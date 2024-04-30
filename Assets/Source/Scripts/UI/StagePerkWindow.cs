@@ -1,29 +1,46 @@
-using System.Collections.Generic;
-using Source.Scripts.LibrariesSystem;
 using Source.SignalSystem;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Source.Scripts.UI
 {
-    public class StagePerkWindow : MonoSignalListener<OnPerksGenerated>
+    public class StagePerkWindow : MonoBehaviour
     {
-        [SerializeField] private GameObject panel;
-        [SerializeField] private Animator animator;
-        [SerializeField] private Image[] perkImages;
-        [SerializeField] private TextMeshProUGUI[] perkDescriptions;
+        [SerializeField] private Signal signal;
+        [SerializeField] private PerkCard firstCard;
+        [SerializeField] private PerkCard secondCard;
+        [SerializeField] private PerkCard thirdCard;
+        private OnPerkChosenSignal _first;
+        private OnPerkChosenSignal _second;
+        private OnPerkChosenSignal _third;
 
-        private List<PerksPack> _perksPacks = new List<PerksPack>();
 
-
-        protected override void OnSignal(OnPerksGenerated data)
+        public void SetContent(OnPerkChosenSignal first, OnPerkChosenSignal second, OnPerkChosenSignal third)
         {
-            for (int i = 0; i < data.PerksPacks.Count; i++)
-            {
-                perkImages[i].sprite = data.PerksPacks[i].Icon;
-                perkDescriptions[i].text = data.PerksPacks[i].Description;
-            }
+            _first = first;
+            _second = second;
+            _third = third;
+            firstCard.SetContent(_first.ChosenPerkID);
+            secondCard.SetContent(_second.ChosenPerkID);
+            thirdCard.SetContent(_third.ChosenPerkID);
+        }
+
+
+        public void InvokeFirst()
+        {
+            signal.RegistryRaise(_first);
+            gameObject.SetActive(false);
+        }
+
+        public void InvokeSecond()
+        {
+            signal.RegistryRaise(_second);
+            gameObject.SetActive(false);
+        }
+
+        public void InvokeThird()
+        {
+            signal.RegistryRaise(_third);
+            gameObject.SetActive(false);
         }
     }
 }

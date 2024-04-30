@@ -96,10 +96,10 @@ namespace Source.Scripts.KeysHolder
     
     public enum PerkKeys
     {
-        [Description("BonusHP")]
-        BonusHP,
-        [Description("HPRestoration")]
-        HPRestoration,
+        [Description("BonusHealth")]
+        BonusHealth,
+        [Description("HealthRestoration")]
+        HealthRestoration,
         [Description("Lifesteal")]
         LifeSteal,
         [Description("BonusDamage")]

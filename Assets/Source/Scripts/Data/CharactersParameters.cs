@@ -45,6 +45,9 @@ namespace Source.Scripts.Data
         [SerializeField] private float attackDistance;
         [SerializeField] private float attackSpeed;
         [SerializeField] private ProjectileKeys projectileID;
+        [SerializeField] private float baseAttackSpeed;
+
+        public float BaseAttackSpeed => baseAttackSpeed;
 
         public float AttackSpeed => attackSpeed;
         

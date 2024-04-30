@@ -3,6 +3,7 @@ using Source.Scripts.Characters;
 using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
+using Source.Scripts.Ecs.Systems.PerkSystems;
 using Source.Scripts.Enums;
 using Source.Scripts.KeysHolder;
 using Source.Scripts.LibrariesSystem;
@@ -45,7 +46,15 @@ namespace Source.Scripts.Ecs.Systems
                     ref var reloadData = ref Componenter.Add<AttackReloadData>(playerEntity);
                     var targetDirection = ((Vector2)enemyTransform.position -
                                            (Vector2)playerTransform.position).normalized;
+                    // Для бонусной скорости атаки
+                    /*if (Componenter.Has<BonusAttackSpeedData>(playerEntity))
+                    {
+                        ref var bonusAttackSpeedData = ref Componenter.Get<BonusAttackSpeedData>(playerEntity);
+                        reloadData.InitializeValues(bonusAttackSpeedData.BonusAttackSpeed);
+                    }
+                    else */ 
                     reloadData.InitializeValues(attackingData.AttackSpeed);
+
                     var angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
                     var newObject = Object.Instantiate(attackingData.ProjectilePrefab, playerTransform.position,
                         Quaternion.Euler(0f, 0f, angle));
@@ -55,7 +64,7 @@ namespace Source.Scripts.Ecs.Systems
                         Libraries.ProjectileLibrary.GetByID(ProjectileKeys.PlayerDefault).PreviewSprite;
                     projectile.Initialize((targetEntity =>
                     {
-                        RegistryEvent(new OnProjectileTouch
+                        RegistryEvent(new OnHitEvent
                         {
                             CharacterEntity = playerEntity,
                             TargetEntity = targetEntity

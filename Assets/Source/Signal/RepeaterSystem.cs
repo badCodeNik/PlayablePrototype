@@ -8,9 +8,19 @@ namespace Source.SignalSystem
         protected override void Initialize()
         {
             SubscribeSignal<OnGameInitializedSignal>(OnGameInitialized);
+            SubscribeSignal<OnPlayerInitializedSignal>(OnHeroInitialized);
             SubscribeSignal<OnEnemyInitializedSignal>(OnEnemyInitialized);
-            SubscribeSignal<OnEnemyColliderTouchSignal>(OnEnemyColliderTouch);
+            SubscribeSignal<OnHitSignal>(OnHit);
             SubscribeSignal<OnPerkChosenSignal>(OnPerkChosen);
+        }
+
+        private void OnHeroInitialized(OnPlayerInitializedSignal data)
+        {
+            RegistryEvent(new OnHeroInitialized()
+            {
+                Hero = data.Hero,
+                HeroInfo = data.HeroInfo
+            });
         }
 
         private void OnPerkChosen(OnPerkChosenSignal data)
@@ -18,16 +28,16 @@ namespace Source.SignalSystem
             RegistryEvent(new OnPerkChosen()
             {
                 ChosenPerkID = data.ChosenPerkID,
-                PlayerEntity = data.PlayerEntity
+                Data = data.Data
             });
         }
 
-        private void OnEnemyColliderTouch(OnEnemyColliderTouchSignal data)
+        private void OnHit(OnHitSignal data)
         {
-            RegistryEvent(new OnEnemyColliderTouchEvent()
+            RegistryEvent(new OnHitEvent()
             {
-                EnemyEntity = data.EnemyEntity,
-                PlayerEntity = data.PlayerEntity
+                CharacterEntity = data.EnemyEntity,
+                TargetEntity = data.PlayerEntity
             });
         }
 
