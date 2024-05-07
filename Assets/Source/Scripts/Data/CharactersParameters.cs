@@ -6,15 +6,15 @@ using UnityEngine.AI;
 
 namespace Source.Scripts.Data
 {
-    
-    [Serializable][Toggle("enabled")]
+    [Serializable]
+    [Toggle("enabled")]
     public abstract class Parameter
     {
         [SerializeField] protected bool enabled;
 
         public bool Enabled => enabled;
     }
-    
+
     [Serializable]
     public class Movable : Parameter
     {
@@ -25,8 +25,8 @@ namespace Source.Scripts.Data
         public float MoveSpeed => moveSpeed;
         public float RotationSpeed => rotationSpeed;
     }
-    
-    
+
+
     [Serializable]
     public class Destructable : Parameter
     {
@@ -35,7 +35,6 @@ namespace Source.Scripts.Data
         public float MaxHealth => maxHealth;
 
         public float Health => health;
-        
     }
 
     [Serializable]
@@ -50,15 +49,11 @@ namespace Source.Scripts.Data
         public float BaseAttackSpeed => baseAttackSpeed;
 
         public float AttackSpeed => attackSpeed;
-        
+
         public ProjectileKeys ProjectileID => projectileID;
-        
+
         public float Damage => damage;
 
         public float AttackDistance => attackDistance;
     }
-
-    
-    
-
 }

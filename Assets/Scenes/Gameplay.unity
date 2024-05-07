@@ -219,6 +219,13 @@ MonoBehaviour:
 
 
       Default: None'
+  - name: DamageDealer
+    fullName: Source.Scripts.Ecs.ECSeventListeners.DamageDealer
+    initializeType: 2
+    description: '
+
+
+      Default: None'
   - name: HealthRestorationSystem
     fullName: Source.Scripts.Ecs.Systems.PerkSystems.HealthRestorationSystem
     initializeType: 2
@@ -226,8 +233,8 @@ MonoBehaviour:
 
 
       Default: None'
-  - name: HealthChanger
-    fullName: Source.Scripts.Ecs.ECSeventListeners.HealthChanger
+  - name: LifestealSystem
+    fullName: Source.Scripts.Ecs.Systems.PerkSystems.LifestealSystem
     initializeType: 2
     description: '
 
@@ -242,13 +249,6 @@ MonoBehaviour:
       Default: None'
   - name: BleedSystem
     fullName: Source.Scripts.Ecs.Systems.PerkSystems.BleedSystem
-    initializeType: 2
-    description: '
-
-
-      Default: None'
-  - name: BonusDamageSystem
-    fullName: Source.Scripts.Ecs.Systems.PerkSystems.BonusDamageSystem
     initializeType: 2
     description: '
 
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 50
+    OrthographicSize: 49
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -560,7 +560,7 @@ Transform:
   m_GameObject: {fileID: 754222279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -808,15 +808,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3350554390574616369, guid: ca7152c8d7b0d984fbc84dcba722cfde, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6750736
+      value: -0.013494492
       objectReference: {fileID: 0}
     - target: {fileID: 3350554390574616369, guid: ca7152c8d7b0d984fbc84dcba722cfde, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.19732285
+      value: -0.065719604
       objectReference: {fileID: 0}
     - target: {fileID: 3350554390574616369, guid: ca7152c8d7b0d984fbc84dcba722cfde, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3350554390574616369, guid: ca7152c8d7b0d984fbc84dcba722cfde, type: 3}
       propertyPath: m_LocalRotation.w
@@ -848,7 +848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6414408050683086716, guid: ca7152c8d7b0d984fbc84dcba722cfde, type: 3}
       propertyPath: orthographic size
-      value: 50
+      value: 49
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1045,8 +1045,8 @@ Transform:
   m_GameObject: {fileID: 2065230871}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -14.4, z: 0}
-  m_LocalScale: {x: 20.3, y: 41.124302, z: 1}
+  m_LocalPosition: {x: 0, y: -9.4, z: 0}
+  m_LocalScale: {x: 20.3, y: 36.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 43518063}
@@ -1163,16 +1163,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.27044383, y: 1.5781927}
-      - {x: -4.3773756, y: 1.5457748}
+    - - {x: 0.34981057, y: 1.6228228}
+      - {x: -0.10359465, y: 1.6291398}
+      - {x: -4.3773756, y: 1.626109}
       - {x: -4.390938, y: 0.7827296}
-      - {x: -4.304852, y: -0.4206631}
-      - {x: -4.3252645, y: -0.6301163}
-      - {x: -4.3582196, y: -0.8366661}
-      - {x: -1.564597, y: -0.8224862}
-      - {x: 0.56277156, y: -0.79816824}
-      - {x: 4.4103875, y: -0.815054}
-      - {x: 4.3931212, y: 1.5133569}
+      - {x: -4.415965, y: -0.40281108}
+      - {x: -4.404631, y: -0.6301163}
+      - {x: -4.3582196, y: -1.0687424}
+      - {x: -1.5011036, y: -1.0991925}
+      - {x: 0.7056317, y: -1.0927265}
+      - {x: 4.3786407, y: -1.0739082}
+      - {x: 4.377248, y: 1.584765}
   m_UseDelaunayMesh: 0
 --- !u!1 &2083625701
 GameObject:

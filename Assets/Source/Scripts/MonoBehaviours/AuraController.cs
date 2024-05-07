@@ -9,14 +9,14 @@ namespace Source.Scripts.MonoBehaviours
         [SerializeField] private GameObject freezingAuraPrefab;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private float rotationSpeed;
-        [SerializeField] private int auraCount = 3; 
-        [SerializeField] private float auraRadius = 2f; 
+        [SerializeField] private int auraCount = 3;
+        [SerializeField] private float auraRadius = 2f;
         [SerializeField] private float maxDistance;
 
         private GameObject[] _auraObjects;
         private bool _isAuraCreated;
 
-        private void Start()
+        public AuraController(Transform playerTransform)
         {
             _auraObjects = new GameObject[auraCount];
         }
@@ -41,11 +41,9 @@ namespace Source.Scripts.MonoBehaviours
             {
                 // Создаем новую ауру из префаба
                 _auraObjects[i] = Instantiate(fireAuraPrefab, transform.position, Quaternion.identity);
-                
+
                 float angle = i * (360f / auraCount); // Равномерно распределяем ауры вокруг круга
-                Vector3 offset =
-                    Quaternion.Euler(0f, 0f, angle) * Vector3.right * maxDistance; // Вычисляем смещение для каждой ауры
-                offset = Vector3.ClampMagnitude(offset, maxDistance);
+                Vector3 offset = Quaternion.Euler(0f, 0f, angle) * Vector3.right * auraRadius;
                 _auraObjects[i].transform.position = playerTransform.position + offset;
             }
 
@@ -58,13 +56,12 @@ namespace Source.Scripts.MonoBehaviours
             {
                 // Создаем новую ауру из префаба
                 _auraObjects[i] = Instantiate(freezingAuraPrefab, transform.position, Quaternion.identity);
-                
+
                 float angle = i * (360f / auraCount); // Равномерно распределяем ауры вокруг круга
-                Vector3 offset =
-                    Quaternion.Euler(0f, 0f, angle) * Vector3.right * maxDistance; // Вычисляем смещение для каждой ауры
-                offset = Vector3.ClampMagnitude(offset, maxDistance);
+                Vector3 offset = Quaternion.Euler(0f, 0f, angle) * Vector3.right * auraRadius;
                 _auraObjects[i].transform.position = playerTransform.position + offset;
             }
+
             _isAuraCreated = true;
         }
     }

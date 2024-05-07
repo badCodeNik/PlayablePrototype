@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8650087069736066970}
   - component: {fileID: -4918974254415718790}
   - component: {fileID: -4590052344189408706}
-  - component: {fileID: -6306853969316616420}
+  - component: {fileID: 8345786732317637083}
   m_Layer: 3
   m_Name: Vasya
   m_TagString: Untagged
@@ -161,26 +161,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-6306853969316616420
-MonoBehaviour:
+--- !u!50 &8345786732317637083
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3974154192787621255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed349a705b50df44bc3b9f54449249f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 611a7ca498befef4a96c2ffd3868bbb8, type: 2}
-  fireAuraPrefab: {fileID: 324089919723640893, guid: e51a2303c615d9e44bdf73f6b975773c, type: 3}
-  freezingAuraPrefab: {fileID: 324089919723640893, guid: b0a23cab0ba7bd84f906f31ffff67555, type: 3}
-  playerTransform: {fileID: 8437504078963508917}
-  rotationSpeed: 300
-  auraCount: 3
-  auraRadius: 10
-  maxDistance: 1
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &5477513936851260483
 GameObject:
   m_ObjectHideFlags: 0

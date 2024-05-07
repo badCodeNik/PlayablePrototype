@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+using Source.Scripts.Data;
 using Source.Scripts.EasyECS.Core;
 using Source.SignalSystem;
 using UnityEngine;
@@ -22,7 +22,7 @@ namespace Source.EasyECS
         protected float DeltaTime => _deltaTime;
         protected float TickTime { get; private set; }
         private InitializeType _initializeType;
-        
+
         public void PreInit(GameShare gameShare, float tickTime, InitializeType initializeType = InitializeType.None)
         {
             if (_isInitialized) return;
@@ -42,18 +42,18 @@ namespace Source.EasyECS
             {
                 case InitializeType.None:
                     return 0;
-                
+
                 case InitializeType.FixedUpdate:
                     return Time.fixedDeltaTime;
-                
+
                 case InitializeType.Tick:
                     return TickTime;
-                
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         public void RegistrySignal<T>(T data)
         {
             _signal.RegistryRaise(data);
@@ -69,7 +69,7 @@ namespace Source.EasyECS
             _signal.Unsubscribe(action);
         }
 
-        public void RegistryEvent<T>(T data) where T: struct, IEcsEvent<T>
+        public void RegistryEvent<T>(T data) where T : struct, IEcsEvent<T>
         {
             _eventSystem.RegistryEvent(data);
         }
@@ -84,11 +84,15 @@ namespace Source.EasyECS
         {
             Update();
         }
-        
-        
-        
-        protected virtual void Initialize(){}
-        protected virtual void Update(){}
+
+
+        protected virtual void Initialize()
+        {
+        }
+
+        protected virtual void Update()
+        {
+        }
 
         public virtual InitializeType DefaultInitializeType()
         {
@@ -100,7 +104,7 @@ namespace Source.EasyECS
             return "";
         }
     }
-    
+
     public enum InitializeType
     {
         None,

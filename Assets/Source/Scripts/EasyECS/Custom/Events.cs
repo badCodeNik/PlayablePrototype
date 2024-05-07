@@ -119,11 +119,11 @@ namespace Source.Scripts.EasyECS.Custom
         }
     }
     
-    public struct OnHeroInitialized : IEcsEvent<OnHeroInitialized>
+    public struct OnHeroInitializedEvent : IEcsEvent<OnHeroInitializedEvent>
     {
         public Hero Hero;
         public HeroInfo HeroInfo;
-        public void InitializeValues(OnHeroInitialized eventData)
+        public void InitializeValues(OnHeroInitializedEvent eventData)
         {
             Hero = eventData.Hero;
             HeroInfo = eventData.HeroInfo;

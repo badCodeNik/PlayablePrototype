@@ -34,6 +34,6 @@ MonoBehaviour:
     enabled: 1
     damage: 1
     attackDistance: 0
-    attackSpeed: 1
+    attackSpeed: 3
     projectileID: 0
     baseAttackSpeed: 1

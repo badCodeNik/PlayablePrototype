@@ -2,8 +2,8 @@
 using Source.EasyECS;
 using Source.Scripts.Data;
 using Source.Scripts.Ecs.Components;
+using Source.Scripts.Ecs.ECSeventListeners;
 using Source.Scripts.Ecs.Marks;
-using Source.Scripts.LibrariesSystem;
 using Source.SignalSystem;
 using UnityEngine;
 
@@ -38,6 +38,7 @@ namespace Source.Scripts.Characters
             lookRotationData.InitializeValues(Vector2.zero);
             ref var animatorData = ref componenter.Add<AnimatorData>(entity);
             animatorData.InitializeValues(animator);
+            
 
             // Создаем и прокидываем соотвествующую дату в ECS!
             if (heroInfo.Movable.Enabled)
@@ -55,21 +56,6 @@ namespace Source.Scripts.Characters
                 ref var destructableData = ref componenter.Add<DestructableData>(entity);
                 destructableData.CurrentHealth = heroInfo.Destructable.Health;
                 destructableData.Maxhealth = heroInfo.Destructable.MaxHealth;
-            }
-
-
-            if (heroInfo.Attacking.Enabled)
-            {
-                var projectileInfo = Libraries.ProjectileLibrary.GetByID(heroInfo.Attacking.ProjectileID);
-                ref var attackingData = ref EasyNode.EcsComponenter.Add<AttackingData>(entity);
-                attackingData.InitializeValues(
-                    heroInfo.Attacking.Damage,
-                    heroInfo.Attacking.AttackDistance,
-                    heroInfo.Attacking.AttackSpeed,
-                    projectileInfo.Prefab,
-                    projectileInfo.Speed,
-                    heroInfo.Attacking.BaseAttackSpeed
-                );
             }
         }
 

@@ -31,9 +31,8 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
             {
                 ref var healthRestorationData = ref Componenter.Get<HealthRestorationData>(playerEntity);
                 ref var destructableData = ref Componenter.Get<DestructableData>(playerEntity);
-                
+
                 healthRestorationData.Timer -= DeltaTime;
-                healthRestorationData.TimeRemaining -= DeltaTime;
                 var interval = healthRestorationData.Interval;
 
                 if (healthRestorationData.Timer <= 0f)
@@ -44,23 +43,27 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
                     currentHealth = Mathf.Min(currentHealth, maxHealth);
                     healthRestorationData.Timer += interval;
                 }
-                if (healthRestorationData.TimeRemaining < 0f)
-                {
-                    Componenter.Del<HealthRestorationData>(playerEntity);
-                }
             }
         }
 
         public override void OnEvent(OnPerkChosen data)
         {
-            if (data is { ChosenPerkID: PerkKeys.HealthRestoration, Data : HealthRestorationData healthRestoration } &&
+            if (data is { ChosenPerkID: PerkKeys.HealthRestoration } &&
                 _playerFilter.TryGetFirstEntity(out int entity))
             {
                 ref var healthRestorationData = ref Componenter.AddOrGet<HealthRestorationData>(entity);
                 Componenter.Del<PerkChoosingMark>(entity);
-                healthRestorationData.InitializeValues(healthRestoration);
+                healthRestorationData.InitializeValues(EasyNode.GameConfiguration.Perks.HealthRestoration);
             }
         }
+    }
+
+
+    public class HealthRestoration
+    {
+        public float RestorationAmount;
+        public float Interval;
+        public float Timer;
     }
 
     public struct HealthRestorationData : IEcsComponent
@@ -70,11 +73,10 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
         public float Timer;
         public float TimeRemaining;
 
-        public void InitializeValues(HealthRestorationData data)
+        public void InitializeValues(HealthRestoration data)
         {
-            RestorationAmount = data.RestorationAmount;
-            Interval = data.Interval;
-            TimeRemaining = data.TimeRemaining;
+            RestorationAmount += data.RestorationAmount;
+            Interval += data.Interval;
         }
     }
 }

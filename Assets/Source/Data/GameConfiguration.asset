@@ -20,5 +20,119 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Perks
+      Entry: 7
+      Data: 0|Source.Scripts.Data.Perks, Assembly-CSharp
+    - Name: BonusAttackSpeed
+      Entry: 7
+      Data: 1|Source.Scripts.Ecs.Systems.PerkSystems.BonusAttackSpeed, Assembly-CSharp
+    - Name: AttackSpeed
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: BonusDamage
+      Entry: 7
+      Data: 2|Source.Scripts.Ecs.ECSeventListeners.BonusDamage, Assembly-CSharp
+    - Name: Value
+      Entry: 4
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: CriticalDamage
+      Entry: 7
+      Data: 3|Source.Scripts.Ecs.ECSeventListeners.CriticalDamage, Assembly-CSharp
+    - Name: CritChance
+      Entry: 3
+      Data: 10
+    - Name: CritDamage
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Lifesteal
+      Entry: 7
+      Data: 4|Source.Scripts.Ecs.Systems.PerkSystems.Lifesteal, Assembly-CSharp
+    - Name: LifestealValue
+      Entry: 4
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: BonusProjectile
+      Entry: 7
+      Data: 5|Source.Scripts.Ecs.Systems.BonusProjectile, Assembly-CSharp
+    - Name: Offset
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 4
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Angle
+      Entry: 4
+      Data: 180
+    - Name: SideAngleOffset
+      Entry: 4
+      Data: 90
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: HealthRestoration
+      Entry: 7
+      Data: 6|Source.Scripts.Ecs.Systems.PerkSystems.HealthRestoration, Assembly-CSharp
+    - Name: RestorationAmount
+      Entry: 4
+      Data: 1
+    - Name: Interval
+      Entry: 4
+      Data: 1
+    - Name: Timer
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: BonusHealth
+      Entry: 7
+      Data: 7|Source.Scripts.Ecs.Systems.PerkSystems.BonusHealth, Assembly-CSharp
+    - Name: Health
+      Entry: 4
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Bleed
+      Entry: 7
+      Data: 8|Source.Scripts.Ecs.Systems.PerkSystems.Bleed, Assembly-CSharp
+    - Name: DamageAmount
+      Entry: 4
+      Data: 1
+    - Name: Interval
+      Entry: 4
+      Data: 1
+    - Name: Timer
+      Entry: 4
+      Data: 0
+    - Name: TimeRemaining
+      Entry: 4
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   languageID: 0

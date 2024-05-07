@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Source.Scripts.Ecs.Systems.PerkSystems;
 using Source.Scripts.KeysHolder;
 using Source.Scripts.LibrariesSystem;
 using Source.Scripts.UI;
@@ -9,12 +8,22 @@ using Random = UnityEngine.Random;
 
 namespace Source.Scripts.MonoBehaviours
 {
-    public class PerkSignalSender : MonoSignalListener<OnRoomCleanedSignal>
+    public class PerkSignalSender : MonoSignalListener<OnRoomCleanedSignal, OnPerkChosenSignal>
     {
         [SerializeField, HideInInspector] private Canvas _canvas;
         [SerializeField] private GameObject prefab;
         [SerializeField] private StagePerkWindow content;
 
+        private List<PerkKeys> _usedPerkIDs = new List<PerkKeys>();
+        private List<int> _numberList = new List<int>();
+        private List<PerksPack> _perksLibrary = new List<PerksPack>();
+
+
+        private void Start()
+        {
+            _perksLibrary = Libraries.Instance.PerksLibrary.GetAllPacks();
+            _usedPerkIDs = new List<PerkKeys>();
+        }
 
         protected override void OnSignal(OnRoomCleanedSignal data)
         {
@@ -26,36 +35,43 @@ namespace Source.Scripts.MonoBehaviours
             content.SetContent(perks.Item1, perks.Item2, perks.Item3);
         }
 
+        protected override void OnSignal(OnPerkChosenSignal data)
+        {
+            _usedPerkIDs.Add(data.ChosenPerkID);
+        }
+
         private (OnPerkChosenSignal, OnPerkChosenSignal, OnPerkChosenSignal) GetRandomPerks()
         {
-            var perksLibrary = Libraries.Instance.PerksLibrary.GetAllPacks();
-            var numberList = new List<int>();
-
-            while (numberList.Count < 2 || numberList.Count < perksLibrary.Count)
+            List<int> availablePerksIndexes = new List<int>();
+            for (int i = 0; i < _perksLibrary.Count; i++)
             {
-                var randomNumber = Random.Range(0, perksLibrary.Count);
-                if (!numberList.Contains(randomNumber)) numberList.Add(randomNumber);
+                if (!_usedPerkIDs.Contains(_perksLibrary[i].ID))
+                {
+                    availablePerksIndexes.Add(i);
+                }
+            }
+
+            Debug.Log(availablePerksIndexes.Count);
+            _numberList.Clear();
+            while (_numberList.Count < 3 && availablePerksIndexes.Count > 0)
+            {
+                int index = Random.Range(0, availablePerksIndexes.Count);
+                _numberList.Add(availablePerksIndexes[index]);
+                availablePerksIndexes.RemoveAt(index);
             }
 
             return (
                 new OnPerkChosenSignal
                 {
-                    //ChosenPerkID = perksLibrary[numberList[0]].ID
-                    ChosenPerkID = PerkKeys.HealthRestoration,
-                    Data = new HealthRestorationData()
-                    {
-                        TimeRemaining = 8,
-                        Interval = 1,
-                        RestorationAmount = 2
-                    }
+                    ChosenPerkID = _perksLibrary[_numberList[0]].ID
                 },
                 new OnPerkChosenSignal
                 {
-                    ChosenPerkID = perksLibrary[numberList[1]].ID
+                    ChosenPerkID = _perksLibrary[_numberList[1]].ID
                 },
                 new OnPerkChosenSignal
                 {
-                    ChosenPerkID = perksLibrary[numberList[2]].ID
+                    ChosenPerkID = _perksLibrary[_numberList[2]].ID
                 });
         }
 

@@ -19,25 +19,30 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
 
         public override void OnEvent(OnPerkChosen data)
         {
-            if (data is { ChosenPerkID: PerkKeys.BonusHealth, Data : BonusHealthData bonusHealth } &&
+            if (data is { ChosenPerkID: PerkKeys.BonusHealth} &&
                 _playerFilter.TryGetFirstEntity(out int entity))
             {
-                ref var bonusDamageData = ref Componenter.AddOrGet<BonusHealthData>(entity);
+                ref var bonusHealthData = ref Componenter.AddOrGet<BonusHealthData>(entity);
                 Componenter.Del<PerkChoosingMark>(entity);
-                bonusDamageData.InitializeValues(bonusHealth);
+                bonusHealthData.InitializeValues(EasyNode.GameConfiguration.Perks.BonusHealth);
                 ref var destructableData = ref Componenter.Get<DestructableData>(entity);
-                destructableData.CurrentHealth += bonusHealth.BonusHealth;
+                destructableData.CurrentHealth += bonusHealthData.BonusHealth;
             }
         }
     }
 
+
+    public class BonusHealth
+    {
+        public float Health;
+    }
     public struct BonusHealthData : IEcsComponent
     {
         public float BonusHealth;
 
-        public void InitializeValues(BonusHealthData data)
+        public void InitializeValues(BonusHealth data)
         {
-            BonusHealth = data.BonusHealth;
+            BonusHealth += data.Health;
         }
     }
 }

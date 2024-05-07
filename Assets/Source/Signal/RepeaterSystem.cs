@@ -16,7 +16,7 @@ namespace Source.SignalSystem
 
         private void OnHeroInitialized(OnPlayerInitializedSignal data)
         {
-            RegistryEvent(new OnHeroInitialized()
+            RegistryEvent(new OnHeroInitializedEvent()
             {
                 Hero = data.Hero,
                 HeroInfo = data.HeroInfo

@@ -28,11 +28,12 @@ MonoBehaviour:
     navMeshAgent: {fileID: -1074186850333074833, guid: 79b9428276af5114195e171dcad24839, type: 3}
   destructable:
     enabled: 1
-    maxHealth: 2
-    health: 2
+    maxHealth: 1
+    health: 1
   attacking:
     enabled: 1
     damage: 1
     attackDistance: 200
     attackSpeed: 3
     projectileID: 1
+    baseAttackSpeed: 0

@@ -1,6 +1,5 @@
 using Source.EasyECS.Interfaces;
-using Source.Scripts.Data;
-using Source.Scripts.LibrariesSystem;
+using Source.Scripts.Ecs.ECSeventListeners;
 using UnityEngine;
 
 namespace Source.Scripts.Ecs.Components
@@ -14,7 +13,8 @@ namespace Source.Scripts.Ecs.Components
         public float ProjectileSpeed;
         public float BaseAttackSpeed;
 
-        public void InitializeValues(float damage, float attackDistance,float attackSpeed, GameObject projectilePrefab, float projectileSpeed, float baseAttackSpeed)
+        public void InitializeValues(float damage, float attackDistance, float attackSpeed, GameObject projectilePrefab,
+            float projectileSpeed, float baseAttackSpeed)
         {
             Damage = damage;
             AttackDistance = attackDistance;
@@ -23,6 +23,11 @@ namespace Source.Scripts.Ecs.Components
             ProjectileSpeed = projectileSpeed;
             BaseAttackSpeed = baseAttackSpeed;
         }
-       
+
+        
+        public void InitializeValues(BonusDamage value)
+        {
+            Damage += value.Value;
+        }
     }
 }

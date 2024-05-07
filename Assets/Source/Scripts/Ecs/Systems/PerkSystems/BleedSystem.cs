@@ -26,24 +26,32 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
             {
                 ref var bleedingData = ref Componenter.Get<BleedingData>(entity);
                 ref var currentHealth = ref Componenter.Get<DestructableData>(entity).CurrentHealth;
-                bleedingData.Timer = bleedingData.TimeRemaining;
-                bleedingData.Timer -= Time.fixedDeltaTime;
-                var dealingDamage = bleedingData.DamagePerSec * bleedingData.TimeRemaining; 
-                if (bleedingData.Timer > 0)
+                if (currentHealth <= 0) return;
+                bleedingData.Timer -= DeltaTime;
+                bleedingData.TimeRemaining -= DeltaTime;
+                var interval = bleedingData.Interval;
+
+                if (bleedingData.Timer < 0)
                 {
                     currentHealth -= bleedingData.DamagePerSec;
+                    bleedingData.Timer += interval;
+                }
+
+                if (bleedingData.TimeRemaining < 0)
+                {
+                    Componenter.Del<BleedingData>(entity);
                 }
             }
         }
 
         public override void OnEvent(OnPerkChosen data)
         {
-            if (data is { ChosenPerkID: PerkKeys.Bleeding, Data : BleedData bleed } &&
+            if (data is { ChosenPerkID: PerkKeys.Bleeding } &&
                 _playerFilter.TryGetFirstEntity(out int entity))
             {
                 ref var bleedData = ref Componenter.AddOrGet<BleedData>(entity);
                 Componenter.Del<PerkChoosingMark>(entity);
-                bleed.InitializeValues(bleed);
+                bleedData.InitializeValues(EasyNode.GameConfiguration.Perks.Bleed);
             }
         }
 
@@ -57,21 +65,26 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
         }
     }
 
+    public class Bleed
+    {
+        public float DamageAmount;
+        public float Interval;
+        public float TimeRemaining;
+    }
+
     public struct BleedData : IEcsComponent
     {
-        public float Time;
         public float Damage;
+        public float Interval;
+        public float Timer;
+        public float TimeRemaining;
 
-        public void InitializeValues(float time, float damage)
-        {
-            Time += time;
-            Damage += damage;
-        }
 
-        public void InitializeValues(BleedData data)
+        public void InitializeValues(Bleed data)
         {
-            Time += data.Time;
-            Damage += data.Damage;
+            Interval = data.Interval;
+            TimeRemaining = data.TimeRemaining;
+            Damage += data.DamageAmount;
         }
     }
 
@@ -80,10 +93,13 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
         public float TimeRemaining;
         public float DamagePerSec;
         public float Timer;
+        public float Interval;
 
         public void InitializeValues(BleedData data)
         {
-            
+            DamagePerSec = data.Damage;
+            TimeRemaining = data.TimeRemaining;
+            Interval = data.Interval;
         }
     }
 }

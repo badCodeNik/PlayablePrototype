@@ -9,5 +9,6 @@ namespace Source.Scripts.Data
     public class GameConfiguration : SerializedScriptableObject, IGameShareItem
     {
         public LanguageKeys languageID;
+        public Perks Perks;
     }
 }
