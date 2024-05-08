@@ -212,6 +212,13 @@ MonoBehaviour:
 
 
       Default: None'
+  - name: AuraSystem
+    fullName: Source.Scripts.Ecs.Systems.PerkSystems.AuraSystem
+    initializeType: 2
+    description: '
+
+
+      Default: None'
   - name: RoomCleanListener
     fullName: Source.Scripts.Ecs.Systems.RoomCleanListener
     initializeType: 2
@@ -256,13 +263,6 @@ MonoBehaviour:
       Default: None'
   - name: EnemiesKilledCheckSystem
     fullName: Source.Scripts.Ecs.Systems.EnemiesKilledCheckSystem
-    initializeType: 2
-    description: '
-
-
-      Default: None'
-  - name: PerkListener
-    fullName: Source.Scripts.Ecs.ECSeventListeners.PerkListener
     initializeType: 2
     description: '
 

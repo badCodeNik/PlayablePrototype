@@ -15,7 +15,9 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 324089919723640893, guid: b0a23cab0ba7bd84f906f31ffff67555, type: 3}
+    - {fileID: 324089919723640893, guid: e51a2303c615d9e44bdf73f6b975773c, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -123,12 +125,45 @@ MonoBehaviour:
     - Name: Interval
       Entry: 4
       Data: 1
-    - Name: Timer
-      Entry: 4
-      Data: 0
     - Name: TimeRemaining
       Entry: 4
       Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: FreezingAura
+      Entry: 7
+      Data: 9|Source.Scripts.Ecs.Systems.PerkSystems.FreezingAura, Assembly-CSharp
+    - Name: AuraPrefab
+      Entry: 10
+      Data: 0
+    - Name: OrbitDistance
+      Entry: 4
+      Data: 7
+    - Name: RotationSpeed
+      Entry: 4
+      Data: 70
+    - Name: AuraCount
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: BurningAura
+      Entry: 7
+      Data: 10|Source.Scripts.Ecs.Systems.PerkSystems.BurningAura, Assembly-CSharp
+    - Name: AuraPrefab
+      Entry: 10
+      Data: 1
+    - Name: OrbitDistance
+      Entry: 4
+      Data: 7
+    - Name: RotationSpeed
+      Entry: 4
+      Data: 70
+    - Name: AuraCount
+      Entry: 3
+      Data: 3
     - Name: 
       Entry: 8
       Data: 

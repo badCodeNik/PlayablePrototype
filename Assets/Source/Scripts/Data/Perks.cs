@@ -14,5 +14,7 @@ namespace Source.Scripts.Data
         public HealthRestoration HealthRestoration;
         public BonusHealth BonusHealth;
         public Bleed Bleed;
+        public FreezingAura FreezingAura;
+        public BurningAura BurningAura;
     }
 }
