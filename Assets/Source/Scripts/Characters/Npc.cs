@@ -46,12 +46,13 @@ namespace Source.Scripts.Characters
             });
             agent.updateRotation = false;
             agent.updateUpAxis = false;
+            
 
             // Создаем и прокидываем соотвествующую дату в ECS!
             if (EnemyInfo.Movable.Enabled)
             {
                 ref var movableData = ref componenter.Add<MovableData>(entity);
-                movableData.InitializeValue(EnemyInfo.Movable.MoveSpeed, EnemyInfo.Movable.RotationSpeed, transform,
+                movableData.InitializeValue(EnemyInfo.Movable.MoveSpeed, transform,
                     agent);
             }
 
@@ -65,6 +66,7 @@ namespace Source.Scripts.Characters
                 destructableData.Maxhealth = EnemyInfo.Destructable.MaxHealth;
                 destructableData.Prefab = gameObject;
             }
+            
         }
 
         private void OnTriggerEnter2D(Collider2D other)

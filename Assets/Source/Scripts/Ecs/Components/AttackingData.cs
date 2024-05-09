@@ -11,17 +11,15 @@ namespace Source.Scripts.Ecs.Components
         public float AttackSpeed;
         public GameObject ProjectilePrefab;
         public float ProjectileSpeed;
-        public float BaseAttackSpeed;
 
         public void InitializeValues(float damage, float attackDistance, float attackSpeed, GameObject projectilePrefab,
-            float projectileSpeed, float baseAttackSpeed)
+            float projectileSpeed)
         {
             Damage = damage;
             AttackDistance = attackDistance;
             AttackSpeed = attackSpeed;
             ProjectilePrefab = projectilePrefab;
             ProjectileSpeed = projectileSpeed;
-            BaseAttackSpeed = baseAttackSpeed;
         }
 
         

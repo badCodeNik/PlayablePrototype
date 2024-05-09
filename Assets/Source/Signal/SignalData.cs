@@ -53,13 +53,10 @@ namespace Source.SignalSystem
     {
     }
 
-
-    public struct OnFreezingAuraChosen
+    public struct OnEnemyMoveSignal
     {
-    }
-
-
-    public struct OnBurningAuraChosen
-    {
+        public int Entity;
+        public Vector2 Direction;
+        public float Speed;
     }
 }

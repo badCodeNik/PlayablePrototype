@@ -4,17 +4,17 @@ namespace Source.Scripts.MonoBehaviours
 {
     public abstract class MoneyManager 
     {
-        private const string MoneyKey = "PlayerMoney";
+        private const string PointsKey = "PlayerMoney";
         
-        public static void SaveMoney(int moneyAmount)
+        public static void SavePoints(int pointsNumber)
         {
-            PlayerPrefs.SetInt(MoneyKey, moneyAmount);
+            PlayerPrefs.SetInt(PointsKey, pointsNumber);
             PlayerPrefs.Save();
         }
         
-        public static int LoadMoney()
+        public static int LoadPoints()
         {
-            return PlayerPrefs.GetInt(MoneyKey, 0); 
+            return PlayerPrefs.GetInt(PointsKey, 0); 
         }
     }
 }

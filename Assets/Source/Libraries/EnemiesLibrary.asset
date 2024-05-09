@@ -21,3 +21,11 @@ MonoBehaviour:
     enemyInfo: {fileID: 11400000, guid: 02aff3ecd623df44b8221630bf92e18c, type: 2}
     prefab: Enemies/RangeEnemy
     icon: {fileID: 21300000, guid: a3f06dbf403102e438041bd5ddfb61a9, type: 3}
+  - heroID: 2
+    enemyInfo: {fileID: 11400000, guid: ddf8c16c5d6228142ae296f943a185cd, type: 2}
+    prefab: Enemies/FlyEnemy
+    icon: {fileID: 21300000, guid: 51c8244bf94d57c4ebb8910b622026bb, type: 3}
+  - heroID: 3
+    enemyInfo: {fileID: 11400000, guid: 3f18202521e1a234393219d344ceb9e8, type: 2}
+    prefab: Enemies/Ghost
+    icon: {fileID: 21300000, guid: c10cab367f07c064fba6040b0c9d13c3, type: 3}

@@ -45,10 +45,14 @@ namespace Source.Scripts.KeysHolder
     
     public enum EnemyKeys
     {
-        [Description("enemy_range_enemy")]
+        [Description("npc_range_enemy")]
         RangeEnemy,
-        [Description("enemy_melee_enemy")]
-        MeleeEnemy
+        [Description("npc_melee_enemy")]
+        MeleeEnemy,
+        [Description("npc_fly_enemy")]
+        FlyEnemy,
+        [Description("npc_ghost")]
+        Ghost
     }
     
     public enum LocationKeys
@@ -62,7 +66,17 @@ namespace Source.Scripts.KeysHolder
         [Description("fourth_location")]
         FourthLocation,
         [Description("fifth_location")]
-        FifthLocation
+        FifthLocation,
+        [Description("sixth_location")]
+        SixthLocation,
+        [Description("seventh_location")]
+        SeventhLocation,
+        [Description("eighth_location")]
+        EighthLocation,
+        [Description("ninth_location")]
+        NinthLocation,
+        [Description("Tenth_location")]
+        TenthLocation
     }
     
     public enum ProjectileKeys

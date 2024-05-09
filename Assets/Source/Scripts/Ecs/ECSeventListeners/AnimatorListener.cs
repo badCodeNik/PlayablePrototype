@@ -2,6 +2,7 @@ using Source.Scripts.EasyECS.Core;
 using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
+using UnityEngine;
 
 namespace Source.Scripts.Ecs.Systems
 {

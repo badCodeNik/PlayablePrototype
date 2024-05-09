@@ -44,7 +44,6 @@ namespace Source.Scripts.Characters
             if (heroInfo.Movable.Enabled)
             {
                 ref var movableData = ref componenter.Add<MovableData>(entity);
-                movableData.RotationSpeed = heroInfo.Movable.RotationSpeed;
                 movableData.MoveSpeed = heroInfo.Movable.MoveSpeed;
                 movableData.CharacterTransform = transform;
             }

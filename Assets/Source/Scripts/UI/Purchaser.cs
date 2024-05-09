@@ -11,7 +11,7 @@ namespace Source.Scripts.UI
 
         private void Start()
         {
-            moneyAmount = MoneyManager.LoadMoney();
+            moneyAmount = MoneyManager.LoadPoints();
         }
 
         public void Purchase()
@@ -20,7 +20,7 @@ namespace Source.Scripts.UI
             {
                 moneyAmount -= price;
                 Debug.Log("Капец ты лох");
-                MoneyManager.SaveMoney(moneyAmount);
+                MoneyManager.SavePoints(moneyAmount);
             }
         }
     }

@@ -46,13 +46,11 @@ namespace Source.Scripts.EasyECS.Custom
     {
         public int Entity;
         public Vector2 Direction;
-        public float Speed;
 
         public void InitializeValues(OnEnemyMoveEvent eventData)
         {
             Entity = eventData.Entity;
             Direction = eventData.Direction;
-            Speed = eventData.Speed;
         }
     }
 

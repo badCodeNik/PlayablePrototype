@@ -23,3 +23,13 @@ MonoBehaviour:
     prefabPath: Locations/Location4
   - locationID: 4
     prefabPath: Locations/Location5
+  - locationID: 5
+    prefabPath: Locations/Location6
+  - locationID: 6
+    prefabPath: Locations/Location7
+  - locationID: 7
+    prefabPath: Locations/Location8
+  - locationID: 8
+    prefabPath: Locations/Location9
+  - locationID: 9
+    prefabPath: Locations/Location10

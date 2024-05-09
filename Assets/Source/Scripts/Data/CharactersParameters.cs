@@ -44,9 +44,7 @@ namespace Source.Scripts.Data
         [SerializeField] private float attackDistance;
         [SerializeField] private float attackSpeed;
         [SerializeField] private ProjectileKeys projectileID;
-        [SerializeField] private float baseAttackSpeed;
 
-        public float BaseAttackSpeed => baseAttackSpeed;
 
         public float AttackSpeed => attackSpeed;
 
@@ -55,5 +53,16 @@ namespace Source.Scripts.Data
         public float Damage => damage;
 
         public float AttackDistance => attackDistance;
+    }
+
+    [Serializable]
+    public class Untouchable : Parameter
+    {
+        [SerializeField] private float wanderRadius;
+        [SerializeField] private float wanderDelay;
+
+        public float WanderRadius => wanderRadius;
+
+        public float WanderDelay => wanderDelay;
     }
 }

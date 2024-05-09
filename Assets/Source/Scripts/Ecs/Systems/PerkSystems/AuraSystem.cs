@@ -25,6 +25,7 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
         {
             foreach (var enemyEntity in _frozenFilter)
             {
+                if (Componenter.Has<DestroyingData>(enemyEntity)) return;
                 ref var frozenData = ref Componenter.Get<FrozenData>(enemyEntity);
                 ref var movableData = ref Componenter.Get<MovableData>(enemyEntity);
                 frozenData.TimeRemaining -= DeltaTime;

@@ -12,6 +12,16 @@ namespace Source.SignalSystem
             SubscribeSignal<OnEnemyInitializedSignal>(OnEnemyInitialized);
             SubscribeSignal<OnHitSignal>(OnHit);
             SubscribeSignal<OnPerkChosenSignal>(OnPerkChosen);
+            SubscribeSignal<OnEnemyMoveSignal>(OnEnemyMove);
+        }
+
+        private void OnEnemyMove(OnEnemyMoveSignal data)
+        {
+            RegistryEvent(new OnEnemyMoveEvent()
+            {
+                Direction = data.Direction,
+                Entity = data.Entity
+            });
         }
 
         private void OnHeroInitialized(OnPlayerInitializedSignal data)

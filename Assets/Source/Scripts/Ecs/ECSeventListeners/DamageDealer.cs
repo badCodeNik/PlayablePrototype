@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Source.EasyECS;
 using Source.EasyECS.Interfaces;
 using Source.Scripts.EasyECS.Core;
@@ -27,8 +26,8 @@ namespace Source.Scripts.Ecs.ECSeventListeners
             {
                 Componenter.Add<DestroyingData>(data.TargetEntity).InitializeValues(3);
             }
-            
-            
+
+
             //Critical damage logic
             if (Componenter.Has<CriticalDamageData>(data.CharacterEntity))
             {
@@ -40,7 +39,6 @@ namespace Source.Scripts.Ecs.ECSeventListeners
                     Debug.Log("Crit Attack");
                     var critDamage = playerAttackingData.Damage + critDamageData.CritDamage;
                     targetHealth -= critDamage;
-                    
                 }
             }
         }
@@ -57,8 +55,7 @@ namespace Source.Scripts.Ecs.ECSeventListeners
                     attacking.AttackDistance,
                     attacking.AttackSpeed,
                     projectileInfo.Prefab,
-                    projectileInfo.Speed,
-                    attacking.BaseAttackSpeed
+                    projectileInfo.Speed
                 );
             }
         }
@@ -76,8 +73,8 @@ namespace Source.Scripts.Ecs.ECSeventListeners
                     attacking.AttackDistance,
                     attacking.AttackSpeed,
                     projectileInfo.Prefab,
-                    projectileInfo.Speed,
-                    attacking.BaseAttackSpeed);
+                    projectileInfo.Speed
+                );
             }
         }
 
