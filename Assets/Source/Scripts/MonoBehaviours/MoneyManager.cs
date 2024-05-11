@@ -9,19 +9,25 @@ namespace Source.Scripts.MonoBehaviours
 
         public static void SaveCoins(int coins)
         {
-            PlayerPrefs.SetInt(CoinsKey, coins);
+            int currentCoins = LoadCoins();
+            PlayerPrefs.SetInt(CoinsKey, currentCoins + coins);
             PlayerPrefs.Save();
         }
 
         public static void SaveCrystals(int crystals)
         {
-            PlayerPrefs.SetInt(CrystalsKey,crystals);
+            int currentCrystals = LoadCrystals();
+            PlayerPrefs.SetInt(CrystalsKey, currentCrystals + crystals);
             PlayerPrefs.Save();
         }
 
-        public static int LoadPoints()
+        public static int LoadCoins()
         {
             return PlayerPrefs.GetInt(CoinsKey, 0);
+        }
+        public static int LoadCrystals()
+        {
+            return PlayerPrefs.GetInt(CrystalsKey, 0);
         }
     }
 }

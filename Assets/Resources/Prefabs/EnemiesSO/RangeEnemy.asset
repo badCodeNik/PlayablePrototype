@@ -30,10 +30,11 @@ MonoBehaviour:
     enabled: 1
     maxHealth: 1
     health: 1
+    coinsForKill: 3
+    crystalsForKill: 1
   attacking:
     enabled: 1
     damage: 1
     attackDistance: 200
     attackSpeed: 3
     projectileID: 1
-    baseAttackSpeed: 0

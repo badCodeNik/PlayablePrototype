@@ -46,7 +46,7 @@ namespace Source.Scripts.Characters
             });
             agent.updateRotation = false;
             agent.updateUpAxis = false;
-            
+
 
             // Создаем и прокидываем соотвествующую дату в ECS!
             if (EnemyInfo.Movable.Enabled)
@@ -61,12 +61,15 @@ namespace Source.Scripts.Characters
 
             if (EnemyInfo.Destructable.Enabled)
             {
-                ref var destructableData = ref componenter.Add<DestructableData>(entity);
-                destructableData.CurrentHealth = EnemyInfo.Destructable.Health;
-                destructableData.Maxhealth = EnemyInfo.Destructable.MaxHealth;
-                destructableData.Prefab = gameObject;
+                ref var destructableData = ref componenter.AddOrGet<DestructableData>(entity);
+                destructableData.InitializeValues(
+                    enemyInfo.Destructable.MaxHealth,
+                    enemyInfo.Destructable.Health,
+                    gameObject,
+                    enemyInfo.Destructable.CoinsForKill,
+                    enemyInfo.Destructable.CrystalsForKill
+                );
             }
-            
         }
 
         private void OnTriggerEnter2D(Collider2D other)

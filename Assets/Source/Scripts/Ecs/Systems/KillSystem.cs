@@ -3,12 +3,13 @@ using Source.Scripts.EasyECS.Core;
 using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
+using Source.Scripts.MonoBehaviours;
 using Source.SignalSystem;
 using UnityEngine;
 
 namespace Source.Scripts.Ecs.Systems
 {
-    public class KillSystem : EcsEventListener<OnHeroKilledEvent>
+    public class KillSystem : EcsEventListener<OnHeroKilledEvent, OnEnemyKilledEvent>
     {
         private EcsFilter _enemyDestroyingFilter;
         private EcsFilter _playerDestroyingFilter;
@@ -27,11 +28,18 @@ namespace Source.Scripts.Ecs.Systems
             {
                 ref var enemy = ref Componenter.Get<DestructableData>(enemyEntity).Prefab;
                 ref var destroyingData = ref Componenter.Get<DestroyingData>(enemyEntity);
+                var destructableData = Componenter.Get<DestructableData>(enemyEntity);
                 destroyingData.TimeRemaining -= DeltaTime;
                 enemy.SetActive(false);
                 if (destroyingData.TimeRemaining <= 0)
                 {
                     Componenter.DelEntity(enemyEntity);
+                    RegistryEvent(new OnEnemyKilledEvent()
+                    {
+                        Coins = destructableData.CoinsForKill,
+                        Crystals = destructableData.CrystalsForKill,
+                        Entity = enemyEntity
+                    });
                 }
             }
 
@@ -64,6 +72,14 @@ namespace Source.Scripts.Ecs.Systems
             {
                 Componenter.Add<DestroyingData>(enemy);
             }
+        }
+
+        public override void OnEvent(OnEnemyKilledEvent data)
+        {
+            MoneyManager.SaveCoins(data.Coins);
+            Debug.Log(MoneyManager.LoadCoins());
+            MoneyManager.SaveCrystals(data.Crystals);
+            Debug.Log(MoneyManager.LoadCrystals());
         }
     }
 }

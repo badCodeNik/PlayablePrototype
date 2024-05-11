@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Source.Scripts.MonoBehaviours;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,8 +28,8 @@ namespace Source.Scripts.UI
         {
             gameObject.SetActive(true);
             _tween = panel.DOFade(1, 1);
-            crystals.text = PlayerPrefs.GetInt("PlayerCrystals", 0).ToString();
-            coins.text = PlayerPrefs.GetInt("PlayerCoins", 0).ToString();
+            crystals.text = MoneyManager.LoadCrystals().ToString();
+            coins.text = MoneyManager.LoadCoins().ToString();
             timer.text = timeFromStart.ToString("F2");
         }
 

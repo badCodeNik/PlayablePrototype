@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using Source.Scripts.KeysHolder;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Source.Scripts.Data
 {
@@ -32,6 +33,13 @@ namespace Source.Scripts.Data
     {
         [SerializeField] private float maxHealth;
         [SerializeField] private float health;
+        [SerializeField] private int coinsForKill;
+        [SerializeField] private int crystalsForKill;
+
+        public int CrystalsForKill => crystalsForKill;
+
+        public int CoinsForKill => coinsForKill;
+
         public float MaxHealth => maxHealth;
 
         public float Health => health;

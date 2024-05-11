@@ -130,5 +130,17 @@ namespace Source.Scripts.EasyECS.Custom
             Entity = eventData.Entity;
         }
     }
+    public struct OnEnemyKilledEvent : IEcsEvent<OnEnemyKilledEvent>
+    {
+        public int Entity;
+        public int Coins;
+        public int Crystals;
+        public void InitializeValues(OnEnemyKilledEvent eventData)
+        {
+            Entity = eventData.Entity;
+            Coins = eventData.Coins;
+            Crystals = eventData.Crystals;
+        }
+    }
 }
 

@@ -8,6 +8,19 @@ namespace Source.Scripts.Ecs.Components
         public float Maxhealth;
         public float CurrentHealth;
         public GameObject Prefab;
+        public int CoinsForKill;
+        public int CrystalsForKill;
+
+
+        public void InitializeValues(float maxHealth, float currentHealth, GameObject prefab, int coinsForKill,
+            int crystalsForKill)
+        {
+            Maxhealth = maxHealth;
+            CurrentHealth = currentHealth;
+            Prefab = prefab;
+            CoinsForKill = coinsForKill;
+            CrystalsForKill = crystalsForKill;
+        }
     }
     
 }

@@ -11,7 +11,7 @@ namespace Source.Scripts.UI
 
         private void Start()
         {
-            moneyAmount = MoneyManager.LoadPoints();
+            moneyAmount = MoneyManager.LoadCoins();
         }
 
         public void Purchase()

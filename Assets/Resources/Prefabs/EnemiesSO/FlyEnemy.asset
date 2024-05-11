@@ -30,6 +30,8 @@ MonoBehaviour:
     enabled: 1
     maxHealth: 1
     health: 1
+    coinsForKill: 5
+    crystalsForKill: 1
   attacking:
     enabled: 1
     damage: 3

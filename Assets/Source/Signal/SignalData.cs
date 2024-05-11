@@ -57,11 +57,17 @@ namespace Source.SignalSystem
     {
         public int Entity;
         public Vector2 Direction;
-        public float Speed;
     }
 
     public struct OnHeroKilledSignal
     {
         public int Entity;
+    }
+
+    public struct OnEnemyKilledSignal
+    {
+        public int Entity;
+        public int Coins;
+        public int Crystals;
     }
 }
