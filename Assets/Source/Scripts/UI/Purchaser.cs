@@ -20,7 +20,7 @@ namespace Source.Scripts.UI
             {
                 moneyAmount -= price;
                 Debug.Log("Капец ты лох");
-                MoneyManager.SavePoints(moneyAmount);
+                MoneyManager.SaveCoins(moneyAmount);
             }
         }
     }

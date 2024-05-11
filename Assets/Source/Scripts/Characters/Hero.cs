@@ -4,17 +4,19 @@ using Source.Scripts.Data;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.ECSeventListeners;
 using Source.Scripts.Ecs.Marks;
+using Source.Scripts.Ecs.Systems;
 using Source.SignalSystem;
 using UnityEngine;
 
 namespace Source.Scripts.Characters
 {
-    public class Hero : MonoSignalListener<OnLocationCreatedSignal>
+    public class Hero : MonoSignalListener<OnLocationCreatedSignal, OnHeroKilledSignal>
     {
         [SerializeField] private HeroInfo heroInfo;
         [SerializeField] private Animator animator;
         [SerializeField, ReadOnly] private int entity;
         public HeroInfo HeroInfo => heroInfo;
+        private float _checkLevelForEnemies = 2f;
         public int Entity => entity;
 
         public void Start()
@@ -38,6 +40,9 @@ namespace Source.Scripts.Characters
             lookRotationData.InitializeValues(Vector2.zero);
             ref var animatorData = ref componenter.Add<AnimatorData>(entity);
             animatorData.InitializeValues(animator);
+            ref var enemyChecker = ref componenter.Add<EnemiesCheckData>(entity);
+            enemyChecker.Timer = _checkLevelForEnemies;
+            
             
 
             // Создаем и прокидываем соотвествующую дату в ECS!
@@ -61,6 +66,11 @@ namespace Source.Scripts.Characters
         protected override void OnSignal(OnLocationCreatedSignal data)
         {
             transform.position = data.PlayerSpawnPosition.position;
+        }
+
+        protected override void OnSignal(OnHeroKilledSignal data)
+        {
+            Destroy(gameObject, 0.2f);
         }
     }
 }

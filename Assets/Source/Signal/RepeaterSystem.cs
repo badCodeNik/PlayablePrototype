@@ -13,6 +13,15 @@ namespace Source.SignalSystem
             SubscribeSignal<OnHitSignal>(OnHit);
             SubscribeSignal<OnPerkChosenSignal>(OnPerkChosen);
             SubscribeSignal<OnEnemyMoveSignal>(OnEnemyMove);
+            SubscribeSignal<OnHeroKilledSignal>(OnHeroKilled);
+        }
+
+        private void OnHeroKilled(OnHeroKilledSignal data)
+        {
+            RegistryEvent(new OnHeroKilledEvent
+            {
+                Entity = data.Entity
+            });
         }
 
         private void OnEnemyMove(OnEnemyMoveSignal data)

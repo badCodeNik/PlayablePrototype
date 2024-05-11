@@ -59,4 +59,9 @@ namespace Source.SignalSystem
         public Vector2 Direction;
         public float Speed;
     }
+
+    public struct OnHeroKilledSignal
+    {
+        public int Entity;
+    }
 }

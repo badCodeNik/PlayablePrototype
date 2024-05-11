@@ -12,8 +12,8 @@ namespace Source.Scripts.MonoBehaviours
     [RequireComponent(typeof(NavMeshAgent))]
     public class Ghost : MonoBehaviour
     {
-        [SerializeField] private float wanderRadius; // радиус перемещения
-        [SerializeField] private float wanderDelay; // задержка между перемещениями
+        [SerializeField] private float wanderRadius; 
+        [SerializeField] private float wanderDelay; 
         [SerializeField] private Signal signal;
         [SerializeField] private Animator animator;
         [SerializeField, ReadOnly] private int entity;

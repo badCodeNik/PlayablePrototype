@@ -554,7 +554,7 @@
         </member>
         <member name="P:Sirenix.Utilities.Editor.EditorIcons.Timer">
             <summary>
-            Gets an icon of a timer symbol.
+            Gets an icon of a timeFromStart symbol.
             </summary>
         </member>
         <member name="P:Sirenix.Utilities.Editor.EditorIcons.TrafficStopLight">

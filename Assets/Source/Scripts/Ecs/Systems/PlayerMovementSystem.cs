@@ -11,7 +11,7 @@ namespace Source.Scripts.Ecs.Systems
 
         protected override void Initialize()
         {
-            _inputFilter = World.Filter<InputData>().Inc<PlayerMark>().Inc<MovableData>().Exc<PerkChoosingMark>().End();
+            _inputFilter = World.Filter<InputData>().Inc<PlayerMark>().Inc<MovableData>().End();
         }
 
         protected override void Update()

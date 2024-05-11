@@ -2,19 +2,26 @@ using UnityEngine;
 
 namespace Source.Scripts.MonoBehaviours
 {
-    public abstract class MoneyManager 
+    public abstract class MoneyManager
     {
-        private const string PointsKey = "PlayerMoney";
-        
-        public static void SavePoints(int pointsNumber)
+        private const string CoinsKey = "PlayerCoins";
+        private const string CrystalsKey = "PlayerCrystals";
+
+        public static void SaveCoins(int coins)
         {
-            PlayerPrefs.SetInt(PointsKey, pointsNumber);
+            PlayerPrefs.SetInt(CoinsKey, coins);
             PlayerPrefs.Save();
         }
-        
+
+        public static void SaveCrystals(int crystals)
+        {
+            PlayerPrefs.SetInt(CrystalsKey,crystals);
+            PlayerPrefs.Save();
+        }
+
         public static int LoadPoints()
         {
-            return PlayerPrefs.GetInt(PointsKey, 0); 
+            return PlayerPrefs.GetInt(CoinsKey, 0);
         }
     }
 }

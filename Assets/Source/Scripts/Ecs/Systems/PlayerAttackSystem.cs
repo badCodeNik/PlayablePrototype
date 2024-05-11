@@ -23,7 +23,7 @@ namespace Source.Scripts.Ecs.Systems
         protected override void Initialize()
         {
             _playerFilter = World.Filter<PlayerMark>().Exc<InputData>().End();
-            _readyAttackFilter = World.Filter<PlayerMark>().Exc<InputData>().Exc<AttackReloadData>().End();
+            _readyAttackFilter = World.Filter<PlayerMark>().Exc<InputData>().Exc<DestroyingData>().Exc<AttackReloadData>().End();
             _enemyFilter = World.Filter<EnemyMark>().Exc<DestroyingData>().End();
             _reloadRemainingFilter = World.Filter<AttackReloadData>().End();
         }

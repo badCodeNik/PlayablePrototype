@@ -24,7 +24,8 @@ namespace Source.Scripts.Ecs.ECSeventListeners
             targetHealth -= playerAttackingData.Damage;
             if (targetHealth <= 0)
             {
-                Componenter.Add<DestroyingData>(data.TargetEntity).InitializeValues(3);
+                if (Componenter.Has<DestroyingData>(data.TargetEntity)) return;
+                Componenter.Add<DestroyingData>(data.TargetEntity).InitializeValues(1);
             }
 
 

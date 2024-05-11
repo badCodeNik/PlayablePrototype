@@ -33,12 +33,14 @@ namespace Source.Scripts.EasyECS.Custom
         public int Entity;
         public Vector2 Direction;
         public float Speed;
+        public bool IsMoving;
 
         public void InitializeValues(OnMoveEvent eventData)
         {
             Entity = eventData.Entity;
             Direction = eventData.Direction;
             Speed = eventData.Speed;
+            IsMoving = eventData.IsMoving;
         }
     }
 
@@ -72,16 +74,7 @@ namespace Source.Scripts.EasyECS.Custom
             EnemyInfo = eventData.EnemyInfo;
         }
     }
-
-    public struct OnRoomCleaned : IEcsEvent<OnRoomCleaned>
-    {
-        public Transform Transform;
-
-        public void InitializeValues(OnRoomCleaned eventData)
-        {
-            Transform = eventData.Transform;
-        }
-    }
+    
 
     public struct OnGetPerk : IEcsEvent<OnGetPerk>
     {
@@ -125,6 +118,16 @@ namespace Source.Scripts.EasyECS.Custom
         {
             Hero = eventData.Hero;
             HeroInfo = eventData.HeroInfo;
+        }
+    }
+    
+    
+    public struct OnHeroKilledEvent : IEcsEvent<OnHeroKilledEvent>
+    {
+        public int Entity;
+        public void InitializeValues(OnHeroKilledEvent eventData)
+        {
+            Entity = eventData.Entity;
         }
     }
 }
