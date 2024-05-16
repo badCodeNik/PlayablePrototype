@@ -14,6 +14,14 @@ namespace Source.SignalSystem
             SubscribeSignal<OnPerkChosenSignal>(OnPerkChosen);
             SubscribeSignal<OnEnemyMoveSignal>(OnEnemyMove);
             SubscribeSignal<OnHeroKilledSignal>(OnHeroKilled);
+            SubscribeSignal<OnLevelCompletedSignal>(OnLevelCompleted);
+        }
+
+        private void OnLevelCompleted(OnLevelCompletedSignal data)
+        {
+            RegistryEvent(new OnLevelCompletedEvent()
+            {
+            });
         }
 
         private void OnHeroKilled(OnHeroKilledSignal data)
@@ -74,10 +82,6 @@ namespace Source.SignalSystem
             RegistryEvent(new OnGameInitializedEvent()
             {
             });
-        }
-
-        protected override void Update()
-        {
         }
     }
 }

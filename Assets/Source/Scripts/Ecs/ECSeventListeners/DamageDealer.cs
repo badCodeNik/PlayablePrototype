@@ -21,7 +21,9 @@ namespace Source.Scripts.Ecs.ECSeventListeners
             //General logic
             ref var targetHealth = ref Componenter.Get<DestructableData>(data.TargetEntity).CurrentHealth;
             ref var playerAttackingData = ref Componenter.Get<AttackingData>(data.CharacterEntity);
+            ref var targetSlider = ref Componenter.Get<SliderData>(data.TargetEntity).Slider;
             targetHealth -= playerAttackingData.Damage;
+            targetSlider.value = targetHealth;
             if (targetHealth <= 0)
             {
                 if (Componenter.Has<DestroyingData>(data.TargetEntity)) return;

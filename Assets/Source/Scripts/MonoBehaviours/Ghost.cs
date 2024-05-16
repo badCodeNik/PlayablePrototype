@@ -26,7 +26,8 @@ namespace Source.Scripts.MonoBehaviours
         {
             var componenter = EasyNode.EcsComponenter;
             entity = componenter.GetNewEntity();
-            componenter.Add<GhostMark>(entity);
+            ref var mark = ref componenter.Add<GhostMark>(entity);
+            mark.InitializeValues(gameObject);
             componenter.Add<AttackingData>(entity);
             ref var animatorData = ref componenter.Add<AnimatorData>(entity);
             animatorData.InitializeValues(animator);

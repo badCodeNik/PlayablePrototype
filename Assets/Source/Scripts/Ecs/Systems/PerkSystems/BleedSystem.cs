@@ -5,7 +5,6 @@ using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Components;
 using Source.Scripts.Ecs.Marks;
 using Source.Scripts.KeysHolder;
-using UnityEngine;
 
 namespace Source.Scripts.Ecs.Systems.PerkSystems
 {
@@ -70,6 +69,7 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
         public float DamageAmount;
         public float Interval;
         public float TimeRemaining;
+        public float Timer;
     }
 
     public struct BleedData : IEcsComponent
@@ -82,9 +82,10 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
 
         public void InitializeValues(Bleed data)
         {
-            Interval = data.Interval;
-            TimeRemaining = data.TimeRemaining;
+            Interval += data.Interval;
+            TimeRemaining += data.TimeRemaining;
             Damage += data.DamageAmount;
+            Timer += data.Timer;
         }
     }
 
@@ -97,9 +98,10 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
 
         public void InitializeValues(BleedData data)
         {
-            DamagePerSec = data.Damage;
-            TimeRemaining = data.TimeRemaining;
-            Interval = data.Interval;
+            DamagePerSec += data.Damage;
+            TimeRemaining += data.TimeRemaining;
+            Interval += data.Interval;
+            Timer += data.Timer;
         }
     }
 }

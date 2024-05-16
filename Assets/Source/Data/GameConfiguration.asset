@@ -103,7 +103,7 @@ MonoBehaviour:
       Data: 1
     - Name: Timer
       Entry: 4
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -128,6 +128,9 @@ MonoBehaviour:
     - Name: TimeRemaining
       Entry: 4
       Data: 6
+    - Name: Timer
+      Entry: 4
+      Data: 1
     - Name: 
       Entry: 8
       Data: 

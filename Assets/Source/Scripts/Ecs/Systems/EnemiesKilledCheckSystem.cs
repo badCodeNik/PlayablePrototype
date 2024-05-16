@@ -1,11 +1,13 @@
 using Source.EasyECS;
 using Source.EasyECS.Interfaces;
+using Source.Scripts.EasyECS.Core;
+using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Marks;
 using Source.SignalSystem;
 
 namespace Source.Scripts.Ecs.Systems
 {
-    public class EnemiesKilledCheckSystem : EasySystem
+    public class EnemiesKilledCheckSystem : EcsEventListener<OnHeroKilledEvent>
     {
         private EcsFilter _enemyFilter;
         private EcsFilter _playerFilter;
@@ -18,21 +20,23 @@ namespace Source.Scripts.Ecs.Systems
 
         protected override void Update()
         {
-            if (_playerFilter.TryGetFirstEntity(out int playerEntity))
-            {
-                if (!_enemyFilter.HasAny())
-                {
-                    ref var timer = ref Componenter.Get<EnemiesCheckData>(playerEntity).Timer;
-                    timer -= DeltaTime;
+            if (!_playerFilter.TryGetFirstEntity(out int playerEntity)) return;
 
-                    if (timer <= 0)
-                    {
-                        RegistrySignal(new OnRoomCleanedSignal());
-                        Componenter.Add<PerkChoosingMark>(playerEntity);
-                        timer = 2;
-                    }
-                }
+            if (_enemyFilter.HasAny()) return;
+
+            ref var timer = ref Componenter.Get<EnemiesCheckData>(playerEntity).Timer;
+            timer -= DeltaTime;
+
+            if (timer <= 0)
+            {
+                RegistrySignal(new OnRoomCleanedSignal());
+                Componenter.Add<PerkChoosingMark>(playerEntity);
+                timer = 2;
             }
+        }
+
+        public override void OnEvent(OnHeroKilledEvent data)
+        {
         }
     }
 

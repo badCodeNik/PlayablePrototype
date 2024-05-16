@@ -1,4 +1,5 @@
-﻿using Source.Scripts.Characters;
+﻿using Source.EasyECS.Interfaces;
+using Source.Scripts.Characters;
 using Source.Scripts.Data;
 using Source.Scripts.KeysHolder;
 using UnityEngine;
@@ -45,8 +46,9 @@ namespace Source.SignalSystem
         public PerkKeys ChosenPerkID;
     }
 
-    public struct OnLevelCompletedSignal
+    public struct OnLevelCompletedSignal : IEcsComponent
     {
+        
     }
 
     public struct OnRoomCleanedSignal
@@ -70,4 +72,6 @@ namespace Source.SignalSystem
         public int Coins;
         public int Crystals;
     }
+    
+    
 }

@@ -28,8 +28,8 @@ MonoBehaviour:
     navMeshAgent: {fileID: -1074186850333074833, guid: 051c398c65e1c234386b8e65d62d0cfc, type: 3}
   destructable:
     enabled: 1
-    maxHealth: 1
-    health: 1
+    maxHealth: 2
+    health: 2
     coinsForKill: 1
     crystalsForKill: 1
   attacking:

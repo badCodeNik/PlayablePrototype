@@ -23,6 +23,7 @@ namespace Source.Scripts.Ecs.Systems
                 Componenter.TryGetReadOnly(playerEntity, out AnimatorData animatorData);
                 if (direction is {x : 0, y : 0} || Componenter.Has<DestroyingData>(playerEntity) || Componenter.Has<PerkChoosingMark>(playerEntity))
                 {
+                    if (!animatorData.Value) return;
                     animatorData.Value.SetBool("isMoving",false);
                     Componenter.Del<InputData>(playerEntity);
                     direction = Vector2.zero;

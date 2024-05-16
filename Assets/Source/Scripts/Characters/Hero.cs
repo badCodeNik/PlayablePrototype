@@ -2,11 +2,11 @@
 using Source.EasyECS;
 using Source.Scripts.Data;
 using Source.Scripts.Ecs.Components;
-using Source.Scripts.Ecs.ECSeventListeners;
 using Source.Scripts.Ecs.Marks;
 using Source.Scripts.Ecs.Systems;
 using Source.SignalSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Source.Scripts.Characters
 {
@@ -17,10 +17,13 @@ namespace Source.Scripts.Characters
         [SerializeField, ReadOnly] private int entity;
         public HeroInfo HeroInfo => heroInfo;
         private float _checkLevelForEnemies = 2f;
+        private Componenter _componenter;
         public int Entity => entity;
+        private Slider _slider;
 
         public void Start()
         {
+            _slider = GetComponentInChildren<Slider>();
             EcsInitialize();
             signal.RegistryRaise(new OnPlayerInitializedSignal
             {
@@ -31,16 +34,16 @@ namespace Source.Scripts.Characters
 
         private void EcsInitialize()
         {
-            var componenter = EasyNode.EcsComponenter;
-            entity = componenter.GetNewEntity();
-            componenter.Add<PlayerMark>(entity);
-            ref var transformData = ref componenter.Add<TransformData>(entity);
+            _componenter = EasyNode.EcsComponenter;
+            entity = _componenter.GetNewEntity();
+            _componenter.Add<PlayerMark>(entity);
+            ref var transformData = ref _componenter.Add<TransformData>(entity);
             transformData.InitializeValues(transform);
-            ref var lookRotationData = ref componenter.Add<LookRotationData>(entity);
+            ref var lookRotationData = ref _componenter.Add<LookRotationData>(entity);
             lookRotationData.InitializeValues(Vector2.zero);
-            ref var animatorData = ref componenter.Add<AnimatorData>(entity);
+            ref var animatorData = ref _componenter.Add<AnimatorData>(entity);
             animatorData.InitializeValues(animator);
-            ref var enemyChecker = ref componenter.Add<EnemiesCheckData>(entity);
+            ref var enemyChecker = ref _componenter.Add<EnemiesCheckData>(entity);
             enemyChecker.Timer = _checkLevelForEnemies;
             
             
@@ -48,7 +51,7 @@ namespace Source.Scripts.Characters
             // Создаем и прокидываем соотвествующую дату в ECS!
             if (heroInfo.Movable.Enabled)
             {
-                ref var movableData = ref componenter.Add<MovableData>(entity);
+                ref var movableData = ref _componenter.Add<MovableData>(entity);
                 movableData.MoveSpeed = heroInfo.Movable.MoveSpeed;
                 movableData.CharacterTransform = transform;
             }
@@ -57,9 +60,16 @@ namespace Source.Scripts.Characters
 
             if (heroInfo.Destructable.Enabled)
             {
-                ref var destructableData = ref componenter.Add<DestructableData>(entity);
+                ref var destructableData = ref _componenter.Add<DestructableData>(entity);
                 destructableData.CurrentHealth = heroInfo.Destructable.Health;
                 destructableData.Maxhealth = heroInfo.Destructable.MaxHealth;
+
+                if (_slider == null) return;
+
+                ref var sliderData = ref _componenter.Add<SliderData>(entity);
+                sliderData.Slider = _slider;
+                _slider.maxValue = destructableData.Maxhealth;
+                _slider.value = destructableData.CurrentHealth;
             }
         }
 
@@ -70,7 +80,9 @@ namespace Source.Scripts.Characters
 
         protected override void OnSignal(OnHeroKilledSignal data)
         {
-            Destroy(gameObject, 0.2f);
+            _componenter.Add<DestroyingData>(data.Entity);
+            Destroy(gameObject, 0.1f);
         }
+        
     }
 }

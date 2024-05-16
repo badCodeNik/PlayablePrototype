@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cinemachine;
+using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.KeysHolder;
 using Source.Scripts.LibrariesSystem;
 using Source.SignalSystem;
@@ -42,18 +43,21 @@ namespace Source.Scripts.MonoBehaviours
 
             var heroLibrary = Libraries.HeroPrefabLibrary.GetByID(HeroKeys.Vasya);
             var hero = Resources.Load<GameObject>(heroLibrary.Prefab);
-            if (hero != null)
-            {
-                var vasya = Instantiate(hero);
-                _player = vasya;
-                _spawnPosition = _player.transform.position;
-                virtualCamera.Follow = vasya.transform;
-                virtualCamera.LookAt = vasya.transform;
-            }
+            
+            if (hero == null) return;
+            
+            var vasya = Instantiate(hero);
+            _player = vasya;
+            _spawnPosition = _player.transform.position;
+            virtualCamera.Follow = vasya.transform;
+            virtualCamera.LookAt = vasya.transform;
+
 
             _currentLocationInstance = Instantiate(_locations[_locationIndex] as GameObject);
             if (!_usedIndexes.Contains(_locationIndex)) _usedIndexes.Add(_locationIndex);
             _locationIndex++;
+            Debug.Log($"location index is : {_locationIndex}");
+            Debug.Log($"number of locations is : {_locations.Count}");
 
             if (!_isInitialized)
             {
@@ -79,12 +83,19 @@ namespace Source.Scripts.MonoBehaviours
 
         protected override void OnSignal(OnPerkChosenSignal data)
         {
+            if(data.ChosenPerkID == 0) return;
             ClearPreviousLocation();
             if (_locationIndex < _locations.Count)
                 _currentLocationInstance = Instantiate(_locations[_locationIndex] as GameObject);
             if (!_usedIndexes.Contains(_locationIndex)) _usedIndexes.Add(_locationIndex);
             _locationIndex++;
-            if (_locationIndex == _locations.Count) signal.RegistryRaise(new OnLevelCompletedSignal());
+            //Подать сигнал о том что последняя локация
+            if (_usedIndexes.Count == 10)
+            {
+                signal.RegistryRaise(new OnLevelCompletedSignal());
+                signal.RegistryRaise(new OnHeroKilledSignal());
+            }
+            
         }
 
 
@@ -93,7 +104,8 @@ namespace Source.Scripts.MonoBehaviours
             ClearPreviousLocation(); // или DeactivateAllLocations() в зависимости от выбранного подхода
             _locationIndex = 0;
             _usedIndexes.Clear();
-
+            _locationPaths.Clear();
+            _locations.Clear();
             InitializeGame();
             _player.transform.position = _spawnPosition;
         }

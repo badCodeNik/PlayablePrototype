@@ -13,26 +13,29 @@ namespace Source.Scripts.UI
         [SerializeField] private TextMeshProUGUI crystals;
         [SerializeField] private TextMeshProUGUI coins;
         [SerializeField] private TextMeshProUGUI timer;
-        [SerializeField] private Image panel;
+        [SerializeField] private Image panelImage;
         private Tween _tween;
 
-        private float _startTime;
-        private TimeSpan _timeTaken;
-
         private int _coins;
-        
+
 
         public Button Restart => restart;
+        
 
         public void Show(float timeFromStart)
         {
             gameObject.SetActive(true);
-            _tween = panel.DOFade(1, 1);
+            _tween = panelImage.DOFade(1, 1);
             crystals.text = MoneyManager.LoadCrystals().ToString();
             coins.text = MoneyManager.LoadCoins().ToString();
             timer.text = timeFromStart.ToString("F2");
         }
+        void OnDestroy() 
+        {
+            Debug.Log("GameOverPanel was destroyed");
+        }
 
+        
         public void Hide() => gameObject.SetActive(false);
     }
 }

@@ -26,6 +26,10 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
                 Componenter.Del<PerkChoosingMark>(entity);
                 bonusHealthData.InitializeValues(EasyNode.GameConfiguration.Perks.BonusHealth);
                 ref var destructableData = ref Componenter.Get<DestructableData>(entity);
+                if (destructableData.CurrentHealth + bonusHealthData.BonusHealth > destructableData.Maxhealth)
+                {
+                    destructableData.Maxhealth += bonusHealthData.BonusHealth;
+                }
                 destructableData.CurrentHealth += bonusHealthData.BonusHealth;
             }
         }

@@ -9,14 +9,16 @@ using UnityEngine;
 
 namespace Source.Scripts.Ecs.Systems
 {
-    public class KillSystem : EcsEventListener<OnHeroKilledEvent, OnEnemyKilledEvent>
+    public class KillSystem : EcsEventListener<OnHeroKilledEvent, OnEnemyKilledEvent, OnLevelCompletedEvent>
     {
         private EcsFilter _enemyDestroyingFilter;
         private EcsFilter _playerDestroyingFilter;
         private EcsFilter _enemyFilter;
+        private EcsFilter _ghostFilter;
 
         protected override void Initialize()
         {
+            _ghostFilter = World.Filter<GhostMark>().End();
             _enemyDestroyingFilter = World.Filter<DestroyingData>().Inc<EnemyMark>().End();
             _playerDestroyingFilter = World.Filter<DestroyingData>().Inc<PlayerMark>().End();
             _enemyFilter = World.Filter<EnemyMark>().End();
@@ -58,9 +60,7 @@ namespace Source.Scripts.Ecs.Systems
                     {
                         Entity = player
                     });
-                    Componenter.Del<DestroyingData>(player);
-                    ref var destructableData = ref Componenter.Get<DestructableData>(player);
-                    destructableData.CurrentHealth = destructableData.Maxhealth;
+                    Componenter.Add<DeadMark>(player);
                 }
             }
         }
@@ -72,6 +72,13 @@ namespace Source.Scripts.Ecs.Systems
             {
                 Componenter.Add<DestroyingData>(enemy);
             }
+
+            foreach (var ghostEntity in _ghostFilter)
+            {
+                Componenter.Add<DestroyingData>(ghostEntity);
+                ref var ghost = ref Componenter.Get<GhostMark>(ghostEntity).Ghost;
+                ghost.SetActive(false);
+            }
         }
 
         public override void OnEvent(OnEnemyKilledEvent data)
@@ -80,6 +87,16 @@ namespace Source.Scripts.Ecs.Systems
             Debug.Log(MoneyManager.LoadCoins());
             MoneyManager.SaveCrystals(data.Crystals);
             Debug.Log(MoneyManager.LoadCrystals());
+        }
+
+        public override void OnEvent(OnLevelCompletedEvent data)
+        {
+            foreach (var ghostEntity in _ghostFilter)
+            {
+                Componenter.Add<DestroyingData>(ghostEntity);
+                ref var ghost = ref Componenter.Get<GhostMark>(ghostEntity).Ghost;
+                ghost.SetActive(false);
+            }
         }
     }
 }

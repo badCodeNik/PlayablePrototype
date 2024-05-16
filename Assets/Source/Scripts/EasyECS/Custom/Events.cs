@@ -2,6 +2,7 @@
 using Source.Scripts.Data;
 using Source.Scripts.EasyECS.Core;
 using Source.Scripts.KeysHolder;
+using Source.SignalSystem;
 using UnityEngine;
 
 namespace Source.Scripts.EasyECS.Custom
@@ -140,6 +141,14 @@ namespace Source.Scripts.EasyECS.Custom
             Entity = eventData.Entity;
             Coins = eventData.Coins;
             Crystals = eventData.Crystals;
+        }
+    }
+    
+    public struct OnLevelCompletedEvent : IEcsEvent<OnLevelCompletedEvent>
+    {
+        public void InitializeValues(OnLevelCompletedEvent eventData)
+        {
+            
         }
     }
 }

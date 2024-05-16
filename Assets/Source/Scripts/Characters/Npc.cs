@@ -7,6 +7,7 @@ using Source.Scripts.Ecs.Marks;
 using Source.SignalSystem;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace Source.Scripts.Characters
 {
@@ -17,6 +18,7 @@ namespace Source.Scripts.Characters
         [SerializeField] private NavMeshAgent agent;
         [SerializeField, ReadOnly] private int entity;
         [SerializeField] private Signal signal;
+        private Slider _slider;
         private Tween _tween;
 
         public EnemyInfo EnemyInfo => enemyInfo;
@@ -26,6 +28,7 @@ namespace Source.Scripts.Characters
         {
             SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
             _tween = spriteRenderer.DOFade(1, 1);
+            _slider = GetComponentInChildren<Slider>();
             EcsInitialize();
         }
 
@@ -69,6 +72,13 @@ namespace Source.Scripts.Characters
                     enemyInfo.Destructable.CoinsForKill,
                     enemyInfo.Destructable.CrystalsForKill
                 );
+
+                if (_slider == null) return;
+                
+                ref var sliderData = ref componenter.Add<SliderData>(entity);
+                sliderData.Slider = _slider;
+                _slider.maxValue = destructableData.Maxhealth;
+                _slider.value = destructableData.CurrentHealth;
             }
         }
 
