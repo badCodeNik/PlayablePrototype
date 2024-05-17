@@ -41,16 +41,16 @@ namespace Source.Scripts.MonoBehaviours
                 _locations.Add(Resources.Load(locationPath));
             }
 
-            var heroLibrary = Libraries.HeroPrefabLibrary.GetByID(HeroKeys.Vasya);
-            var hero = Resources.Load<GameObject>(heroLibrary.Prefab);
+            var heroLibrary = Libraries.HeroPrefabLibrary.GetByID(HeroKeys.Jokeress);
+            var heroPrefab = Resources.Load<GameObject>(heroLibrary.Prefab);
             
-            if (hero == null) return;
+            if (heroPrefab == null) return;
             
-            var vasya = Instantiate(hero);
-            _player = vasya;
+            var hero = Instantiate(heroPrefab);
+            _player = hero;
             _spawnPosition = _player.transform.position;
-            virtualCamera.Follow = vasya.transform;
-            virtualCamera.LookAt = vasya.transform;
+            virtualCamera.Follow = hero.transform;
+            virtualCamera.LookAt = hero.transform;
 
 
             _currentLocationInstance = Instantiate(_locations[_locationIndex] as GameObject);

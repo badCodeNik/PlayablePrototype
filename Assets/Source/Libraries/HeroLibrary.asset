@@ -13,7 +13,39 @@ MonoBehaviour:
   m_Name: HeroLibrary
   m_EditorClassIdentifier: 
   items:
-  - heroID: 1
+  - heroID: 0
+    animatorController: {fileID: 9100000, guid: 5699a7cab7ff1924eb4c0cf4ca73805e, type: 2}
+    isBought: 1
     heroInfo: {fileID: 11400000, guid: 0d8bbb6cccfe99c469e72a2c2100a119, type: 2}
-    prefab: Vasya/Vasya
-    icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    prefab: HeroesPrefabs/Jokeress
+    icon: {fileID: 21300000, guid: b0db58ccd820429408422d7b6be20ea7, type: 3}
+  - heroID: 1
+    animatorController: {fileID: 9100000, guid: 4b1d331e14e2e7c4fb473cc7ad1541cd, type: 2}
+    isBought: 0
+    heroInfo: {fileID: 11400000, guid: 6aa2d2af441786f4f81b89de6a43f7fd, type: 2}
+    prefab: HeroesPrefabs/Joker
+    icon: {fileID: 0}
+  - heroID: 2
+    animatorController: {fileID: 9100000, guid: 9e7eb72cd594be34c83b6a46fc8797f4, type: 2}
+    isBought: 0
+    heroInfo: {fileID: 11400000, guid: 7db347c5ced87c24b810d0e131026bd2, type: 2}
+    prefab: HeroesPrefabs/Butler
+    icon: {fileID: 0}
+  - heroID: 3
+    animatorController: {fileID: 9100000, guid: 26012f9d7eaa27c4c8f736d867c444f4, type: 2}
+    isBought: 0
+    heroInfo: {fileID: 11400000, guid: 8d5740f2fa434244ba8fd890fa8724c2, type: 2}
+    prefab: HeroesPrefabs/Maid
+    icon: {fileID: 0}
+  - heroID: 4
+    animatorController: {fileID: 9100000, guid: ed648142974915843b9cd196c160ef61, type: 2}
+    isBought: 0
+    heroInfo: {fileID: 11400000, guid: c0fa65a6e246e984f8cc130aae87a9d6, type: 2}
+    prefab: HeroesPrefabs/Sorcerer
+    icon: {fileID: 0}
+  - heroID: 5
+    animatorController: {fileID: 9100000, guid: 721d2b1f10cbe7e468ac4499b7e829bc, type: 2}
+    isBought: 0
+    heroInfo: {fileID: 11400000, guid: a9580169e5976bd4fa4db8243e779aea, type: 2}
+    prefab: HeroesPrefabs/Wizard
+    icon: {fileID: 0}

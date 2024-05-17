@@ -37,10 +37,23 @@ namespace Source.Scripts.KeysHolder
     
     public enum HeroKeys
     {
-        [Description("hero_some_hero")]
-        SomeHero,
-        [Description("hero_vasya")]
-        Vasya
+        [Description("hero_jokeress")]
+        Jokeress,
+
+        [Description("hero_joker")]
+        Joker,
+
+        [Description("hero_butler")]
+        Butler,
+
+        [Description("hero_maid")]
+        Maid,
+        
+        [Description("hero_sorcerer")]
+        Sorcerer,
+        
+        [Description("hero_wizard")]
+        Wizard,
     }
     
     public enum EnemyKeys
@@ -135,6 +148,7 @@ namespace Source.Scripts.KeysHolder
         [Description("BurningAura")]
         BurningAura
     }
+    
     
     
 }
