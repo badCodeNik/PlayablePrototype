@@ -26,8 +26,8 @@ namespace Source.Scripts.UI
         {
             gameObject.SetActive(true);
             _tween = panelImage.DOFade(1, 1);
-            crystals.text = MoneyManager.LoadCrystals().ToString();
-            coins.text = MoneyManager.LoadCoins().ToString();
+            crystals.text = DataManager.LoadCrystals().ToString();
+            coins.text = DataManager.LoadCoins().ToString();
             timer.text = timeFromStart.ToString("F2");
         }
         void OnDestroy() 

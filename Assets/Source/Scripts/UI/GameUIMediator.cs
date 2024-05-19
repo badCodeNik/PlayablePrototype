@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Source.Scripts.MonoBehaviours
 {
-    public class UIMediator : MonoSignalListener<OnHeroKilledSignal, OnLevelCompletedSignal>
+    public class GameUIMediator : MonoSignalListener<OnHeroKilledSignal, OnLevelCompletedSignal>
     {
         [SerializeField] private GameInitializer gameInitializer;
         [SerializeField] private GameOverPanel restartPanel;
@@ -18,6 +18,7 @@ namespace Source.Scripts.MonoBehaviours
             winningPanel.Restart.onClick.AddListener(RestartGame);
             winningPanel.MainMenu.onClick.AddListener(GoToMainMenu);
         }
+        
 
         private void GoToMainMenu()
         {

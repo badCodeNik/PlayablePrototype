@@ -83,10 +83,10 @@ namespace Source.Scripts.Ecs.Systems
 
         public override void OnEvent(OnEnemyKilledEvent data)
         {
-            MoneyManager.SaveCoins(data.Coins);
-            Debug.Log(MoneyManager.LoadCoins());
-            MoneyManager.SaveCrystals(data.Crystals);
-            Debug.Log(MoneyManager.LoadCrystals());
+            DataManager.AddCoins(data.Coins);
+            Debug.Log(DataManager.LoadCoins());
+            DataManager.AddCrystals(data.Crystals);
+            Debug.Log(DataManager.LoadCrystals());
         }
 
         public override void OnEvent(OnLevelCompletedEvent data)

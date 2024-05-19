@@ -1,39 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class ButtonEnableUI : MonoBehaviour
+namespace Source.Scripts.UI
 {
-    [SerializeField] private GameObject uiToEnable;
-    [SerializeField] private GameObject uiToDisable;
-    private bool _isEnabled;
-
-    public void EnableUi()
+    public class ButtonEnableUI : MonoBehaviour
     {
-         switch (_isEnabled)
-         {
-             case true:
-                 _isEnabled = false;
-                 EnableUi(_isEnabled);
-                 DesableUI(_isEnabled);
-                 break;
-             case false:
-                 _isEnabled = true;
-                 EnableUi(_isEnabled);
-                 DesableUI(_isEnabled);
-                 break;
-         }
-    }
+        [SerializeField] private GameObject uiToEnable;
+        [SerializeField] private GameObject uiToDisable;
+        private bool _isEnabled;
 
-    private void EnableUi(bool isEnabled)
-    {
-        uiToEnable.SetActive(isEnabled);
-    }
+        public void EnableUi()
+        {
+            switch (_isEnabled)
+            {
+                case true:
+                    _isEnabled = false;
+                    EnableUi(_isEnabled);
+                    DisableUI(_isEnabled);
+                    break;
+                case false:
+                    _isEnabled = true;
+                    EnableUi(_isEnabled);
+                    DisableUI(_isEnabled);
+                    break;
+            }
+        }
 
-    private void DesableUI(bool isEnabled)
-    {
-        var isDisabled = !isEnabled;
-        if(uiToDisable != null) uiToDisable.SetActive(isDisabled);
+        private void EnableUi(bool isEnabled)
+        {
+            uiToEnable.SetActive(isEnabled);
+        }
+
+        private void DisableUI(bool isEnabled)
+        {
+            var isDisabled = !isEnabled;
+            if (uiToDisable != null) uiToDisable.SetActive(isDisabled);
+        }
     }
 }

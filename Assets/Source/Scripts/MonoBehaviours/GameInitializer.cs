@@ -40,8 +40,8 @@ namespace Source.Scripts.MonoBehaviours
             {
                 _locations.Add(Resources.Load(locationPath));
             }
-
-            var heroLibrary = Libraries.HeroPrefabLibrary.GetByID(HeroKeys.Jokeress);
+            HeroKeys selectedCat = DataManager.LoadSelectedCat();
+            var heroLibrary = Libraries.HeroPrefabLibrary.GetByID(selectedCat);
             var heroPrefab = Resources.Load<GameObject>(heroLibrary.Prefab);
             
             if (heroPrefab == null) return;

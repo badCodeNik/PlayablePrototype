@@ -54,6 +54,8 @@ namespace Source.Scripts.KeysHolder
         
         [Description("hero_wizard")]
         Wizard,
+        [Description("null_null")]
+        Null
     }
     
     public enum EnemyKeys

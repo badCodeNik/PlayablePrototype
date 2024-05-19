@@ -72,6 +72,10 @@ namespace Source.SignalSystem
         public int Coins;
         public int Crystals;
     }
-    
+
+    public struct OnMoneyChangeSignal
+    {
+        
+    }
     
 }

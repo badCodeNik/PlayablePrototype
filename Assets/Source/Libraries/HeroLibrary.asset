@@ -24,28 +24,28 @@ MonoBehaviour:
     isBought: 0
     heroInfo: {fileID: 11400000, guid: 6aa2d2af441786f4f81b89de6a43f7fd, type: 2}
     prefab: HeroesPrefabs/Joker
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: cf9776e291efb3d47974482069a5d3a4, type: 3}
   - heroID: 2
     animatorController: {fileID: 9100000, guid: 9e7eb72cd594be34c83b6a46fc8797f4, type: 2}
     isBought: 0
     heroInfo: {fileID: 11400000, guid: 7db347c5ced87c24b810d0e131026bd2, type: 2}
     prefab: HeroesPrefabs/Butler
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: d89479eab9e2c224989b713c1f7e1660, type: 3}
   - heroID: 3
     animatorController: {fileID: 9100000, guid: 26012f9d7eaa27c4c8f736d867c444f4, type: 2}
     isBought: 0
     heroInfo: {fileID: 11400000, guid: 8d5740f2fa434244ba8fd890fa8724c2, type: 2}
     prefab: HeroesPrefabs/Maid
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: ae27a0f9f8648ce48b50bff373dcebef, type: 3}
   - heroID: 4
     animatorController: {fileID: 9100000, guid: ed648142974915843b9cd196c160ef61, type: 2}
     isBought: 0
     heroInfo: {fileID: 11400000, guid: c0fa65a6e246e984f8cc130aae87a9d6, type: 2}
     prefab: HeroesPrefabs/Sorcerer
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 255500d578c7f0e498cf46ed6408eccc, type: 3}
   - heroID: 5
     animatorController: {fileID: 9100000, guid: 721d2b1f10cbe7e468ac4499b7e829bc, type: 2}
     isBought: 0
     heroInfo: {fileID: 11400000, guid: a9580169e5976bd4fa4db8243e779aea, type: 2}
     prefab: HeroesPrefabs/Wizard
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 38e982ec18338124e9137e4f8a10837b, type: 3}
