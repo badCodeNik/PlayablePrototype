@@ -27,5 +27,10 @@ namespace Source.Scripts.Ecs.Components
         {
             Damage += value.Value;
         }
+
+        public void InitializeValues(float damage)
+        {
+            Damage += damage;
+        }
     }
 }

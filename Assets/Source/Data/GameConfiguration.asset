@@ -142,7 +142,7 @@ MonoBehaviour:
       Data: 0
     - Name: OrbitDistance
       Entry: 4
-      Data: 7
+      Data: 9
     - Name: RotationSpeed
       Entry: 4
       Data: 70

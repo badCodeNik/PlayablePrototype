@@ -55,7 +55,6 @@ namespace Source.SignalSystem
             RegistryEvent(new OnPerkChosen()
             {
                 ChosenPerkID = data.ChosenPerkID,
-                Data = data.Data
             });
         }
 

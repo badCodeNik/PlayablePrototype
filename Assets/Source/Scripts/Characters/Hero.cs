@@ -10,8 +10,9 @@ using UnityEngine.UI;
 
 namespace Source.Scripts.Characters
 {
-    public class Hero : MonoSignalListener<OnLocationCreatedSignal, OnHeroKilledSignal>
+    public class Hero : MonoSignalListener<OnLocationCreatedSignal, OnHeroKilledSignal, OnHitSignal>
     {
+        [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private HeroInfo heroInfo;
         [SerializeField] private Animator animator;
         [SerializeField, ReadOnly] private int entity;
@@ -45,8 +46,9 @@ namespace Source.Scripts.Characters
             animatorData.InitializeValues(animator);
             ref var enemyChecker = ref _componenter.Add<EnemiesCheckData>(entity);
             enemyChecker.Timer = _checkLevelForEnemies;
-            
-            
+            ref var spriteData = ref _componenter.Add<SpriteData>(entity);
+            spriteData.SpriteRenderer = spriteRenderer;
+
 
             // Создаем и прокидываем соотвествующую дату в ECS!
             if (heroInfo.Movable.Enabled)
@@ -83,6 +85,10 @@ namespace Source.Scripts.Characters
             _componenter.Add<DestroyingData>(data.Entity);
             Destroy(gameObject, 0.1f);
         }
-        
+
+        protected override void OnSignal(OnHitSignal data)
+        {
+            
+        }
     }
 }

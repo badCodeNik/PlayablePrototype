@@ -8,7 +8,8 @@ using Random = UnityEngine.Random;
 
 namespace Source.Scripts.MonoBehaviours
 {
-    public class PerkSignalSender : MonoSignalListener<OnRoomCleanedSignal, OnPerkChosenSignal, OnHeroKilledSignal , OnLevelCompletedSignal>
+    public class PerkSignalSender : MonoSignalListener<OnRoomCleanedSignal, OnPerkChosenSignal, OnHeroKilledSignal,
+        OnLevelCompletedSignal>
     {
         [SerializeField, HideInInspector] private Canvas _canvas;
         [SerializeField] private GameObject prefab;
@@ -27,11 +28,7 @@ namespace Source.Scripts.MonoBehaviours
 
         protected override void OnSignal(OnRoomCleanedSignal data)
         {
-            if (_usedPerkIDs.Count >= 8)
-            {
-                signal.RegistryRaise(new OnPerkChosenSignal());
-                return;
-            }
+            if (_usedPerkIDs.Count >= 9) signal.RegistryRaise(new OnLevelCompletedSignal());
             if (content == null) content = Instantiate(prefab, transform).GetComponent<StagePerkWindow>();
             content.gameObject.SetActive(true);
 
@@ -60,8 +57,7 @@ namespace Source.Scripts.MonoBehaviours
             _usedPerkIDs.Clear();
             _perksLibrary.Clear();
             _numberList.Clear();
-           Start();
-           
+            Start();
         }
 
         private (OnPerkChosenSignal, OnPerkChosenSignal, OnPerkChosenSignal) GetRandomPerks()
@@ -83,7 +79,7 @@ namespace Source.Scripts.MonoBehaviours
                 _numberList.Add(availablePerksIndexes[index]);
                 availablePerksIndexes.RemoveAt(index);
             }
-
+            
             return (
                 new OnPerkChosenSignal
                 {

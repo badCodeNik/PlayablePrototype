@@ -28,7 +28,8 @@ namespace Source.Scripts.MonoBehaviours
             entity = componenter.GetNewEntity();
             ref var mark = ref componenter.Add<GhostMark>(entity);
             mark.InitializeValues(gameObject);
-            componenter.Add<AttackingData>(entity);
+            ref var attackingData = ref componenter.Add<AttackingData>(entity);
+            attackingData.InitializeValues(3);
             ref var animatorData = ref componenter.Add<AnimatorData>(entity);
             animatorData.InitializeValues(animator);
             _navMeshAgent = GetComponent<NavMeshAgent>();

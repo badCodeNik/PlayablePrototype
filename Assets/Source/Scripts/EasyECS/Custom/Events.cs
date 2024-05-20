@@ -75,7 +75,7 @@ namespace Source.Scripts.EasyECS.Custom
             EnemyInfo = eventData.EnemyInfo;
         }
     }
-    
+
 
     public struct OnGetPerk : IEcsEvent<OnGetPerk>
     {
@@ -89,12 +89,10 @@ namespace Source.Scripts.EasyECS.Custom
 
     public struct OnPerkChosen : IEcsEvent<OnPerkChosen>
     {
-        public object Data;
         public PerkKeys ChosenPerkID;
 
         public void InitializeValues(OnPerkChosen eventData)
         {
-            Data = eventData.Data;
             ChosenPerkID = eventData.ChosenPerkID;
         }
     }
@@ -110,32 +108,36 @@ namespace Source.Scripts.EasyECS.Custom
             PlayerEntity = eventData.PlayerEntity;
         }
     }
-    
+
     public struct OnHeroInitializedEvent : IEcsEvent<OnHeroInitializedEvent>
     {
         public Hero Hero;
         public HeroInfo HeroInfo;
+
         public void InitializeValues(OnHeroInitializedEvent eventData)
         {
             Hero = eventData.Hero;
             HeroInfo = eventData.HeroInfo;
         }
     }
-    
-    
+
+
     public struct OnHeroKilledEvent : IEcsEvent<OnHeroKilledEvent>
     {
         public int Entity;
+
         public void InitializeValues(OnHeroKilledEvent eventData)
         {
             Entity = eventData.Entity;
         }
     }
+
     public struct OnEnemyKilledEvent : IEcsEvent<OnEnemyKilledEvent>
     {
         public int Entity;
         public int Coins;
         public int Crystals;
+
         public void InitializeValues(OnEnemyKilledEvent eventData)
         {
             Entity = eventData.Entity;
@@ -143,13 +145,11 @@ namespace Source.Scripts.EasyECS.Custom
             Crystals = eventData.Crystals;
         }
     }
-    
+
     public struct OnLevelCompletedEvent : IEcsEvent<OnLevelCompletedEvent>
     {
         public void InitializeValues(OnLevelCompletedEvent eventData)
         {
-            
         }
     }
 }
-

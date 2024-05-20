@@ -83,23 +83,17 @@ namespace Source.Scripts.MonoBehaviours
 
         protected override void OnSignal(OnPerkChosenSignal data)
         {
-            if(data.ChosenPerkID == 0) return;
             ClearPreviousLocation();
             if (_locationIndex < _locations.Count)
                 _currentLocationInstance = Instantiate(_locations[_locationIndex] as GameObject);
             if (!_usedIndexes.Contains(_locationIndex)) _usedIndexes.Add(_locationIndex);
             _locationIndex++;
             //Подать сигнал о том что последняя локация
-            if (_usedIndexes.Count == 10)
-            {
-                signal.RegistryRaise(new OnLevelCompletedSignal());
-                signal.RegistryRaise(new OnHeroKilledSignal());
-            }
             
         }
 
 
-        public void Restart()
+        /*public void Restart()
         {
             ClearPreviousLocation(); // или DeactivateAllLocations() в зависимости от выбранного подхода
             _locationIndex = 0;
@@ -108,6 +102,6 @@ namespace Source.Scripts.MonoBehaviours
             _locations.Clear();
             InitializeGame();
             _player.transform.position = _spawnPosition;
-        }
+        }*/
     }
 }

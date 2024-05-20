@@ -1,13 +1,11 @@
 using Source.EasyECS;
 using Source.EasyECS.Interfaces;
-using Source.Scripts.EasyECS.Core;
-using Source.Scripts.EasyECS.Custom;
 using Source.Scripts.Ecs.Marks;
 using Source.SignalSystem;
 
 namespace Source.Scripts.Ecs.Systems
 {
-    public class EnemiesKilledCheckSystem : EcsEventListener<OnHeroKilledEvent>
+    public class EnemiesKilledCheckSystem : EasySystem
     {
         private EcsFilter _enemyFilter;
         private EcsFilter _playerFilter;
@@ -33,10 +31,6 @@ namespace Source.Scripts.Ecs.Systems
                 Componenter.Add<PerkChoosingMark>(playerEntity);
                 timer = 2;
             }
-        }
-
-        public override void OnEvent(OnHeroKilledEvent data)
-        {
         }
     }
 

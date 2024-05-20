@@ -13,11 +13,13 @@ namespace Source.Scripts.Characters
 {
     public class Npc : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private EnemyInfo enemyInfo;
         [SerializeField] private Animator animator;
         [SerializeField] private NavMeshAgent agent;
         [SerializeField, ReadOnly] private int entity;
         [SerializeField] private Signal signal;
+        private Componenter _componenter;
         private Slider _slider;
         private Tween _tween;
 
@@ -35,12 +37,12 @@ namespace Source.Scripts.Characters
 
         private void EcsInitialize()
         {
-            var componenter = EasyNode.EcsComponenter;
-            entity = componenter.GetNewEntity();
-            componenter.Add<EnemyMark>(entity);
-            ref var transformData = ref componenter.Add<TransformData>(entity);
+            _componenter = EasyNode.EcsComponenter;
+            entity = _componenter.GetNewEntity();
+            _componenter.Add<EnemyMark>(entity);
+            ref var transformData = ref _componenter.Add<TransformData>(entity);
             transformData.InitializeValues(transform);
-            ref var animatorData = ref componenter.Add<AnimatorData>(entity);
+            ref var animatorData = ref _componenter.Add<AnimatorData>(entity);
             animatorData.InitializeValues(animator);
             signal.RegistryRaise(new OnEnemyInitializedSignal
             {
@@ -49,12 +51,15 @@ namespace Source.Scripts.Characters
             });
             agent.updateRotation = false;
             agent.updateUpAxis = false;
+            
+            ref var spriteData = ref _componenter.Add<SpriteData>(entity);
+            spriteData.SpriteRenderer = spriteRenderer;
 
 
             // Создаем и прокидываем соотвествующую дату в ECS!
             if (EnemyInfo.Movable.Enabled)
             {
-                ref var movableData = ref componenter.Add<MovableData>(entity);
+                ref var movableData = ref _componenter.Add<MovableData>(entity);
                 movableData.InitializeValue(EnemyInfo.Movable.MoveSpeed, transform,
                     agent);
             }
@@ -64,7 +69,7 @@ namespace Source.Scripts.Characters
 
             if (EnemyInfo.Destructable.Enabled)
             {
-                ref var destructableData = ref componenter.AddOrGet<DestructableData>(entity);
+                ref var destructableData = ref _componenter.AddOrGet<DestructableData>(entity);
                 destructableData.InitializeValues(
                     enemyInfo.Destructable.MaxHealth,
                     enemyInfo.Destructable.Health,
@@ -75,7 +80,7 @@ namespace Source.Scripts.Characters
 
                 if (_slider == null) return;
                 
-                ref var sliderData = ref componenter.Add<SliderData>(entity);
+                ref var sliderData = ref _componenter.Add<SliderData>(entity);
                 sliderData.Slider = _slider;
                 _slider.maxValue = destructableData.Maxhealth;
                 _slider.value = destructableData.CurrentHealth;

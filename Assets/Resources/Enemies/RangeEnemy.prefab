@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850022e1cc9f400a81815dbe1b3c3395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 7675992180663026870}
   enemyInfo: {fileID: 11400000, guid: 02aff3ecd623df44b8221630bf92e18c, type: 2}
   animator: {fileID: -2982864760986879269}
   agent: {fileID: -1074186850333074833}

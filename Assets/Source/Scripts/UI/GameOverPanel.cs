@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using Source.Scripts.MonoBehaviours;
 using TMPro;
@@ -20,7 +19,7 @@ namespace Source.Scripts.UI
 
 
         public Button Restart => restart;
-        
+
 
         public void Show(float timeFromStart)
         {
@@ -30,12 +29,10 @@ namespace Source.Scripts.UI
             coins.text = DataManager.LoadCoins().ToString();
             timer.text = timeFromStart.ToString("F2");
         }
-        void OnDestroy() 
+
+        void OnDestroy()
         {
             Debug.Log("GameOverPanel was destroyed");
         }
-
-        
-        public void Hide() => gameObject.SetActive(false);
     }
 }

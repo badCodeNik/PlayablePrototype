@@ -1,8 +1,8 @@
-using Source.Scripts.UI;
+using Source.Scripts.MonoBehaviours;
 using Source.SignalSystem;
 using UnityEngine;
 
-namespace Source.Scripts.MonoBehaviours
+namespace Source.Scripts.UI
 {
     public class GameUIMediator : MonoSignalListener<OnHeroKilledSignal, OnLevelCompletedSignal>
     {
@@ -18,7 +18,7 @@ namespace Source.Scripts.MonoBehaviours
             winningPanel.Restart.onClick.AddListener(RestartGame);
             winningPanel.MainMenu.onClick.AddListener(GoToMainMenu);
         }
-        
+
 
         private void GoToMainMenu()
         {
@@ -32,10 +32,7 @@ namespace Source.Scripts.MonoBehaviours
 
         private void RestartGame()
         {
-            gameInitializer.Restart();
-            restartPanel.Hide();
-            winningPanel.Hide();
-            _timer = 0;
+            autoTransition.RestartScene();
         }
 
         protected override void OnSignal(OnHeroKilledSignal data)

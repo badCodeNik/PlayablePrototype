@@ -60,7 +60,6 @@ namespace Source.Scripts.Ecs.Systems
                     {
                         Entity = player
                     });
-                    Componenter.Add<DeadMark>(player);
                 }
             }
         }

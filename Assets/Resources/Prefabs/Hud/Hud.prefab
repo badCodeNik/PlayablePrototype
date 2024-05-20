@@ -196,7 +196,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4822548622921526459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
   deadzoneRadius: 0
   isDynamicJoystick: 1
   dynamicJoystickMovementArea: {fileID: 297663734842199003}
-  canFollowPointer: 0
+  canFollowPointer: 1
 --- !u!1 &7288960868536671407
 GameObject:
   m_ObjectHideFlags: 0

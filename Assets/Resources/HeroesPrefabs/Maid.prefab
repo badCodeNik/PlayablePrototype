@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signal: {fileID: 11400000, guid: 611a7ca498befef4a96c2ffd3868bbb8, type: 2}
+  spriteRenderer: {fileID: 6404001325524345767}
   heroInfo: {fileID: 11400000, guid: 8d5740f2fa434244ba8fd890fa8724c2, type: 2}
   animator: {fileID: -4590052344189408706}
   entity: 0

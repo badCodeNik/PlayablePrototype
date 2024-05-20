@@ -803,6 +803,13 @@ MonoBehaviour:
 
 
       Default: None'
+  - name: EntityFX
+    fullName: Source.Scripts.MonoBehaviours.EntityFX
+    initializeType: 2
+    description: '
+
+
+      Default: None'
   - name: BonusHealthSystem
     fullName: Source.Scripts.Ecs.Systems.PerkSystems.BonusHealthSystem
     initializeType: 2
@@ -2570,11 +2577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3350554390574616369, guid: ca7152c8d7b0d984fbc84dcba722cfde, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0135746
+      value: -0.013525009
       objectReference: {fileID: 0}
     - target: {fileID: 3350554390574616369, guid: ca7152c8d7b0d984fbc84dcba722cfde, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.065971375
+      value: -0.06581497
       objectReference: {fileID: 0}
     - target: {fileID: 3350554390574616369, guid: ca7152c8d7b0d984fbc84dcba722cfde, type: 3}
       propertyPath: m_LocalPosition.z

@@ -22,11 +22,11 @@ namespace Source.Scripts.UI
         private TimeSpan _timeTaken;
 
         private int _coins;
-        
+
         public Button Restart => restart;
         public Button MainMenu => mainMenuButton;
 
-        public void Show(float timeFromStart )
+        public void Show(float timeFromStart)
         {
             gameObject.SetActive(true);
             _tween = panelImage.DOFade(1, 1);
@@ -35,11 +35,9 @@ namespace Source.Scripts.UI
             coins.text = DataManager.LoadCoins().ToString();
             timer.text = timeFromStart.ToString("F2");
         }
-        
 
-        public void Hide() => gameObject.SetActive(false);
-        
-        void OnDestroy() 
+
+        void OnDestroy()
         {
             Debug.Log("WinPanel was destroyed");
         }

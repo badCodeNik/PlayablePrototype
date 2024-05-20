@@ -1,3 +1,4 @@
+using System;
 using Source.Scripts.KeysHolder;
 using Source.Scripts.MonoBehaviours;
 using Source.SignalSystem;
@@ -15,6 +16,18 @@ namespace Source.Scripts.UI
         private const int CatPrice = 100;
         private int _coins;
         private int _crystals;
+
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                DataManager.AddCrystals(100);
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                DataManager.ResetData();
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                DataManager.ResetCatsBought();
+            
+        }
 
         private void Start()
         {
@@ -46,9 +59,7 @@ namespace Source.Scripts.UI
             {
                 DataManager.SpendCrystals(CatPrice);
                 DataManager.SaveCatsBought(catId);
-
-                // Обновите UI, если нужно
-                // В инвентаре появляется кот
+                Debug.Log("Успешно");
             }
 
             signal.RegistryRaise(new OnMoneyChangeSignal());

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Source.Scripts.KeysHolder;
 using Source.Scripts.LibrariesSystem;
 using Source.Scripts.MonoBehaviours;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ namespace Source.Scripts.UI
     public class CharacterSelectionMenu : MonoBehaviour
     {
         [SerializeField] private Image previewImage; // Картинка превью
+        [SerializeField] private TextMeshProUGUI previewCatName;
         [SerializeField] private Button selectButton; // Кнопка "Выбрать"
         [SerializeField] private Button leftArrow; // Кнопка "Листать влево"
         [SerializeField] private Button rightArrow; // Кнопка "Листать вправо"
@@ -46,10 +48,14 @@ namespace Source.Scripts.UI
             if (DataManager.LoadCatsBought(_heroPacks[_selectedIndex].ID) == 1)
             {
                 previewImage.sprite = _heroPacks[_selectedIndex].Icon;
+                previewCatName.text = _heroPacks[_selectedIndex].ID.ToString();
+                previewCatName.color = Color.green;
             }
             else
             {
                 previewImage.sprite = lockedCharacterImage;
+                previewCatName.text = $" \" {_heroPacks[_selectedIndex].ID} \" " + " недоступен " ;
+                previewCatName.color = Color.red;
             }
         }
 
