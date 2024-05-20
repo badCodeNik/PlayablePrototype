@@ -803,15 +803,15 @@ MonoBehaviour:
 
 
       Default: None'
-  - name: EntityFX
-    fullName: Source.Scripts.MonoBehaviours.EntityFX
+  - name: BonusHealthSystem
+    fullName: Source.Scripts.Ecs.Systems.PerkSystems.BonusHealthSystem
     initializeType: 2
     description: '
 
 
       Default: None'
-  - name: BonusHealthSystem
-    fullName: Source.Scripts.Ecs.Systems.PerkSystems.BonusHealthSystem
+  - name: BlinkSystem
+    fullName: Source.Scripts.Ecs.Systems.BlinkSystem
     initializeType: 2
     description: '
 
