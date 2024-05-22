@@ -9,9 +9,8 @@ namespace Source.Scripts.UI
         public GameObject menu2;
         public GameObject menu3;
 
-        public void CloseAllMenus()
+        private void CloseAllMenus()
         {
-            // Закрываем все меню
             menu1.SetActive(false);
             menu2.SetActive(false);
             menu3.SetActive(false);
@@ -20,10 +19,8 @@ namespace Source.Scripts.UI
         public void OnMenuButtonClicked(GameObject menu)
         {
             bool isMenuActive = menu.activeSelf;
-            CloseAllMenus(); // Сначала закрываем все меню
+            CloseAllMenus();
 
-            // Затем переключаем состояние нажатого меню
-            // (если оно было открыто, теперь закрыть - если было закрыто, теперь открыть)
             menu.SetActive(!isMenuActive);
         }
     }

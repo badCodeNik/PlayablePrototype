@@ -36,7 +36,7 @@ namespace Source.Scripts.Ecs.Systems.PerkSystems
             {
                 ref var lifesteal = ref Componenter.Get<LifestealData>(data.CharacterEntity).Lifesteal;
                 ref var attackingData = ref Componenter.Get<AttackingData>(data.CharacterEntity);
-                var lifestealValue = (attackingData.Damage / 100) * lifesteal;
+                var lifestealValue = attackingData.Damage + lifesteal;
                 ref var currentHealth = ref Componenter.Get<DestructableData>(data.CharacterEntity).CurrentHealth;
                 var maxHealth = Componenter.Get<DestructableData>(data.CharacterEntity).Maxhealth;
                 currentHealth += lifestealValue;

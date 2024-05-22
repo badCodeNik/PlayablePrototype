@@ -18,17 +18,6 @@ namespace Source.Scripts.UI
         private int _crystals;
 
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-                DataManager.AddCrystals(100);
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-                DataManager.ResetData();
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-                DataManager.ResetCatsBought();
-            
-        }
-
         private void Start()
         {
             _perkPrice = DataManager.LoadCost();
@@ -38,14 +27,18 @@ namespace Source.Scripts.UI
         public void PurchasePerk()
         {
             _coins = DataManager.LoadCoins();
+            _perkPrice = DataManager.LoadCost();
+            perkPriceText.text = _perkPrice.ToString();
+            Debug.Log(_coins);
+            Debug.Log(_perkPrice);
             if (_coins >= _perkPrice)
             {
-                DataManager.SpendCoins(_coins);
+                DataManager.SpendCoins(_perkPrice);
 
                 _nextPerkPrice = _perkPrice + 100;
                 DataManager.SavePerkCost(_nextPerkPrice);
 
-                perkPriceText.text = _nextPerkPrice.ToString();
+                perkPriceText.text = DataManager.LoadCost().ToString();
             }
 
             signal.RegistryRaise(new OnMoneyChangeSignal());

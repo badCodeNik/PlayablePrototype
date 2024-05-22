@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Source.Scripts.KeysHolder;
 using UnityEngine;
 
@@ -43,8 +42,7 @@ namespace Source.Scripts.MonoBehaviours
 
         public static void SavePerkCost(int cost)
         {
-            int currentCost = LoadCost();
-            PlayerPrefs.SetInt(PerkCostKey, currentCost + cost);
+            PlayerPrefs.SetInt(PerkCostKey, cost);
             PlayerPrefs.Save();
         }
 
@@ -76,9 +74,7 @@ namespace Source.Scripts.MonoBehaviours
 
         public static void ResetData()
         {
-            PlayerPrefs.SetInt(CrystalsKey, 0);
-            PlayerPrefs.SetInt(CoinsKey, 0);
-            PlayerPrefs.SetInt(PerkCostKey, 0);
+            PlayerPrefs.DeleteAll();
         }
 
         public static void ResetCatsBought()

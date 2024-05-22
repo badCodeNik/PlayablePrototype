@@ -1,11 +1,10 @@
 using Source.Scripts.MonoBehaviours;
-using Source.SignalSystem;
 using TMPro;
 using UnityEngine;
 
 namespace Source.Scripts.UI
 {
-    public class ResourcesViewer : MonoSignalListener<OnMoneyChangeSignal>
+    public class ResourcesViewer : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI coins;
         [SerializeField] private TextMeshProUGUI crystals;
@@ -16,11 +15,16 @@ namespace Source.Scripts.UI
             crystals.text = DataManager.LoadCrystals().ToString();
         }
 
-
-        protected override void OnSignal(OnMoneyChangeSignal data)
+        private void Update()
         {
             crystals.text = DataManager.LoadCoins().ToString();
             crystals.text = DataManager.LoadCrystals().ToString();
         }
+
+
+        /*protected override void OnSignal(OnMoneyChangeSignal data)
+        {
+            UpdateResources();
+        }*/
     }
 }

@@ -9,25 +9,12 @@ using Random = UnityEngine.Random;
 
 namespace Source.Scripts.UI
 {
-    public class BanishCat : MonoBehaviour
+    public class GachaPanelController : MonoBehaviour
     {
         [SerializeField] private Button purchaseCat;
 
         public Button PurchaseCat => purchaseCat;
 
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                DataManager.ResetData();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                DataManager.ResetCatsBought();
-            }
-        }
 
         public HeroKeys GetRandomCat()
         {
