@@ -2,7 +2,7 @@
 // The Proprietary or MIT-Red License
 // Copyright (c) 2012-2022 Leopotam <leopotam@yandex.ru>
 // ----------------------------------------------------------------------------
-
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -46,3 +46,4 @@ namespace Source.EasyECS.UnityEditor {
         }
     }
 }
+#endif

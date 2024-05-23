@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+#if UNITY_EDITOR
+
 namespace Source.EasyECS.UnityEditor {
     public sealed class EcsSystemsDebugSystem : IEcsPreInitSystem, IEcsPostDestroySystem {
         readonly string _systemsName;
@@ -55,3 +57,4 @@ namespace Source.EasyECS.UnityEditor {
         }
     }
 }
+#endif
