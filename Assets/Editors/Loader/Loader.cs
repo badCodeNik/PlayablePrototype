@@ -1,5 +1,4 @@
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace Editors.Loader
@@ -18,7 +17,7 @@ namespace Editors.Loader
         [MenuItem("Tools/Start Game")]
         public static void StartGame()
         {
-            EditorSceneManager.OpenScene(BootstrapperPath);
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene(BootstrapperPath);
             EditorApplication.isPlaying = true;
         }
         
@@ -26,21 +25,21 @@ namespace Editors.Loader
         {
             if (GUILayout.Button("Start Game"))
             {
-                EditorSceneManager.OpenScene(BootstrapperPath);
+                UnityEditor.SceneManagement.EditorSceneManager.OpenScene(BootstrapperPath);
                 EditorApplication.isPlaying = true;
             }
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Bootstrap"))
             {
-                EditorSceneManager.OpenScene(BootstrapperPath);
+                UnityEditor.SceneManagement.EditorSceneManager.OpenScene(BootstrapperPath);
             }
             if (GUILayout.Button("Menu"))
             {
-                EditorSceneManager.OpenScene(MenuPath);
+                UnityEditor.SceneManagement.EditorSceneManager.OpenScene(MenuPath);
             }
             if (GUILayout.Button("Gameplay"))
             {
-                EditorSceneManager.OpenScene(GameplayPath);
+                UnityEditor.SceneManagement.EditorSceneManager.OpenScene(GameplayPath);
             }
             GUILayout.EndHorizontal();
         }

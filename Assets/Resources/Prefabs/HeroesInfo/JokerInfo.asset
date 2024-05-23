@@ -34,7 +34,7 @@ MonoBehaviour:
     crystalsForKill: 0
   attacking:
     enabled: 1
-    damage: 0.5
+    damage: 1
     attackDistance: 0
     attackSpeed: 3
     projectileID: 0
