@@ -3,7 +3,6 @@ using Sirenix.OdinInspector;
 using Source.Scripts.KeysHolder;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace Source.Scripts.Data
 {

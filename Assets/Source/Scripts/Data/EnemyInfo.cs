@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using Source.Scripts.Enums;
 using UnityEngine;
 
 namespace Source.Scripts.Data

@@ -68,7 +68,6 @@ namespace Source.Scripts.Ecs.Systems
                     }), velocity, CharacterFaction.Enemy, projectileSprite);
                 }
             }
-            //else if there is no player, what happens?
         }
 
         private void TryReload()
